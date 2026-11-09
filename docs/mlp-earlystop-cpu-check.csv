@@ -1,0 +1,3 @@
+date,variant,seed,RMSLE,inner_date,selected_epoch,epochs_searched,selection_stop_reason,inner_best_rmsle,n_inner_fit,n_inner_valid,n_inner_purged,n_refit,n_valid,seconds
+2018-09-01,early_stop,42,2.6310036926553315,2018-08-01,24,44,patience_reached,2.3572268805426546,42399,2766,0,45165,2768,2.6411297500599176
+2018-10-01,early_stop,42,2.701737967353533,2018-09-01,11,31,patience_reached,2.624523685513373,45165,2768,0,47933,2919,0.9132916249800472

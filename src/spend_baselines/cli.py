@@ -55,7 +55,8 @@ def manifest(args, config, stats):
             libraries[name] = version(name)
         except PackageNotFoundError:
             pass
-    return {"command": args.command, "models": args.models if args.command == "validate" else [args.model],
+    models = args.models if args.command == "validate" else (["mlp"] if args.command == "mlp-experiment" else [args.model])
+    return {"command": args.command, "models": models,
             "config": config, "device": args.device,
             "threads": args.threads, "python": platform.python_version(),
             "platform": platform.platform(), "libraries": libraries,
@@ -64,9 +65,9 @@ def manifest(args, config, stats):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=["validate", "submit"])
+    parser.add_argument("command", choices=["validate", "submit", "mlp-experiment"])
     parser.add_argument("--data-dir", type=Path, default=Path("data/raw"))
-    parser.add_argument("--out-dir", type=Path, default=Path("outputs/baselines"))
+    parser.add_argument("--out-dir", type=Path)
     parser.add_argument("--config", type=Path, default=Path("configs/baselines.json"))
     parser.add_argument("--models", nargs="+", choices=MODEL_NAMES, default=["logmean", "ridge", "forest", "mlp"])
     parser.add_argument("--model", choices=MODEL_NAMES, default="ridge", help="Single model for submit")
@@ -74,14 +75,25 @@ def main(argv=None):
     parser.add_argument("--threads", type=int, default=2)
     parser.add_argument("--features", choices=["rfm", "extended"])
     parser.add_argument("--epochs", type=int, help="Explicit manual override for MLP training epochs")
+    parser.add_argument("--experiment-config", type=Path, default=Path("configs/mlp_experiments.json"))
+    parser.add_argument("--variants", nargs="+", help="Explicit named MLP experiments")
+    parser.add_argument("--seeds", nargs="+", type=int, help="Explicit repeated-run seeds")
+    parser.add_argument("--resume", action="store_true", help="Resume an identical interrupted MLP experiment run")
     args = parser.parse_args(argv)
+    if args.out_dir is None:
+        args.out_dir = Path("outputs/mlp-experiments" if args.command == "mlp-experiment" else "outputs/baselines")
     if args.threads < 1 or (args.epochs is not None and args.epochs < 1):
         parser.error("threads and epochs must be positive")
+    if args.command != "mlp-experiment" and (args.variants or args.seeds or args.resume):
+        parser.error("--variants, --seeds and --resume are only for mlp-experiment")
     config = json.loads(args.config.read_text())
     if args.features:
         config["feature_group"] = args.features
     if args.epochs:
         config["mlp"]["epochs"] = args.epochs
+    if args.command == "mlp-experiment":
+        from .experiments import run_mlp_experiments
+        return run_mlp_experiments(args, config)
     args.out_dir.mkdir(parents=True, exist_ok=True)
     print("Loading official data and checking all known training targets", flush=True)
     train, test, history, stats = load_dataset(args.data_dir)
