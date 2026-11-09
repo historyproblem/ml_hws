@@ -1,0 +1,17 @@
+/.venv/
+/data/
+/outputs/
+/analysis/
+/research/
+/STATUS.md
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.DS_Store
+*.pt
+*.pkl
+*.joblib
+.env
+.env.*
+!.env.example

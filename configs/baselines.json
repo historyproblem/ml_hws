@@ -1,0 +1,19 @@
+{
+  "seed": 42,
+  "feature_group": "rfm",
+  "validation_dates": ["2018-09-01", "2018-10-01"],
+  "ridge": {"alpha": 10.0},
+  "forest": {
+    "n_estimators": 200,
+    "max_depth": 12,
+    "min_samples_leaf": 20,
+    "max_features": 0.8
+  },
+  "mlp": {
+    "hidden_sizes": [128, 64],
+    "epochs": 60,
+    "batch_size": 1024,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001
+  }
+}

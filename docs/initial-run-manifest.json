@@ -1,0 +1,71 @@
+{
+  "command": "validate",
+  "models": [
+    "logmean",
+    "ridge",
+    "forest",
+    "mlp"
+  ],
+  "config": {
+    "seed": 42,
+    "feature_group": "rfm",
+    "validation_dates": [
+      "2018-09-01",
+      "2018-10-01"
+    ],
+    "ridge": {
+      "alpha": 10.0
+    },
+    "forest": {
+      "n_estimators": 200,
+      "max_depth": 12,
+      "min_samples_leaf": 20,
+      "max_features": 0.8
+    },
+    "mlp": {
+      "hidden_sizes": [
+        128,
+        64
+      ],
+      "epochs": 60,
+      "batch_size": 1024,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0001
+    }
+  },
+  "device": "cpu",
+  "threads": 2,
+  "python": "3.12.14",
+  "platform": "macOS-26.2-arm64-arm-64bit",
+  "libraries": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.7.2",
+    "scipy": "1.18.1",
+    "joblib": "1.6.0",
+    "threadpoolctl": "3.8.0",
+    "torch": "2.5.1"
+  },
+  "source_sha256": {
+    "__init__.py": "b4d114427298e18b06abda80b091042ea4e49f185144fe3fe65e897b887f6c05",
+    "__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+    "cli.py": "a7aa3aff7b943288a54e624c9cc5932518080ce84a6aeef02ccd3d1273bed198",
+    "data.py": "97fcb5952dfb208ea4d3650318013d95f3ded5461107c049bedaf311060532b3",
+    "models.py": "a33ed548a271447a327a025a4a50e19886bfc0dcf5acbd16f55a2af05fd0f951"
+  },
+  "input_sha256": {
+    "transactions.csv": "c57a20d530c85362f6536a4c6975e17132f02e2369731772b00f8ad90f169f4b",
+    "train.csv": "0bc50b7f09ea466190b221ebae928f22828b3fe6d0f96de08432cc68197f2c56",
+    "test.csv": "933a573fc83a7f3bc8bb58d463b09966993981cf87b32597f17c1a457a899967",
+    "sample_submission.csv": "d956970d4dbca566262ffaf222e321963ba8da2a889ed889b608823363760224"
+  },
+  "data_checks": {
+    "raw_rows": 957134,
+    "exact_duplicates": 32689,
+    "clean_rows": 696676,
+    "customers": 5633,
+    "purchase_days": 29790,
+    "train_targets_checked": 50852,
+    "max_target_error": 0.0
+  }
+}
