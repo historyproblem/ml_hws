@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "validation_dates": ["2018-06-01", "2018-07-01", "2018-08-01", "2018-09-01", "2018-10-01"],
+  "datasets": ["D0", "D1", "D2", "D3"],
+  "tabular_features": ["F0", "F1", "F2", "F3", "F4"],
+  "sequence_features": ["S0", "S1", "S0_F0", "S1_F2"],
+  "seeds": [42, 123, 2026],
+  "component_profile": "compact_l2",
+  "continue_on_error": true,
+  "tabular": {
+    "ridge_alpha": 10.0,
+    "logistic_C": 1.0,
+    "spline_knots": 5,
+    "forest": {"n_estimators": 200, "max_depth": 12, "min_samples_leaf": 20, "max_features": 0.8}
+  },
+  "neural": {"max_epochs": 200, "patience": 20, "min_delta": 0.0001, "batch_size": 1024, "learning_rate": 0.001},
+  "profiles": [
+    {"name": "compact_l2", "hidden_sizes": [128, 64], "weight_decay": 0.0001, "dropout": 0.0},
+    {"name": "compact_strong_l2", "hidden_sizes": [128, 64], "weight_decay": 0.01, "dropout": 0.0},
+    {"name": "compact_dropout", "hidden_sizes": [128, 64], "weight_decay": 0.0001, "dropout": 0.1},
+    {"name": "large_l2", "hidden_sizes": [256, 128, 64], "weight_decay": 0.0001, "dropout": 0.0},
+    {"name": "large_strong_l2", "hidden_sizes": [256, 128, 64], "weight_decay": 0.01, "dropout": 0.0},
+    {"name": "large_dropout", "hidden_sizes": [256, 128, 64], "weight_decay": 0.0001, "dropout": 0.1}
+  ],
+  "bagging": {
+    "members": 32, "prefixes": [1, 2, 4, 8, 16, 32], "seed": 17000, "profile": "compact_l2",
+    "datasets": ["D0", "D1", "D2", "D3"], "features": ["F0", "F2", "S0_F0", "S1_F2"]
+  },
+  "clv": {"enabled": true, "maxiter": 1000, "penalty": 0.001, "quadrature_order": 64, "quadrature_tolerance": 0.0001, "draws": 4096}
+}
