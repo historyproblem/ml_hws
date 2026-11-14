@@ -109,23 +109,40 @@ python -m spend_baselines submit --model ridge --out-dir outputs/submission
 
 | Конфиг | Оценок на пяти внешних датах | Назначение |
 |---|---:|---|
-| `configs/v100_suite.json` | 880 | Все семейства, D0/D2, F0/F2, S0+F0/S1+F2, один профиль/seed, бэггинг 8 сетей |
+| `configs/v100_suite.json` | 515 | Целевые сравнения: контроль дат/признаков, сложные модели на D2/F2, последовательные сети, ограниченный бэггинг |
 | `configs/full_suite.json` | 49 880 | Полное произведение D0–D3, F0–F4, четырёх последовательных входов, шести профилей/трёх seed, ансамблей до 32 сетей |
 
 Оценка нейросети включает **два обучения**: выбор эпох на внутренней дате и
-повторный fit с нуля на всех доступных метках. Это соответственно 1360 и
+повторный fit с нуля на всех доступных метках. Это соответственно 840 и
 97920 нейросетевых fit. Дополнительные сочетания готовых прогнозов не требуют
 повторного обучения компонент.
+
+Основной конфиг перечисляет `experiments` отдельными блоками, а не перемножает
+все таблицы и модели. Совпадающие fit между блоками выполняются один раз.
+
+- Ridge, лес и одна MLP сравнивают D0/F0, D2/F0, D0/F2, D2/F1 и D2/F2:
+  дополнительные даты, короткая активность, корзина и их взаимодействие.
+- Сплайны, hurdle-компоненты, Wide/residual MLP и ZILN проверяются на D2/F2.
+  Для содержательных нейросетевых сравнений используются три фиксированных
+  seed; ширина и dropout сравниваются только у обычной MLP.
+- Плоская MLP, TCN, GRU и LSTM получают одинаковый S1+F2. S0+F0 оставлен
+  контролем представления только у плоской MLP; двухчастный выход у ряда
+  проверяется на GRU.
+- Для обычной и двухчастной MLP сравниваются по 8 seed-сетей и по 8
+  customer-bootstrap сетей при одинаковой архитектуре и числе участников. Wide/residual и случайное исключение
+  блоков признаков в этот этап не включены.
+- BG/NBD и Pareto/NBD с Gamma-Gamma используют всю доступную историю.
+  D3, F3, F4 и обрезанная до 180 дней CLV-история оставлены за основным прогоном.
 
 Из корня клона, с четырьмя исходными CSV в `data/raw/`, Python 3.11/3.12 и
 рабочим PyTorch/CUDA:
 
 ```bash
 python -m pip install -e '.[neural]'
-bash scripts/run_v100_suite.sh configs/v100_suite.json outputs/v100-suite
+bash scripts/run_v100_suite.sh configs/v100_suite.json outputs/v100-focused
 ```
 
-Для полной матрицы:
+Архивный конфиг полного декартова произведения доступен для воспроизведения; в основной прогон он не входит:
 
 ```bash
 bash scripts/run_v100_suite.sh configs/full_suite.json outputs/full-suite
@@ -143,7 +160,7 @@ bash scripts/run_v100_suite.sh configs/full_suite.json outputs/full-suite
 Подготовку данных можно выполнить отдельно:
 
 ```bash
-python -m spend_baselines.suite prepare --config configs/v100_suite.json --out-dir outputs/v100-suite
+python -m spend_baselines.suite prepare --config configs/v100_suite.json --out-dir outputs/v100-focused
 ```
 
 ### Данные и временные границы
@@ -197,14 +214,14 @@ hard gate 0.5, временной Ridge-stacking и softmax-роутер. Пос
 Собрать имеющиеся результаты повторно или запустить часть плана:
 
 ```bash
-python -m spend_baselines.suite combine --config configs/v100_suite.json --out-dir outputs/v100-suite --device cuda
+python -m spend_baselines.suite combine --config configs/v100_suite.json --out-dir outputs/v100-focused --device cuda
 python -m spend_baselines.suite run --config configs/full_suite.json --out-dir outputs/full-suite --device cuda --resume --datasets D0 --representations F0 --kinds tabular neural
 ```
 
 Для выбранного **самостоятельного** предиктора `job_id` из `scores.csv`:
 
 ```bash
-python -m spend_baselines.suite refit --config configs/v100_suite.json --out-dir outputs/v100-suite --device cuda --resume --job-ids JOB_ID
+python -m spend_baselines.suite refit --config configs/v100_suite.json --out-dir outputs/v100-focused --device cuda --resume --job-ids JOB_ID
 ```
 
 Команда выберет эпохи на октябре, переобучит на всех метках до тестовой даты и
@@ -215,7 +232,7 @@ python -m spend_baselines.suite refit --config configs/v100_suite.json --out-dir
 переобучить hurdle из логистической вероятности и положительного леса:
 
 ```bash
-python -m spend_baselines.suite refit --config configs/v100_suite.json --out-dir outputs/v100-suite --device cuda --resume --datasets D2 --representations F2 --candidate 'hurdle:linear+forest'
+python -m spend_baselines.suite refit --config configs/v100_suite.json --out-dir outputs/v100-focused --device cuda --resume --datasets D2 --representations F2 --candidate 'hurdle:linear+forest'
 ```
 
 Аналогично доступны имена `equal_linear_forest`, `oot_soft_router`,

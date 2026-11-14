@@ -1,6 +1,6 @@
 """Run the explicit non-boosting study: plan, prepare, run, combine, refit.
 
-python -m spend_baselines.suite plan --config configs/full_suite.json
+python -m spend_baselines.suite plan --config configs/v100_suite.json
 """
 
 import argparse
@@ -61,6 +61,9 @@ def read_config(path, smoke=False):
         raise ValueError("Duplicate seeds")
     if smoke:
         config = deepcopy(config)
+        config.pop("experiments", None)
+        config["bagging"].pop("cases", None)
+        config["clv"].pop("windows", None)
         config.update(
             datasets=["D0"],
             tabular_features=["F0", "F2"],
@@ -88,7 +91,7 @@ def read_config(path, smoke=False):
     return config
 
 
-def make_plan(config):
+def _all_jobs(config):
     jobs = []
     for date, dataset, representation in itertools.product(
         config["validation_dates"], config["datasets"], config["tabular_features"]
@@ -205,6 +208,62 @@ def make_plan(config):
     keys = [job_key(j) for j in jobs]
     if len(keys) != len(set(keys)):
         raise ValueError("Duplicate planned jobs")
+    return jobs
+
+
+def make_plan(config):
+    """Union explicit comparisons, sharing identical fits across blocks."""
+    expanded = _all_jobs(config)
+    if not config.get("experiments"):
+        return expanded
+    requested = {}
+    for block in config["experiments"]:
+        for date, cell, model in itertools.product(
+            block.get("dates", config["validation_dates"]),
+            block["cells"],
+            block["models"],
+        ):
+            dataset, representation = cell
+            kind = model["kind"]
+            profiles = (
+                model.get(
+                    "profiles", [model.get("profile", config["component_profile"])]
+                )
+                if kind == "neural"
+                else [None]
+            )
+            seeds = model.get("seeds", config["seeds"] if kind == "neural" else [42])
+            for task, profile, seed in itertools.product(
+                model.get("tasks", ["direct"]), profiles, seeds
+            ):
+                job = {
+                    "date": date,
+                    "dataset": dataset,
+                    "representation": representation,
+                    "kind": kind,
+                    "family": model["family"],
+                    "task": task,
+                    "seed": seed,
+                }
+                if kind == "neural":
+                    job["profile"] = profile
+                requested[job_key(job)] = job
+    known = {job_key(j) for j in expanded}
+    if not set(requested) <= known:
+        invalid = [j for key, j in requested.items() if key not in known]
+        raise ValueError(
+            f"Explicit experiments reference unavailable jobs: {invalid[:3]}"
+        )
+    jobs = list(requested.values())
+    cases = config["bagging"].get("cases")
+    for job in expanded:
+        if (
+            job["kind"] == "bagging"
+            and (cases is None or [job["mode"], job["family"], job["task"]] in cases)
+            or job["kind"] == "clv"
+            and job["window"] in config["clv"].get("windows", ["180", "all"])
+        ):
+            jobs.append(job)
     return jobs
 
 
@@ -638,6 +697,20 @@ def combine(results, config, cache, directory):
                 )
             ].append(result)
     values = {}
+    planned_counts = None
+    if config.get("experiments"):
+        planned_counts = Counter(
+            (
+                j["date"],
+                j["dataset"],
+                j["representation"],
+                j["family"],
+                j["task"],
+                j.get("profile", "fixed"),
+            )
+            for j in make_plan(config)
+            if j["kind"] in {"tabular", "neural"}
+        )
 
     def save(name, date, dataset, representation, predictions, z, prob=None):
         ids = aligned(predictions)
@@ -669,7 +742,11 @@ def combine(results, config, cache, directory):
 
     for key, items in groups.items():
         date, ds, rep, family, task, profile = key
-        required = 1 if items[0]["job"]["kind"] == "tabular" else len(config["seeds"])
+        required = (
+            planned_counts[key]
+            if planned_counts is not None
+            else (1 if items[0]["job"]["kind"] == "tabular" else len(config["seeds"]))
+        )
         if len(items) != required:
             continue
         ps = [load_prediction(directory, r) for r in items]
@@ -908,10 +985,7 @@ def refit_candidate(name, dataset, representation, config, plan, cache, args):
             and j["task"] == task
             and j.get("profile", "fixed") == profile
         ]
-        expected = (
-            1 if family in {"linear", "spline", "forest"} else len(config["seeds"])
-        )
-        if len(found) != expected:
+        if not found or len({j["seed"] for j in found}) != len(found):
             raise ValueError(f"Unavailable component: {family}/{task}/{profile}")
         groups.append(found)
 
@@ -1091,9 +1165,9 @@ def main(argv=None):
     parser.add_argument(
         "command", choices=["plan", "prepare", "run", "combine", "refit"]
     )
-    parser.add_argument("--config", type=Path, default=Path("configs/full_suite.json"))
+    parser.add_argument("--config", type=Path, default=Path("configs/v100_suite.json"))
     parser.add_argument("--data-dir", type=Path, default=Path("data/raw"))
-    parser.add_argument("--out-dir", type=Path, default=Path("outputs/full-suite"))
+    parser.add_argument("--out-dir", type=Path, default=Path("outputs/v100-focused"))
     parser.add_argument("--device", choices=["cpu", "cuda"], default="cuda")
     parser.add_argument("--threads", type=int, default=2)
     parser.add_argument("--resume", action="store_true")

@@ -13,6 +13,7 @@
   ],
   "tabular_features": [
     "F0",
+    "F1",
     "F2"
   ],
   "sequence_features": [
@@ -20,7 +21,9 @@
     "S1_F2"
   ],
   "seeds": [
-    42
+    42,
+    123,
+    2026
   ],
   "component_profile": "compact_l2",
   "continue_on_error": true,
@@ -51,6 +54,25 @@
       ],
       "weight_decay": 0.0001,
       "dropout": 0.0
+    },
+    {
+      "name": "compact_dropout",
+      "hidden_sizes": [
+        128,
+        64
+      ],
+      "weight_decay": 0.0001,
+      "dropout": 0.1
+    },
+    {
+      "name": "large_l2",
+      "hidden_sizes": [
+        256,
+        128,
+        64
+      ],
+      "weight_decay": 0.0001,
+      "dropout": 0.0
     }
   ],
   "bagging": {
@@ -68,6 +90,28 @@
     ],
     "features": [
       "F2"
+    ],
+    "cases": [
+      [
+        "seed",
+        "mlp",
+        "direct"
+      ],
+      [
+        "seed",
+        "mlp",
+        "hurdle_joint"
+      ],
+      [
+        "customer",
+        "mlp",
+        "direct"
+      ],
+      [
+        "customer",
+        "mlp",
+        "hurdle_joint"
+      ]
     ]
   },
   "clv": {
@@ -76,6 +120,212 @@
     "penalty": 0.001,
     "quadrature_order": 64,
     "quadrature_tolerance": 0.0001,
-    "draws": 4096
-  }
+    "draws": 4096,
+    "windows": [
+      "all"
+    ]
+  },
+  "experiments": [
+    {
+      "name": "Separate data and feature effects with three controls",
+      "cells": [
+        [
+          "D0",
+          "F0"
+        ],
+        [
+          "D2",
+          "F0"
+        ],
+        [
+          "D0",
+          "F2"
+        ],
+        [
+          "D2",
+          "F1"
+        ],
+        [
+          "D2",
+          "F2"
+        ]
+      ],
+      "models": [
+        {
+          "kind": "tabular",
+          "family": "linear"
+        },
+        {
+          "kind": "tabular",
+          "family": "forest"
+        },
+        {
+          "kind": "neural",
+          "family": "mlp",
+          "profile": "compact_l2",
+          "seeds": [
+            42
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Smooth nonlinear baseline and hurdle components on rich data",
+      "cells": [
+        [
+          "D2",
+          "F2"
+        ]
+      ],
+      "models": [
+        {
+          "kind": "tabular",
+          "family": "spline"
+        },
+        {
+          "kind": "tabular",
+          "family": "linear",
+          "tasks": [
+            "probability",
+            "positive"
+          ]
+        },
+        {
+          "kind": "tabular",
+          "family": "spline",
+          "tasks": [
+            "probability",
+            "positive"
+          ]
+        },
+        {
+          "kind": "tabular",
+          "family": "forest",
+          "tasks": [
+            "probability",
+            "positive"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "MLP variance, capacity and dropout",
+      "cells": [
+        [
+          "D2",
+          "F2"
+        ]
+      ],
+      "models": [
+        {
+          "kind": "neural",
+          "family": "mlp",
+          "profiles": [
+            "compact_l2",
+            "compact_dropout",
+            "large_l2"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Joint dense architectures and two-part objectives",
+      "cells": [
+        [
+          "D2",
+          "F2"
+        ]
+      ],
+      "models": [
+        {
+          "kind": "neural",
+          "family": "wide",
+          "profile": "compact_l2"
+        },
+        {
+          "kind": "neural",
+          "family": "residual",
+          "profile": "compact_l2"
+        },
+        {
+          "kind": "neural",
+          "family": "mlp",
+          "profile": "compact_l2",
+          "tasks": [
+            "probability",
+            "positive",
+            "hurdle",
+            "hurdle_joint",
+            "ziln"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Simple sequence representation control",
+      "cells": [
+        [
+          "D2",
+          "S0_F0"
+        ]
+      ],
+      "models": [
+        {
+          "kind": "neural",
+          "family": "mlp",
+          "profile": "compact_l2"
+        }
+      ]
+    },
+    {
+      "name": "Compare sequence encoders on identical rich history",
+      "cells": [
+        [
+          "D2",
+          "S1_F2"
+        ]
+      ],
+      "models": [
+        {
+          "kind": "neural",
+          "family": "mlp",
+          "profile": "compact_l2"
+        },
+        {
+          "kind": "neural",
+          "family": "tcn",
+          "profile": "compact_l2"
+        },
+        {
+          "kind": "neural",
+          "family": "gru",
+          "profile": "compact_l2"
+        },
+        {
+          "kind": "neural",
+          "family": "lstm",
+          "profile": "compact_l2"
+        }
+      ]
+    },
+    {
+      "name": "Two-part sequence model",
+      "cells": [
+        [
+          "D2",
+          "S1_F2"
+        ]
+      ],
+      "models": [
+        {
+          "kind": "neural",
+          "family": "gru",
+          "profile": "compact_l2",
+          "tasks": [
+            "hurdle_joint"
+          ]
+        }
+      ]
+    }
+  ]
 }

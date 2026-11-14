@@ -2,7 +2,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 suite_config="${1:-configs/v100_suite.json}"
-suite_output="${2:-outputs/v100-suite}"
+suite_output="${2:-outputs/v100-focused}"
 export PYTHONUNBUFFERED=1
 export CUBLAS_WORKSPACE_CONFIG=:4096:8
 export OMP_NUM_THREADS=2

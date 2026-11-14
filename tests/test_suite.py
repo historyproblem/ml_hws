@@ -223,7 +223,7 @@ class ProbabilityModelTests(unittest.TestCase):
 
 class PlanAndPersistenceTests(unittest.TestCase):
     def test_both_plans_are_unique_and_count_fits_explicitly(self):
-        for name, n in [("v100_suite.json", 880), ("full_suite.json", 49880)]:
+        for name, n in [("v100_suite.json", 515), ("full_suite.json", 49880)]:
             plan = make_plan(read_config(Path("configs") / name))
             self.assertEqual(len(plan), n)
             self.assertEqual(len({job_key(j) for j in plan}), n)
@@ -232,6 +232,39 @@ class PlanAndPersistenceTests(unittest.TestCase):
         self.assertEqual(
             {j["kind"] for j in smoke}, {"tabular", "neural", "bagging", "clv"}
         )
+
+    def test_focused_plan_tests_specific_questions_and_shares_overlapping_fits(self):
+        plan = make_plan(read_config("configs/v100_suite.json"))
+        self.assertTrue(all(j.get("dataset") not in {"D1", "D3"} for j in plan))
+        self.assertTrue(
+            all(j.get("representation") not in {"F3", "F4", "S0", "S1"} for j in plan)
+        )
+        self.assertEqual({j["window"] for j in plan if j["kind"] == "clv"}, {"all"})
+        self.assertEqual({j["family"] for j in plan if j["kind"] == "bagging"}, {"mlp"})
+        self.assertEqual(
+            {j["mode"] for j in plan if j["kind"] == "bagging"}, {"seed", "customer"}
+        )
+        for dataset, representation, seeds in [
+            ("D0", "F0", {42}),
+            ("D2", "F2", {42, 123, 2026}),
+        ]:
+            actual = [
+                j
+                for j in plan
+                if j.get("dataset") == dataset
+                and j.get("representation") == representation
+                and j["kind"] == "neural"
+                and j["family"] == "mlp"
+                and j["task"] == "direct"
+                and j["profile"] == "compact_l2"
+                and j["date"] == "2018-10-01"
+            ]
+            self.assertEqual({j["seed"] for j in actual}, seeds)
+            self.assertEqual(len(actual), len(seeds))
+        invalid = read_config("configs/v100_suite.json")
+        invalid["experiments"][0]["cells"] = [["D3", "F4"]]
+        with self.assertRaises(ValueError):
+            make_plan(invalid)
 
     def test_resume_checks_every_artifact(self):
         with tempfile.TemporaryDirectory() as tmp:
