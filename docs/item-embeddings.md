@@ -145,6 +145,18 @@ python -m spend_embeddings refit --profile item16 --reference outputs/behavior-v
   --out-dir outputs/item-embeddings-v1 --device cuda --threads 2 --resume
 ```
 
-Результат — веса, словарь, preprocessing и NPZ с усреднённым z и
-`maximum(expm1(z),0)`. **Submission CSV и Kaggle upload отсутствуют.**
-Качество новых embedding-вариантов на V100 пока не проверено.
+Результат этой команды — веса, словарь, preprocessing и NPZ с усреднённым z
+и `maximum(expm1(z),0)`.
+
+## Проверенные результаты и выбранная отправка, 15 ноября
+
+Полный CUDA-архив проверен: 30 seed-оценок, 60 fit, 171 SHA. Pooled Sep–Oct:
+Joint+history 2.624691; item16 2.637013; item32 2.629341. Фиксированная смесь
+75% Joint+history + 25% item32 в log1p дала 2.621432, delta −0.003259,
+условный customer-bootstrap 95% CI [−0.005936; −0.000655]. November неизвестен.
+
+После аудита первого Joint+history сабмита (сообщённый Kaggle score 2.77883)
+пользователь выбрал смесь 75/25 для следующей отправки. Финальный item32 refit
+и CSV подготавливаются командой `bash scripts/make_item32_submission.sh`.
+Подробности и имена файлов — [item32-submission.md](item32-submission.md).
+Сам скрипт Kaggle upload не выполняет.
