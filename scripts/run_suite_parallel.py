@@ -12,6 +12,8 @@ import os
 import platform
 import queue
 import signal
+import sys
+import threading
 import time
 import traceback
 from collections import Counter
@@ -30,6 +32,89 @@ from spend_baselines.suite import (
     write_scores,
 )
 from spend_baselines.suite_data import CachedData, atomic_json, digest, prepare_cache
+
+
+def coverage_jobs(plan, config, dates, bootstrap_members=4):
+    """Late-stage coverage: one seed, recent folds, small real bootstrap ensembles."""
+    selected = []
+    for date in dates:
+        jobs = [j for j in plan if j["date"] == date]
+        selected.extend(j for j in jobs if j["kind"] == "clv" and j["window"] == "all")
+        for family, task in [
+            ("mlp", "direct"),
+            ("gru", "direct"),
+            ("lstm", "direct"),
+            ("gru", "hurdle_joint"),
+        ]:
+            matched = [
+                j
+                for j in jobs
+                if j["kind"] == "neural"
+                and j["dataset"] == "D2"
+                and j["representation"] == "S1_F2"
+                and j["family"] == family
+                and j["task"] == task
+                and j["profile"] == config["component_profile"]
+                and j["seed"] == 42
+            ]
+            if len(matched) != 1:
+                raise ValueError(f"Missing coverage candidate: {date}/{family}/{task}")
+            selected.extend(matched)
+        selected.extend(
+            j
+            for j in jobs
+            if j["kind"] == "bagging"
+            and j["dataset"] == "D2"
+            and j["representation"] == "F2"
+            and j["family"] == "mlp"
+            and j["mode"] == "customer"
+            and j["task"] in {"direct", "hurdle_joint"}
+            and j["member"] < bootstrap_members
+        )
+    return selected
+
+
+def training_progress(thread_id):
+    """Read Python counters only: never inspect/copy GPU tensor contents."""
+    frame = sys._current_frames().get(thread_id)
+    while frame is not None:
+        values = frame.f_locals
+        model = values.get("self")
+        if frame.f_code.co_name == "fit" and type(model).__name__ == "Neural":
+            info = {
+                "phase": "selection"
+                if values.get("validation") is not None
+                else "refit",
+                "family": model.architecture,
+            }
+            if "epoch" in values:
+                info["epoch"] = int(values["epoch"]) + 1
+                info["processed_rows"] = int(values.get("mass", 0))
+            if "tx" in values:
+                info["rows"] = len(values["tx"])
+            return info
+        frame = frame.f_back
+    return {"phase": "preparing_or_saving"}
+
+
+def progress_monitor(stop, thread_id, stream, key, interval, messages, worker):
+    started = time.monotonic()
+    while not stop.wait(interval):
+        info = training_progress(thread_id)
+        print(
+            f"PROGRESS {key} elapsed={time.monotonic() - started:.0f}s {json.dumps(info)}",
+            file=stream,
+            flush=True,
+        )
+        messages.put(
+            {
+                "event": "progress",
+                "worker": worker,
+                "key": key,
+                "elapsed": time.monotonic() - started,
+                "progress": info,
+            }
+        )
 
 
 def worker_loop(number, config, args, tasks, messages):
@@ -56,7 +141,26 @@ def worker_loop(number, config, args, tasks, messages):
                     f"worker={number} pid={os.getpid()} job={json.dumps(job, sort_keys=True)}",
                     flush=True,
                 )
-                result = execute_job(job, config, cache, args)
+                stop = threading.Event()
+                monitor = threading.Thread(
+                    target=progress_monitor,
+                    args=(
+                        stop,
+                        threading.get_ident(),
+                        stream,
+                        key,
+                        args.progress_seconds,
+                        messages,
+                        number,
+                    ),
+                    daemon=True,
+                )
+                monitor.start()
+                try:
+                    result = execute_job(job, config, cache, args)
+                finally:
+                    stop.set()
+                    monitor.join()
             messages.put(
                 {
                     "worker": number,
@@ -115,6 +219,8 @@ def execute_parallel(config, cache, args, plan, selected, results):
                 "planned": len(plan),
                 "completed": len(ordered),
                 "remaining": len(plan) - len(ordered),
+                "selected": len(selected),
+                "selected_completed": sum(job_key(j) in results for j in selected),
                 "failed_in_this_invocation": failures,
                 "workers": worker_count,
                 "interrupted": interrupted,
@@ -167,6 +273,13 @@ def execute_parallel(config, cache, args, plan, selected, results):
                     )
                 continue
             number = message["worker"]
+            if message.get("event") == "progress":
+                if number in active and job_key(active[number]) == message["key"]:
+                    print(
+                        f"PROGRESS worker={number} {message['key']} elapsed={message['elapsed']:.0f}s {json.dumps(message['progress'])}",
+                        flush=True,
+                    )
+                continue
             job = active.pop(number)
             if job != message["job"]:
                 raise RuntimeError("Worker returned a different job")
@@ -240,6 +353,12 @@ def execute_parallel(config, cache, args, plan, selected, results):
         f"Completed {len(results)}/{len(plan)} jobs; {count} derived evaluations; failures={len(failures)}",
         flush=True,
     )
+    if args.coverage_only:
+        count = sum(job_key(j) in results for j in selected)
+        print(
+            f"Coverage subset: {count}/{len(selected)} completed; other full-plan jobs were not requested",
+            flush=True,
+        )
     return 1 if failures else 0
 
 
@@ -256,11 +375,26 @@ def main(argv=None):
         "--kinds", nargs="+", choices=["tabular", "neural", "bagging", "clv"]
     )
     parser.add_argument("--limit", type=int)
+    parser.add_argument(
+        "--coverage-only",
+        action="store_true",
+        help="One-seed late-stage coverage; no TCN repeats or seed ensembles",
+    )
+    parser.add_argument(
+        "--dates",
+        nargs="+",
+        help="Coverage dates in execution order; default October only",
+    )
+    parser.add_argument(
+        "--bootstrap-members", type=int, choices=[0, 2, 4, 8], default=4
+    )
+    parser.add_argument("--progress-seconds", type=float, default=15)
     args = parser.parse_args(argv)
     if (
         args.workers < 1
         or args.threads < 1
         or (args.limit is not None and args.limit < 1)
+        or args.progress_seconds <= 0
     ):
         parser.error("workers, threads and limit must be positive")
     args.resume = True
@@ -279,7 +413,18 @@ def main(argv=None):
         )
     config = read_config(args.config, args.smoke)
     plan = make_plan(config)
-    selected = [j for j in plan if not args.kinds or j["kind"] in args.kinds]
+    if args.coverage_only:
+        dates = args.dates or [max(config["validation_dates"])]
+        if len(set(dates)) != len(dates) or not set(dates) <= set(
+            config["validation_dates"]
+        ):
+            parser.error("Unknown/duplicate coverage dates")
+        selected = coverage_jobs(plan, config, dates, args.bootstrap_members)
+    else:
+        if args.dates:
+            parser.error("--dates is for --coverage-only")
+        selected = plan
+    selected = [j for j in selected if not args.kinds or j["kind"] in args.kinds]
     if args.limit:
         selected = selected[: args.limit]
     if not selected:
@@ -313,6 +458,14 @@ def main(argv=None):
             result = existing_result(args.out_dir / "jobs" / job_key(job), job)
             if result is not None:
                 results[job_key(job)] = result
+        if args.coverage_only and results:
+            ordered = [results[job_key(j)] for j in plan if job_key(j) in results]
+            write_scores(ordered, args.out_dir)
+            combine(ordered, config, cache, args.out_dir)
+            print(
+                "Saved comparison of already completed candidates before new training",
+                flush=True,
+            )
         print(
             json.dumps(
                 {
