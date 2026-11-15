@@ -1,0 +1,8 @@
+profile,model,RMSLE
+ridge_full,ridge,2.3620541774991635
+history_summary,forest,2.3648799513049323
+ridge_summary,ridge,2.3675298419181017
+history_baskets,forest,2.3675417961876133
+history_full,forest,2.3684853028139394
+history_without_season,forest,2.368927299271271
+season_control,forest,2.3707563245295353

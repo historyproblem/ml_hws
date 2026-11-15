@@ -1,7 +1,8 @@
-filename,left_score,right_score,after_deadline
-submission_history_embedding32_mlp.csv,2.82389,2.78412,True
-submission_03_rf_season_sqrt.csv,2.76148,2.72729,True
-submission_02_rf_baskets_season.csv,2.74461,2.71733,True
-submission_01_rf_season.csv,2.74391,2.718,True
-submission.csv,2.78882,2.75074,False
-submission_joint_history_mean3.csv,2.79724,2.77883,False
+filename,left_score,right_score,after_deadline,private_score,public_score
+"submission.csv (ridge_full, user identified)",2.71632,2.68,True,2.71632,2.68
+submission_history_embedding32_mlp.csv,2.82389,2.78412,True,2.82389,2.78412
+submission_03_rf_season_sqrt.csv,2.76148,2.72729,True,2.76148,2.72729
+submission_02_rf_baskets_season.csv,2.74461,2.71733,True,2.74461,2.71733
+submission_01_rf_season.csv,2.74391,2.718,True,2.74391,2.718
+submission.csv,2.78882,2.75074,False,2.78882,2.75074
+submission_joint_history_mean3.csv,2.79724,2.77883,False,2.79724,2.77883
