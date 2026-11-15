@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "validation_dates": ["2018-06-01", "2018-07-01", "2018-08-01", "2018-09-01", "2018-10-01"],
+  "seeds": [42, 123, 2026],
+  "bootstrap_repeats": 2000,
+  "blend_weights": [0.1, 0.25, 0.5],
+  "base_settings": {
+    "hidden_sizes": [128, 64],
+    "weight_decay": 0.0001,
+    "dropout": 0.0,
+    "learning_rate": 0.001,
+    "batch_size": 1024,
+    "max_epochs": 200,
+    "patience": 20,
+    "min_delta": 0.0001
+  },
+  "embedding": {
+    "window_days": 180,
+    "half_life_days": 90,
+    "max_items": 128,
+    "min_customers": 3,
+    "weight_decay": 0.001,
+    "initial_std": 0.05
+  },
+  "profiles": [
+    {"name": "item16", "overrides": {"embedding_dim": 16}},
+    {"name": "item32", "overrides": {"embedding_dim": 32}}
+  ]
+}
