@@ -2,6 +2,13 @@
 
 Стартовые бейзлайны для [HW3 ML MIPT autumn 2026](https://www.kaggle.com/competitions/hw-3-ml-mipt-autumn-2026). Цель — `spend_30d`, метрика — RMSLE.
 
+**Текущий режим: только семинары 1–10 включительно.** Проверенный строгий
+workflow: `bash scripts/make_course10_submission.sh`. Он использует один
+обычный регрессор на RFM, без Joint/hurdle, mean3, блендов, товарных embedding
+веток и target-history. Карта источников и результаты —
+[docs/course10-only.md](docs/course10-only.md). Прежние расширенные прогоны ниже
+сохранены как архив исследований и не входят в текущий финальный рецепт.
+
 ## Бейзлайны
 
 | Имя | Подход | Фиксированные настройки |

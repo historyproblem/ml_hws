@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "max_seminar": 10,
+  "course_revision": "8a20cdf4b981c2962ef9741821b8d811468cf849",
+  "dataset": "D0",
+  "features": "F0",
+  "task": "direct",
+  "seed": 42,
+  "models": ["ridge", "forest", "mlp"],
+  "mlp_profile": "compact_l2",
+  "validation_dates": ["2018-06-01", "2018-07-01", "2018-08-01", "2018-09-01", "2018-10-01"]
+}

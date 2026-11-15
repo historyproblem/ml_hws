@@ -145,4 +145,5 @@ def main():
     print('CSV validated. Kaggle upload has not been performed.')
 
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    raise SystemExit('Archived Joint+mean3 exporter. Active scope is seminars1-10; use scripts/make_course10_submission.sh')

@@ -1,0 +1,76 @@
+{
+  "course": "andriygav/MachineLearningSeminars",
+  "revision": "8a20cdf4b981c2962ef9741821b8d811468cf849",
+  "maximum_seminar": 10,
+  "checked_not_executed": true,
+  "active_models": {
+    "ridge": [
+      {
+        "seminar": 2,
+        "source_url": "https://raw.githubusercontent.com/andriygav/MachineLearningSeminars/8a20cdf4b981c2962ef9741821b8d811468cf849/sem2/main.ipynb",
+        "notebook_sha256": "3ea3834fae0d446a0b1ecf944c6f59200fb595b11093cad9795461ffbffb6282",
+        "blob_sha": "a933dd1aa9d59431c6f25c491d8e037dba0df8a0",
+        "cell_indices_zero_based": [
+          29,
+          30
+        ]
+      },
+      {
+        "seminar": 6,
+        "source_url": "https://raw.githubusercontent.com/andriygav/MachineLearningSeminars/8a20cdf4b981c2962ef9741821b8d811468cf849/sem6/main.ipynb",
+        "notebook_sha256": "275cd27c0ff1adbc74fb171d619668812cd8e23c097603e8453f4973afac4617",
+        "blob_sha": "a282147b52780cb1f89f3361bad525deb9d68a9b",
+        "cell_indices_zero_based": [
+          21,
+          23
+        ]
+      }
+    ],
+    "mlp": [
+      {
+        "seminar": 3,
+        "source_url": "https://raw.githubusercontent.com/andriygav/MachineLearningSeminars/8a20cdf4b981c2962ef9741821b8d811468cf849/sem3/main.ipynb",
+        "notebook_sha256": "e82978d2326eeea9810d58bd7151958b0ad3e9e399fd173aae054af6cb81fc44",
+        "blob_sha": "77bff0091f6c4e3f31449d3767cb9fb46f0741b1",
+        "cell_indices_zero_based": [
+          23,
+          33
+        ]
+      },
+      {
+        "seminar": 8,
+        "source_url": "https://raw.githubusercontent.com/andriygav/MachineLearningSeminars/8a20cdf4b981c2962ef9741821b8d811468cf849/sem8/main.ipynb",
+        "notebook_sha256": "d363fb53a4bd093dbc8075e7f428f0985a5436da48514505fce8c799b4ece989",
+        "blob_sha": "8d40c6056b989c77c088ab8f68069004af44ecf8",
+        "cell_indices_zero_based": [
+          8,
+          12
+        ]
+      }
+    ],
+    "forest": [
+      {
+        "seminar": 9,
+        "source_url": "https://raw.githubusercontent.com/andriygav/MachineLearningSeminars/8a20cdf4b981c2962ef9741821b8d811468cf849/sem9/main.ipynb",
+        "notebook_sha256": "6b013fadff3f264d6bdf0b99a1d5f3153edf0d8d3b42e7ac24d83e9a7cae3fd8",
+        "blob_sha": "b2cd2a94d321cce00ca2b18de3b8a7858956857c",
+        "cell_indices_zero_based": [
+          57,
+          59,
+          69
+        ]
+      }
+    ]
+  },
+  "active_recipe": {
+    "dataset": "D0",
+    "features": "F0",
+    "seed": 42,
+    "task": "direct",
+    "manual_ensemble": false,
+    "custom_hurdle": false,
+    "target_history": false,
+    "learned_item_pooling": false
+  },
+  "interpretation": "Conservative scope of our final recipe, not a claim that the organiser banned every possible combination of familiar blocks."
+}
