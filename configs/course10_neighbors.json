@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "model": "KNeighborsRegressor",
+  "seminar": 4,
+  "dataset": "D0",
+  "features": "F0",
+  "target": "log1p(spend_30d)",
+  "n_neighbors": [64, 256, 1024],
+  "weights": ["uniform", "distance"],
+  "tuning_dates": ["2018-06-01", "2018-07-01", "2018-08-01"],
+  "confirmation_dates": ["2018-09-01", "2018-10-01"]
+}
