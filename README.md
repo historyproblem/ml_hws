@@ -9,6 +9,11 @@ workflow: `bash scripts/make_course10_submission.sh`. Он использует 
 [docs/course10-only.md](docs/course10-only.md). Прежние расширенные прогоны ниже
 сохранены как архив исследований и не входят в текущий финальный рецепт.
 
+При ограниченном времени доступен [подбор на 65 минут](docs/course10-fast-tuning.md):
+`bash scripts/run_course10_fast_tuning.sh 2 65`. Для сдачи готовится
+[самодостаточный ноутбук и ZIP](docs/course10-delivery.md):
+`python scripts/package_course10_solution.py`.
+
 ## Бейзлайны
 
 | Имя | Подход | Фиксированные настройки |
