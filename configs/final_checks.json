@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "reference_config": "configs/v100_suite.json",
+  "reference_out": "outputs/v100-focused",
+  "dataset": "D2",
+  "base_features": "F2",
+  "locked_primary": "mlp:hurdle_joint:compact_l2",
+  "locked_reserve": "wide:direct:compact_l2",
+  "refit_reserve": true,
+  "seeds": [42, 123, 2026],
+  "validation_dates": ["2018-06-01", "2018-07-01", "2018-08-01", "2018-09-01", "2018-10-01"],
+  "run_order": ["2018-09-01", "2018-10-01", "2018-06-01", "2018-07-01", "2018-08-01"],
+  "optional_checks_time_budget_minutes": 90,
+  "target_history_prior_strength": 3.0,
+  "blend_joint_weights": [1.0, 0.75, 0.5],
+  "loss_weights": {"purchase_bce": 1.0, "positive_log_mse": 1.0, "total_log_mse": 1.0},
+  "cases": [
+    {"name": "season_ridge", "model": "ridge", "feature_block": "season"},
+    {"name": "season_joint", "model": "joint", "feature_block": "season"},
+    {"name": "target_history_ridge", "model": "ridge", "feature_block": "target_history"},
+    {"name": "target_history_joint", "model": "joint", "feature_block": "target_history"},
+    {"name": "joint_l2_1e3", "model": "joint", "feature_block": "none", "settings": {"weight_decay": 0.001}},
+    {"name": "joint_dropout_10", "model": "joint", "feature_block": "none", "settings": {"dropout": 0.1}},
+    {"name": "joint_total_loss_2", "model": "joint", "feature_block": "none", "loss_weights": {"purchase_bce": 1.0, "positive_log_mse": 1.0, "total_log_mse": 2.0}}
+  ]
+}
