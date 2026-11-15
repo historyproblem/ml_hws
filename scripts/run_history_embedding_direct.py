@@ -18,7 +18,9 @@ SETTINGS={'hidden_sizes':[128,64],'weight_decay':.0001,'dropout':0.,'learning_ra
 
 def run(args):
     out=args.out;out.mkdir(parents=True,exist_ok=True)
-    identity={'settings':SETTINGS,'dataset':'D0','features':'F0+learned-history32','seed':42,'task':'direct',
+    settings={**SETTINGS,'hidden_sizes':list(args.hidden_sizes or SETTINGS['hidden_sizes'])}
+    if any(w<=0 for w in settings['hidden_sizes']):raise ValueError('Hidden layer sizes must be positive')
+    identity={'settings':settings,'dataset':'D0','features':'F0+learned-history32','seed':42,'task':'direct',
      'one_predictor':True,'input_sha256':{n:digest(args.data/n) for n in ['train.csv','test.csv','transactions.csv','sample_submission.csv']},
      'source_sha256':{n:digest(n) for n in ['scripts/run_history_embedding_direct.py','src/spend_embeddings/direct.py','src/spend_embeddings/data.py']}}
     marker=out/'manifest.json'
@@ -32,7 +34,7 @@ def run(args):
     else:
         x=feature_matrix(history.build_features(objects)).astype(np.float32)
         lines,_=positive_lines(args.data);names=np.array(sorted(lines.item_id.unique()),dtype=str)
-        ids,weights,_=build_bags(objects,lines,names,SETTINGS['embedding'])
+        ids,weights,_=build_bags(objects,lines,names,settings['embedding'])
         np.savez_compressed(out/'bags.npz',x=x,ids=ids,weights=weights,names=names)
     atomic_json(out/'data_checks.json',checks)
     dates=['2018-09-01','2018-10-01',str(test.as_of_date.min().date())]
@@ -51,12 +53,12 @@ def run(args):
         assert objects.iloc[ti].target_end.max()<=inner and objects.iloc[tr].target_end.max()<=cutoff
         imap,_=fit_vocabulary(ids[ti],objects.iloc[ti].customer_id.to_numpy(),len(names),3)
         print(date,'inner',inner.date(),'selecting one direct MLP',flush=True);start=time.monotonic()
-        model=ProductMLP(SETTINGS,42,'cpu',args.threads)
+        model=ProductMLP(settings,42,'cpu',args.threads)
         model.fit(x[ti],ids[ti],weights[ti],objects.iloc[ti].spend_30d.to_numpy(float),np.ones(len(ti)),imap,
                   validation=(x[iv],ids[iv],weights[iv],objects.iloc[iv].spend_30d.to_numpy(float)))
         epoch=model.best_epoch;pd.DataFrame(model.history).to_csv(directory/'selection.csv',index=False);del model
         mapping,_=fit_vocabulary(ids[tr],objects.iloc[tr].customer_id.to_numpy(),len(names),3)
-        model=ProductMLP(SETTINGS,42,'cpu',args.threads).fit(x[tr],ids[tr],weights[tr],objects.iloc[tr].spend_30d.to_numpy(float),np.ones(len(tr)),mapping,epochs=epoch)
+        model=ProductMLP(settings,42,'cpu',args.threads).fit(x[tr],ids[tr],weights[tr],objects.iloc[tr].spend_30d.to_numpy(float),np.ones(len(tr)),mapping,epochs=epoch)
         assert model.network.output.out_features==1
         pd.DataFrame(model.history).to_csv(directory/'refit.csv',index=False);model.save(directory/'model.pt',names)
         z=model.predict(x[vi],ids[vi],weights[vi]);frame=objects.iloc[vi][['Id','customer_id']].copy().reset_index(drop=True)
@@ -81,6 +83,7 @@ def run(args):
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--data',type=Path,default=Path('data/raw'))
     p.add_argument('--out',type=Path,default=Path('outputs/history-embedding-direct'));p.add_argument('--threads',type=int,default=2)
+    p.add_argument('--hidden-sizes',nargs='+',type=int,help='Explicit hidden widths; use a new output directory')
     args=p.parse_args()
     with threadpool_limits(limits=args.threads):run(args)
 

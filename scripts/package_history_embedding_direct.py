@@ -1,5 +1,5 @@
 """Readable standalone notebook for the single learned-history MLP."""
-import ast,json,runpy,shutil,zipfile
+import argparse,ast,json,shutil,zipfile
 from pathlib import Path
 from spend_baselines.suite_data import digest
 
@@ -51,10 +51,13 @@ print('Created submission_reproduced.csv; no automatic Kaggle upload.')
 
 
 def main():
-    run=ROOT/'outputs/history-embedding-direct';out=ROOT/'outputs/history-embedding-direct-delivery';out.mkdir(exist_ok=True)
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--run',type=Path,default=ROOT/'outputs/history-embedding-direct')
+    p.add_argument('--out',type=Path,default=ROOT/'outputs/history-embedding-direct-delivery')
+    args=p.parse_args();run,out=args.run,args.out;out.mkdir(parents=True,exist_ok=True)
     proof=json.loads((run/'verification.json').read_text());assert proof['rows']==3188 and proof['all3checkpoint_forwards_verified']
     assert digest(run/'submission_history_embedding32_mlp.csv')==proof['CSV_SHA256']
-    settings=runpy.run_path(str(ROOT/'scripts/run_history_embedding_direct.py'),run_name='embedding_delivery')['SETTINGS']
+    settings=json.loads((run/'manifest.json').read_text())['settings']
     cells=[]
     def add(kind,text):
         cell={'cell_type':kind,'metadata':{},'id':f'cell-{len(cells):03d}','source':text.strip()+'\n'}
@@ -73,7 +76,7 @@ def main():
 Она подготовлена по явной просьбе попробовать обучаемый эмбеддинг истории. Архивная Joint-модель не используется.
 Все50852строкиD0официальные, без смешивания моделей/seed, внешних данных, трансформеров, бустинга или AutoML.
 Внутренние словари и модели строятся заново с temporalpurge; target_end<=cutoff.
-Ранее просмотренныеSep/Octне являются новымholdout. МеткиNovemberнеизвестны. Код подготовлен с помощьюCodex.''')
+Ранее просмотренныеSep/Octне являются новымholdout. МеткиNovemberнеизвестны. Код подготовлен с помощьюCodex.'''.replace('MLP128/64',"MLP"+'/'.join(map(str,settings['hidden_sizes']))))
     add('code','SETTINGS='+repr(settings))
     add('code',(ROOT/'src/spend_baselines/data.py').read_text())
     add('code',source(ROOT/'src/spend_behavior/data.py',{'positive_lines'}))
@@ -92,12 +95,15 @@ def output_prediction(raw,task):
     return raw[:,0].clamp_min(0)
 '''
     add('code',helpers+'\n'+source(ROOT/'src/spend_baselines/suite_models.py',{'Preprocessor'})+'\n'+source(ROOT/'src/spend_embeddings/direct.py',{'make_network','ProductMLP'}))
-    add('markdown','Зафиксировано:September2.631559,October2.676168,pooled2.654549. СезонныйForest2.645327; преимущество этого нейронного кандидата не показано. Проверка и поздняя отправка являются исследовательскими.')
+    sep=json.loads((run/'2018-09-01/result.json').read_text())['RMSLE']
+    oct_=json.loads((run/'2018-10-01/result.json').read_text())['RMSLE']
+    score=json.loads((run/'summary.json').read_text())['RMSLE_SepOct']
+    add('markdown',f"Зафиксировано:MLP{settings['hidden_sizes']},September{sep:.6f},October{oct_:.6f},pooled{score:.6f}. СезонныйForest2.645327. Проверка и поздняя отправка являются исследовательскими; меткиNovemberнеизвестны.")
     add('code',RUN)
     nb={'nbformat':4,'nbformat_minor':5,'metadata':{'kernelspec':{'display_name':'Python3','language':'python','name':'python3'},'language_info':{'name':'python','version':'3.12'}},'cells':cells}
     (out/'solution.ipynb').write_text(json.dumps(nb,indent=1,ensure_ascii=False));shutil.copyfile(run/'submission_history_embedding32_mlp.csv',out/'submission_history_embedding32_mlp.csv')
     for n in ['manifest.json','verification.json','data_checks.json','serialization_migration.json']:
-        shutil.copyfile(run/n,out/n)
+        if (run/n).exists():shutil.copyfile(run/n,out/n)
     (out/'requirements.txt').write_text('numpy==2.3.5\npandas==2.2.3\nscikit-learn==1.7.2\nscipy>=1.14,<2\ntorch==2.5.1\n')
     (out/'delivery_manifest.json').write_text(json.dumps({'CSV_SHA256':proof['CSV_SHA256'],'sha256':{p.name:digest(p) for p in out.iterdir() if p.is_file() and p.suffix!='.zip' and p.name!='delivery_manifest.json'}},indent=2))
     with zipfile.ZipFile(out/'history_embedding_direct_solution.zip','w',compression=zipfile.ZIP_DEFLATED) as z:
