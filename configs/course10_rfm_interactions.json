@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "seed": 42,
+  "dataset": "D0",
+  "task": "direct",
+  "max_seminar": 10,
+  "tuning_dates": [
+    "2018-06-01",
+    "2018-07-01",
+    "2018-08-01"
+  ],
+  "confirmation_dates": [
+    "2018-09-01",
+    "2018-10-01"
+  ],
+  "forest": {
+    "n_estimators": 200,
+    "max_depth": 12,
+    "min_samples_leaf": 20,
+    "max_features": 0.3333333333333333
+  },
+  "profiles": [
+    {
+      "model": "ridge",
+      "base": "F0",
+      "season": true,
+      "history": "full",
+      "alpha": 100.0,
+      "precision": "float64",
+      "items": "none",
+      "name": "ridge64_control",
+      "interaction": "none",
+      "control": true,
+      "reuse": "ridge64_control"
+    },
+    {
+      "model": "ridge",
+      "base": "F0",
+      "season": true,
+      "history": "full",
+      "alpha": 100.0,
+      "precision": "float64",
+      "items": "none",
+      "name": "ridge_bins",
+      "interaction": "bins",
+      "control": false
+    },
+    {
+      "model": "ridge",
+      "base": "F0",
+      "season": true,
+      "history": "full",
+      "alpha": 100.0,
+      "precision": "float64",
+      "items": "none",
+      "name": "ridge_personalized",
+      "interaction": "personalized",
+      "control": false
+    },
+    {
+      "model": "ridge",
+      "base": "F0",
+      "season": true,
+      "history": "full",
+      "alpha": 100.0,
+      "precision": "float64",
+      "items": "none",
+      "name": "ridge_all",
+      "interaction": "all",
+      "control": false
+    }
+  ]
+}

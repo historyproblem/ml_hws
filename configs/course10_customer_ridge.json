@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "seed": 42,
+  "dataset": "D0",
+  "task": "direct",
+  "max_seminar": 10,
+  "tuning_dates": [
+    "2018-06-01",
+    "2018-07-01",
+    "2018-08-01"
+  ],
+  "confirmation_dates": [
+    "2018-09-01",
+    "2018-10-01"
+  ],
+  "forest": {
+    "n_estimators": 200,
+    "max_depth": 12,
+    "min_samples_leaf": 20,
+    "max_features": 0.3333333333333333
+  },
+  "profiles": [
+    {
+      "model": "customer_ridge",
+      "base": "F0",
+      "season": true,
+      "history": "full",
+      "alpha": 100.0,
+      "name": "customer_l2",
+      "customer_alpha": 2.0
+    },
+    {
+      "model": "customer_ridge",
+      "base": "F0",
+      "season": true,
+      "history": "full",
+      "alpha": 100.0,
+      "name": "customer_l10",
+      "customer_alpha": 10.0
+    },
+    {
+      "model": "customer_ridge",
+      "base": "F0",
+      "season": true,
+      "history": "full",
+      "alpha": 100.0,
+      "name": "customer_l50",
+      "customer_alpha": 50.0
+    }
+  ]
+}

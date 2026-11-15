@@ -1,0 +1,16 @@
+{
+  "version":1,"dataset":"D0","task":"direct","seed":42,"max_seminar":10,
+  "tuning_dates":["2018-06-01","2018-07-01","2018-08-01"],
+  "confirmation_dates":["2018-09-01","2018-10-01"],
+  "item_prior":5.0,"item_max_items":128,
+  "forest":{"n_estimators":200,"max_depth":12,"min_samples_leaf":20,"max_features":0.3333333333333333},
+  "profiles":[
+    {"name":"measured_ridge32","model":"ridge","base":"F0","season":true,"history":"full","alpha":100.0,"precision":"float32","items":"none","control":true,"reuse":"ridge_full"},
+    {"name":"ridge64_control","model":"ridge","base":"F0","season":true,"history":"full","alpha":100.0,"precision":"float64","items":"none","control":true},
+    {"name":"forest_history_control","model":"forest","base":"F0","season":true,"history":"summary","items":"none","control":true,"reuse":"history_summary"},
+    {"name":"ridge_item_current","model":"ridge","base":"F0","season":true,"history":"full","alpha":100.0,"precision":"float64","items":"current","control":false},
+    {"name":"ridge_item_year","model":"ridge","base":"F0","season":true,"history":"full","alpha":100.0,"precision":"float64","items":"year","control":false},
+    {"name":"ridge_item_all","model":"ridge","base":"F0","season":true,"history":"full","alpha":100.0,"precision":"float64","items":"all","control":false},
+    {"name":"forest_item_all","model":"forest","base":"F0","season":true,"history":"summary","items":"all","control":false}
+  ]
+}

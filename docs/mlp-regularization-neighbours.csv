@@ -1,0 +1,5 @@
+profile,RMSLE_SepOct,epoch,features,device,smoke
+monthly_l2_003,2.623473241742446,14,83,cpu,False
+monthly_dropout_020,2.6197240516877898,23,83,cpu,False
+monthly_lr_0005,2.622345636778985,14,83,cpu,False
+monthly_small_l2_003,2.628762337137011,28,83,cpu,False

@@ -1,4 +1,14 @@
 filename,left_score,right_score,after_deadline,private_score,public_score
+submission_monthly_lr_0005_cpu.csv,2.70653,2.67613,True,2.70653,2.67613
+submission_monthly_l2_003_cpu.csv,2.6934,2.66351,True,2.6934,2.66351
+submission_monthly_dropout_020_cpu.csv,2.69671,2.6687,True,2.69671,2.6687
+submission_monthly_small_cpu.csv,2.69917,2.66911,True,2.69917,2.66911
+submission_monthly_regularized_cpu.csv,2.69413,2.6646,True,2.69413,2.6646
+submission_monthly_items_regularized_cpu.csv,2.73724,2.67824,True,2.73724,2.67824
+submission_ridge_item_all_float64.csv,2.71947,2.67598,True,2.71947,2.67598
+submission_ridge_rfm_bins_float64.csv,2.7221,2.68401,True,2.7221,2.68401
+submission_ridge_item_current.csv,2.7201,2.6764,True,2.7201,2.6764
+submission_monthly_mlp_seed42.csv,2.7125,2.68374,True,2.7125,2.68374
 "submission.csv (ridge_full, user identified)",2.71632,2.68,True,2.71632,2.68
 submission_history_embedding32_mlp.csv,2.82389,2.78412,True,2.82389,2.78412
 submission_03_rf_season_sqrt.csv,2.76148,2.72729,True,2.76148,2.72729

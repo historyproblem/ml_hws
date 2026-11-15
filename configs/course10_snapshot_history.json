@@ -1,0 +1,12 @@
+{
+  "version":1,"seed":42,"task":"direct","max_seminar":10,"alpha":100.0,
+  "tuning_dates":["2018-06-01","2018-07-01","2018-08-01"],
+  "confirmation_dates":["2018-09-01","2018-10-01"],
+  "profiles":[
+    {"name":"d0_control","dataset":"D0","calendar":"asof_month","weights":"customer_month","half_life":null,"control":true},
+    {"name":"d0_window_calendar","dataset":"D0","calendar":"target_window","weights":"customer_month","half_life":null,"control":false},
+    {"name":"d2_month_weight","dataset":"D2","calendar":"target_window","weights":"customer_month","half_life":null,"control":false},
+    {"name":"d2_uniform_weight","dataset":"D2","calendar":"target_window","weights":"normalized_uniform","half_life":null,"control":false},
+    {"name":"d2_recent_weight","dataset":"D2","calendar":"target_window","weights":"customer_month","half_life":180.0,"control":false}
+  ]
+}
