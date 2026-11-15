@@ -185,4 +185,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    raise SystemExit('Archived item32 blend exporter. Active scope is seminars1-10; use scripts/make_course10_submission.sh')

@@ -45,9 +45,10 @@ class ScopeTests(unittest.TestCase):
 
     def test_legacy_submission_wrapper_is_disabled_without_training(self):
         import subprocess
-        r=subprocess.run(['bash','scripts/make_joint_history_submission.sh'],capture_output=True,text=True)
-        self.assertEqual(r.returncode,2)
-        self.assertIn('make_course10_submission.sh',r.stderr)
+        for name in ['make_joint_history_submission.sh','make_item32_submission.sh']:
+            r=subprocess.run(['bash','scripts/'+name],capture_output=True,text=True)
+            self.assertEqual(r.returncode,2)
+            self.assertIn('make_course10_submission.sh',r.stderr)
 
 
 class ReferenceTests(unittest.TestCase):

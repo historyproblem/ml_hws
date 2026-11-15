@@ -115,7 +115,7 @@ Ridge: тот же вызов с `ridge`. Они также входят в по
 на этапе refit потребуется `--base-cache outputs/v100-focused/cache`.
 `--resume` проверяет совпадение определения и SHA завершённых артефактов.
 Smoke сохраняет `smoke_predictions.csv` с `upload_ready=false`, не submission.
-Старый `make_joint_history_submission.sh` и CLI старого Joint-exporter
+Старые `make_joint_history_submission.sh`, `make_item32_submission.sh` и CLI обоих exporters
 отключены для текущего режима; функции чтения/аудита старых результатов
 сохранены для воспроизводимости. Предыдущие исследовательские веса и
 результаты не удаляются.
