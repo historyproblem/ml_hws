@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "dataset": "D2",
+  "validation_dates": ["2018-06-01", "2018-07-01", "2018-08-01", "2018-09-01", "2018-10-01"],
+  "ridge_alpha": 10.0,
+  "effect_lambdas": [2, 10, 50],
+  "history_prior": 5,
+  "history_half_life": 90,
+  "hazard_C": [0.1, 1.0],
+  "weibull_penalty": [0.01, 0.1],
+  "segment_k": [2, 3, 4, 5],
+  "segment_min_customers": 100,
+  "segment_shrink": 200,
+  "season_prior_days": 60,
+  "season_strengths": [0.25, 0.5],
+  "blend_candidates": ["ridge_individual", "ridge_history", "ridge_regularity", "ridge_season", "ridge_items", "hazard_joint_positive", "weibull_joint_positive", "segment_kmeans_soft"],
+  "blend_weights": [0.1, 0.25, 0.5],
+  "bootstrap_repeats": 2000,
+  "seeds": [42, 123, 2026],
+  "joint_blocks": ["history", "season"],
+  "joint_settings": {
+    "hidden_sizes": [128, 64],
+    "weight_decay": 0.0001,
+    "dropout": 0.0,
+    "max_epochs": 200,
+    "patience": 20,
+    "min_delta": 0.0001,
+    "batch_size": 1024,
+    "learning_rate": 0.001
+  }
+}
