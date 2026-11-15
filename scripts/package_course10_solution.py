@@ -257,6 +257,14 @@ def package(args,kind):
         metrics='| Этап | RMSLE |\n|---|---:|\n'+'\n'.join(f'| {x.stage} | {x.RMSLE:.6f} |' for x in a.itertuples())
         a.to_csv(out/'validation_scores.csv',index=False)
     nb=notebook(recipe,metrics)
+    choice_path=args.run_dir/'final_choice.json'
+    if kind=='selected' and choice_path.exists():
+        choice=json.loads(choice_path.read_text())
+        if choice['profile']!=recipe['profile'] or choice['seed']!=42:
+            raise ValueError('Final choice note belongs to another predictor')
+        if choice.get('explanation'):
+            nb['cells'].insert(3,{'cell_type':'markdown','metadata':{},'id':'final-choice-audit',
+                                  'source':choice['explanation']+'\n'})
     grid=json.loads((REPO/'configs/course10_fast_tuning.json').read_text())
     insert={'cell_type':'code','metadata':{},'id':'declared-parameter-grid','execution_count':None,'outputs':[],
             'source':'# Declared manual search plan; not automatically rerun for reproduction.\nMANUAL_SEARCH_PLAN = '+repr(grid)+'\n'}
@@ -274,7 +282,7 @@ def package(args,kind):
     shutil.copyfile(csvs[0],out/'submission.csv')
     shutil.copyfile(REPO/'configs/course10_fast_tuning.json',out/'manual_parameter_grid.json')
     shutil.copyfile(REPO/'docs/course10-method-proof.json',out/'course_method_sources.json')
-    for name in ['scores.csv','confirmation_scores.csv','winner.json']:
+    for name in ['scores.csv','confirmation_scores.csv','winner.json','final_choice.json','local_validation.json']:
         if (args.run_dir/name).exists():shutil.copyfile(args.run_dir/name,out/name)
     cache=CachedData(args.base_cache)
     rows=np.flatnonzero((cache.objects.official|cache.objects.is_test).to_numpy())
