@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "max_seminar": 10,
+  "model": "RandomForestRegressor",
+  "dataset": "D0",
+  "task": "direct",
+  "seed": 42,
+  "tuning_dates": [
+    "2018-06-01",
+    "2018-07-01",
+    "2018-08-01"
+  ],
+  "confirmation_dates": [
+    "2018-09-01",
+    "2018-10-01"
+  ],
+  "base": {
+    "n_estimators": 200,
+    "max_depth": 12,
+    "min_samples_leaf": 20,
+    "max_features": 0.3333333333333333
+  },
+  "profiles": [
+    {
+      "name": "rf_current",
+      "features": "F0",
+      "season": false,
+      "half_life_days": null,
+      "overrides": {}
+    },
+    {
+      "name": "rf_season",
+      "features": "F0",
+      "season": true,
+      "half_life_days": null,
+      "overrides": {}
+    },
+    {
+      "name": "rf_season_sqrt",
+      "features": "F0",
+      "season": true,
+      "half_life_days": null,
+      "overrides": {
+        "max_features": "sqrt"
+      }
+    },
+    {
+      "name": "rf_season_shallow",
+      "features": "F0",
+      "season": true,
+      "half_life_days": null,
+      "overrides": {
+        "max_depth": 8
+      }
+    },
+    {
+      "name": "rf_season_smooth",
+      "features": "F0",
+      "season": true,
+      "half_life_days": null,
+      "overrides": {
+        "min_samples_leaf": 40
+      }
+    },
+    {
+      "name": "rf_season_recent",
+      "features": "F0",
+      "season": true,
+      "half_life_days": 180,
+      "overrides": {}
+    }
+  ]
+}
