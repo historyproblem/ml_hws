@@ -1,4 +1,5 @@
 filename,left_score,right_score,after_deadline,private_score,public_score
+submission_mlp_standardized_target_cpu.csv,2.7108,2.67616,True,2.7108,2.67616
 submission_ramp_item_ridge.csv,2.70753,2.68211,True,2.70753,2.68211
 submission_monthly_target_cohort_cpu.csv,2.70881,2.67892,True,2.70881,2.67892
 submission_transfer_market_mlp_cpu.csv,2.69904,2.65829,True,2.69904,2.65829
