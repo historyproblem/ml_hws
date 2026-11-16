@@ -1,4 +1,6 @@
 filename,left_score,right_score,after_deadline,private_score,public_score
+submission_monthly_baskets_f2_cpu.csv,2.70192,2.67584,True,2.70192,2.67584
+submission_monthly_past_labels4_cpu.csv,2.72994,2.68269,True,2.72994,2.68269
 submission_monthly_lifetime_summary_cpu.csv,2.70196,2.67031,True,2.70196,2.67031
 submission_monthly_lifetime_all_cpu.csv,2.71535,2.68132,True,2.71535,2.68132
 submission_monthly_lifetime_frequency_cpu.csv,2.70802,2.66702,True,2.70802,2.66702
