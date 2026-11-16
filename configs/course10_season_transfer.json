@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "dataset": "D0",
+  "task": "direct",
+  "max_seminar": 10,
+  "seed": 42,
+  "validation_dates": ["2017-11-01", "2018-06-01", "2018-07-01", "2018-08-01", "2018-09-01", "2018-10-01"],
+  "neural_base": {"hidden_sizes": [128,64], "weight_decay": 0.003, "dropout": 0.1, "learning_rate": 0.001, "batch_size": 1024, "max_epochs": 200, "patience": 20, "min_delta": 0.0001},
+  "profiles": [
+    {"name": "transfer_no_month_dummies", "model": "mlp", "remove": "month_dummies", "centred": false},
+    {"name": "transfer_no_calendar", "model": "mlp", "remove": "calendar", "centred": false},
+    {"name": "transfer_history_only", "model": "mlp", "remove": "season_calendar", "centred": false},
+    {"name": "transfer_market_ridge", "model": "ridge", "remove": "calendar", "centred": true, "alpha": 100.0},
+    {"name": "transfer_market_mlp", "model": "mlp", "remove": "calendar", "centred": true}
+  ]
+}
