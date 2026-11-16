@@ -1,0 +1,7 @@
+{
+  "version":1,"dataset":"D0","task":"direct","max_seminar":10,"seed":42,
+  "profile":"ramp_item_ridge",
+  "tabular_alpha":10.0,"item_alpha":1000.0,"original_bag_scale":5.0,"min_customers":10,
+  "validation_dates":["2018-06-01","2018-07-01","2018-08-01","2018-09-01","2018-10-01"],
+  "parameter_source":"Earlier June-August choices for ramp_interactions and sparse_item_ridge; no new parameter search"
+}

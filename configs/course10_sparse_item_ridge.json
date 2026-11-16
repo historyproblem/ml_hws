@@ -1,0 +1,8 @@
+{
+  "version":1,"dataset":"D0","task":"direct","max_seminar":10,"seed":42,
+  "profile":"sparse_item_ridge",
+  "alphas":[10.0,100.0,1000.0],
+  "min_customers":10,"bag_scale":5.0,"window_days":180,"half_life_days":90,
+  "tuning_dates":["2018-06-01","2018-07-01","2018-08-01"],
+  "confirmation_dates":["2018-09-01","2018-10-01"]
+}

@@ -1,0 +1,10 @@
+{
+  "version":1,"dataset":"D0","task":"direct","max_seminar":10,"seed":42,
+  "tuning_dates":["2018-06-01","2018-07-01","2018-08-01"],
+  "confirmation_dates":["2018-09-01","2018-10-01"],
+  "alphas":[10.0,100.0,1000.0],
+  "profiles":[
+    {"name":"ramp_additive","interactions":false},
+    {"name":"ramp_interactions","interactions":true}
+  ]
+}
