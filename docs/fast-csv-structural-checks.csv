@@ -1,0 +1,14 @@
+profile,RMSLE_SepOct,epoch,features,device,smoke,study
+monthly_activity_f1,2.6251336631718525,19.0,97,cpu,False,rich_features
+monthly_baskets_f2,2.6132862602929565,11.0,117,cpu,False,rich_features
+monthly_rhythm_f3,2.623715509696778,10.0,128,cpu,False,rich_features
+monthly_past_labels4,2.61754195460648,11.0,87,cpu,False,official_labels_and_cohort
+monthly_past_labels12,2.634655408849204,10.0,95,cpu,False,official_labels_and_cohort
+monthly_target_cohort,2.6264787160447107,9.0,83,cpu,False,official_labels_and_cohort
+monthly_cohort_labels4,2.6278843960829588,19.0,87,cpu,False,official_labels_and_cohort
+forest_history_deep,2.6394894836816305,,83,,,forest
+forest_baskets_deep,2.6338115250317338,,117,,,forest
+forest_baskets_smooth,2.6316535069821967,,117,,,forest
+monthly_lifetime_frequency,2.6140796789885856,12.0,92,cpu,False,observed_lifetime
+monthly_lifetime_summary,2.6226039746570944,13.0,91,cpu,False,observed_lifetime
+monthly_lifetime_all,2.620841146061771,14.0,100,cpu,False,observed_lifetime
