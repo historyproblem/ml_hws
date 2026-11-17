@@ -11,7 +11,7 @@ sys.path[:0] = [str(ROOT / "src"), str(ROOT / "tests")]
 
 def main():
     count = 0
-    for name in ["test_hw4_features", "test_hw4_extensions", "test_hw4_neural"]:
+    for name in ["test_hw4_features", "test_hw4_extensions", "test_hw4_neural", "test_hw4_masked"]:
         module = importlib.import_module(name)
         for key, value in vars(module).items():
             if key.startswith("test_") and callable(value):
