@@ -1,0 +1,48 @@
+{
+  "bootstrap": "2000 paired resamples by site, same weights across quarters",
+  "ci_note": "Nominal development CI, same previously used folds, no correction for candidate selection",
+  "mean_ap": {
+    "catboost": 0.26827728924831956,
+    "mlp": 0.26755592915988646,
+    "visit_transformer": 0.27064907095012847,
+    "mlp_blend50": 0.27196348300829604,
+    "visit_transformer_blend50": 0.2717328622087451
+  },
+  "delta_vs_catboost": {
+    "mlp": {
+      "point": -0.0007213600884330984,
+      "ci95": [
+        -0.012559252541346762,
+        0.010441842421434333
+      ]
+    },
+    "visit_transformer": {
+      "point": 0.002371781701808906,
+      "ci95": [
+        -0.007971105004473795,
+        0.013205492253851564
+      ]
+    },
+    "mlp_blend50": {
+      "point": 0.003686193759976475,
+      "ci95": [
+        -0.0008510858961541634,
+        0.0083646117881808
+      ]
+    },
+    "visit_transformer_blend50": {
+      "point": 0.0034555729604255347,
+      "ci95": [
+        -0.0018115507544405954,
+        0.008667312859212134
+      ]
+    }
+  },
+  "visit_minus_mlp": {
+    "point": 0.0030931417902420044,
+    "ci95": [
+      -0.004860966762141085,
+      0.011916105187810506
+    ]
+  }
+}
