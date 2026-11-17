@@ -33,7 +33,8 @@ def sha(path):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--raw", type=Path, default=ROOT / "data/hw4/raw")
+    parser.add_argument("--raw", type=Path, default=ROOT / "data",
+                        help="Directory containing the official CSV files (default: data/)")
     parser.add_argument("--out", type=Path, default=ROOT / "analysis/hw4-neural-20261117")
     parser.add_argument("--device", choices=["cpu", "cuda"], default="cpu")
     parser.add_argument("--models", nargs="+", choices=["mlp", "visit_transformer", "feature_transformer"],
