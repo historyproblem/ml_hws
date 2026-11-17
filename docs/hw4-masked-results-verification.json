@@ -1,0 +1,37 @@
+{
+  "incoming_sha256": {
+    "protocol.json": "373178578827c082601116ab80de49fd7e58a720ea4b159b1d1b6baff0556276",
+    "predictions.csv": "7ade995c9e0b57babfb6156959a07a69ac816c64ad36da1bbcc66e3e32d1771f",
+    "fold_metrics.csv": "d9de246d0fc0bfa9104108f93386a8d1a4a812455dfb0f500496c25fe16d32c4",
+    "summary.csv": "31db9ed780a5f7a1df444dbcc87c554cea7bc2bc0e011dc890f6effbb15898dc"
+  },
+  "baseline_sha256": "a55ef336d4ee6b99e2f66a515dad97c9a63073d3b7ea9593ab3a896bda429436",
+  "protocol_signature_verified": true,
+  "all_6_sources_match": true,
+  "all_4_inputs_match": true,
+  "prediction_rows": 17445,
+  "unique_validation_rows": 5815,
+  "positive_rows": 944,
+  "all_labels_sites_quarters_match_official": true,
+  "all_9_ap_and_3_summary_means_reproduced": true,
+  "reported_checkpoint_forward_checks": true,
+  "checkpoint_weights_independently_replayed": false,
+  "bootstrap": {
+    "repeats": 2000,
+    "unit": "site_id",
+    "seed": 20261117,
+    "quarter_weights": "shared across models and quarters",
+    "confidence": "nominal development CI, no selection correction"
+  },
+  "masked_minus_supervised": {
+    "delta": -0.004510612320962892,
+    "ci95": [
+      -0.011785765638131029,
+      0.0023837420435464944
+    ]
+  },
+  "blend_note": "Exploratory fixed 50/50 probability averages; no weights searched; same previously used development folds",
+  "new_fits": 0,
+  "kaggle_uploads": 0,
+  "lockbox_scored": false
+}
