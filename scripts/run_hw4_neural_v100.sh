@@ -17,12 +17,12 @@ PY
 
 case "${1:-history}" in
   history)
-    "$HW4_PYTHON" scripts/run_hw4_neural.py --device cuda \
+    "$HW4_PYTHON" -u scripts/run_hw4_neural.py --device cuda \
       --models mlp visit_transformer --batch-size 256 --raw "${3:-data}" \
       --out "${2:-analysis/hw4-neural-v100-history}"
     ;;
   features)
-    "$HW4_PYTHON" scripts/run_hw4_neural.py --device cuda \
+    "$HW4_PYTHON" -u scripts/run_hw4_neural.py --device cuda \
       --models feature_transformer --batch-size 32 --raw "${3:-data}" \
       --out "${2:-analysis/hw4-neural-v100-features}"
     ;;

@@ -32,6 +32,12 @@ def sha(path):
 
 
 def main():
+    run_started = time.monotonic()
+
+    def progress(event, **details):
+        print(json.dumps({"event": event, "elapsed_seconds": round(time.monotonic() - run_started, 3),
+                          **details}), flush=True)
+
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--raw", type=Path, default=ROOT / "data",
                         help="Directory containing the official CSV files (default: data/)")
@@ -57,16 +63,37 @@ def main():
         raise FileExistsError("Use a new output directory to preserve earlier runs")
     torch.set_num_threads(args.threads)
     torch.use_deterministic_algorithms(True)
+    device = torch.device(args.device)
+    if device.type == "cuda":
+        probe = torch.ones(1, device=device)
+        assert (probe + 1).item() == 2
+        progress("cuda_ready", device=str(probe.device), gpu=torch.cuda.get_device_name(0))
+        del probe
+    progress("read_csv_start", raw=str(args.raw), device="cpu")
     train = pd.read_csv(args.raw / "train.csv")
     train = train.loc[train.forecast_period <= QUARTERS[-1]].reset_index(drop=True)
     if args.smoke:
         train = train.groupby("forecast_period", group_keys=False).head(32).reset_index(drop=True)
     history = pd.read_csv(args.raw / "inspection_history.csv")
+    progress("read_csv_complete", train_rows=len(train), history_rows=len(history))
     rows = train.drop(columns="target")
+    progress("base_features_start", device="cpu")
     X, cats = build_features(rows, history)
+    progress("base_features_complete", columns=X.shape[1])
+    progress("context_features_start", device="cpu")
     X = pd.concat([X, build_context_features(rows, history)], axis=1)
-    events, valid_events, sequence_audit = build_sequences(rows, history)
+    progress("context_features_complete", columns=X.shape[1])
+    if "visit_transformer" in args.models:
+        progress("visit_sequences_start", device="cpu")
+        events, valid_events, sequence_audit = build_sequences(rows, history)
+        progress("visit_sequences_complete", **sequence_audit)
+    else:
+        events = np.empty((len(rows), 0, 0), dtype=np.float32)
+        valid_events = np.empty((len(rows), 0), dtype=bool)
+        sequence_audit = {"status": "skipped", "reason": "Selected models do not consume visit sequences"}
+        progress("visit_sequences_skipped", **sequence_audit)
     del history
+    progress("input_hashes_start", device="cpu")
     protocol = {"args": {k: str(v) if isinstance(v, Path) else v for k, v in vars(args).items()},
                 "features": list(X), "categorical": cats, "sequence_audit": sequence_audit,
                 "source_sha256": {str(p.relative_to(ROOT)): sha(p) for p in [Path(__file__),
@@ -80,7 +107,7 @@ def main():
                 "device_name": torch.cuda.get_device_name(0) if args.device == "cuda" else "CPU",
                 "status": "running"}
     (args.out / "protocol.json").write_text(json.dumps(protocol, indent=2) + "\n")
-    device = torch.device(args.device)
+    progress("preparation_complete", training_device=str(device))
     y = train.target.to_numpy(dtype=np.float32)
     metrics, predictions = [], []
 
@@ -97,7 +124,9 @@ def main():
                 result.append(model(*(a[start:start + args.batch_size] for a in data)).sigmoid().cpu().numpy())
         return np.concatenate(result)
 
-    def fit(kind, fit_indices, eval_indices, epochs, select):
+    def fit(kind, fit_indices, eval_indices, epochs, select, quarter):
+        phase = "inner_epoch_selection" if select else "outer_refit"
+        progress("preprocessing_start", model=kind, quarter=quarter, phase=phase, device="cpu")
         random.seed(args.seed)
         np.random.seed(args.seed)
         torch.manual_seed(args.seed)
@@ -109,10 +138,20 @@ def main():
                               events.shape[-1], kind, width=args.width).to(device)
         optimizer = torch.optim.AdamW(model.parameters(), lr=.001, weight_decay=.01)
         target = torch.as_tensor(y[fit_indices], device=device)
+        model_device = next(model.parameters()).device
+        tensor_devices = sorted({str(a.device) for a in (*fit_data, *eval_data, target)})
+        if model_device.type != device.type or any(a.device.type != device.type for a in (*fit_data, *eval_data, target)):
+            raise RuntimeError("Model or training tensors are on the wrong device")
+        progress("fit_start", model=kind, quarter=quarter, phase=phase,
+                 model_device=str(model_device), tensor_devices=tensor_devices,
+                 train_rows=len(fit_indices), max_epochs=epochs,
+                 cuda_allocated_mib=round(torch.cuda.memory_allocated() / 1024**2, 2) if device.type == "cuda" else None)
         rng = np.random.default_rng(args.seed)
         best_ap, best_epoch = -1., 1
         curve = []
         for epoch in range(1, epochs + 1):
+            epoch_started = time.monotonic()
+            progress("epoch_start", model=kind, quarter=quarter, phase=phase, epoch=epoch)
             model.train()
             order = rng.permutation(len(fit_indices))
             total_loss = 0.
@@ -127,6 +166,9 @@ def main():
                 torch.nn.utils.clip_grad_norm_(model.parameters(), 1.)
                 optimizer.step()
                 total_loss += loss.item() * len(idx)
+                if epoch == 1 and start == 0:
+                    progress("first_batch_complete", model=kind, quarter=quarter, phase=phase,
+                             logits_device=str(logits.device), loss_device=str(loss.device))
             item = {"epoch": epoch, "train_loss": total_loss / len(order)}
             if select:
                 ap = float(average_precision_score(y[eval_indices], predict(model, eval_data)))
@@ -134,6 +176,9 @@ def main():
                 if ap > best_ap:
                     best_ap, best_epoch = ap, epoch
             curve.append(item)
+            progress("epoch_complete", model=kind, quarter=quarter, phase=phase, **item,
+                     epoch_seconds=round(time.monotonic() - epoch_started, 3),
+                     cuda_allocated_mib=round(torch.cuda.memory_allocated() / 1024**2, 2) if device.type == "cuda" else None)
             if select and epoch - best_epoch >= args.patience:
                 break
         return model, preprocessing, eval_data, best_epoch if select else epochs, curve
@@ -146,8 +191,8 @@ def main():
             inner_quarter = train.iloc[fit_idx].forecast_period.max()
             inner_fit = np.flatnonzero((train.forecast_period < inner_quarter).to_numpy())
             inner_eval = np.flatnonzero((train.forecast_period == inner_quarter).to_numpy())
-            _, _, _, epochs, curve = fit(kind, inner_fit, inner_eval, args.max_epochs, True)
-            model, preprocessing, outer_data, _, refit_curve = fit(kind, fit_idx, outer_idx, epochs, False)
+            _, _, _, epochs, curve = fit(kind, inner_fit, inner_eval, args.max_epochs, True, quarter)
+            model, preprocessing, outer_data, _, refit_curve = fit(kind, fit_idx, outer_idx, epochs, False, quarter)
             p = predict(model, outer_data)
             name = f"{kind}_{quarter}"
             checkpoint = {k: v.detach().cpu() for k, v in model.state_dict().items()}
