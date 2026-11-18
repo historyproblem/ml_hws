@@ -1,0 +1,27 @@
+{
+  "date": "2026-11-19",
+  "archive_sha256": {
+    "classical": "d0209b2ca5b2eb04d4191941581152f501f7de10c8b733d0dd1e1fc63d93d75e",
+    "residual": "de27c40804b288422a0e86a4fa1dd0dbefb2b74728cb46fb2b09ee8cb5f01619"
+  },
+  "protocol_identity_checks": 96,
+  "all_protocol_identity_checks_passed": true,
+  "official_validation_rows": 5815,
+  "positive": 944,
+  "unique_sites": 5537,
+  "original_fold_AP_reproduced": 39,
+  "quarter_metric_rows_reproduced": 123,
+  "summary_and_CI_rows_reproduced": 41,
+  "all_fixed_blends_exact": true,
+  "shared_CB_predictions_exact": true,
+  "gpu_recorded": "Tesla V100-SXM2-32GB",
+  "torch_recorded": "2.6.0+cu126",
+  "independent_checkpoint_reload": false,
+  "new_fits": 0,
+  "closed_quarters_scored": false,
+  "test_refits": 0,
+  "uploads": 0,
+  "fixed_new_threeway_candidates": 2,
+  "new_weight_search": false,
+  "reference_drift_cause": "unresolved; changes in Q4/Q1 training, no data/metric mismatch found"
+}
