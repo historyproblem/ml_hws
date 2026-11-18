@@ -1,0 +1,57 @@
+{
+  "final_checks": {
+    "exit": 0,
+    "expected": 0
+  },
+  "all_models_all_folds": {
+    "exit": 0,
+    "expected": 0
+  },
+  "resume": {
+    "exit": 0,
+    "expected": 0
+  },
+  "changed_config_rejected": {
+    "exit": 1,
+    "expected": 1
+  },
+  "default_architecture": {
+    "exit": 0,
+    "expected": 0
+  },
+  "unit_checks": 50,
+  "small_outer_jobs": 12,
+  "default_architecture_outer_jobs": 4,
+  "all_prediction_reload_exact": true,
+  "all_embedding_reload_exact": true,
+  "resume_new_fits": 0,
+  "quality_claim_from_smoke": false,
+  "full_new_gpu_run": false,
+  "source_sha256": {
+    "scripts/run_hw4_residual.py": "e5dbef7588a04dac65efb48bc1f58a31f06fdc6a91ff7e934e8112fca57198e2",
+    "src/hw4_inspections/features.py": "320317b89be4510e21c83d18c7f0b0ad51bcd9ac677a8bc1297338fee1c1ec38",
+    "src/hw4_inspections/extensions.py": "43ee5a47e6b4e6e2dd271173b60f0bcbd8b31188dbbd0c21f8944ff5691d0a7c",
+    "src/hw4_inspections/neural.py": "0400e8e67d2ad1e54f8ad21045a33f2ece43d7ceb92fa3c6a8680ddca90a820f",
+    "src/hw4_inspections/classical_features.py": "97cd2b9c641d5ea8b8654b52d61f1224a26477d31d825526405ff629bfa4a2f5",
+    "src/hw4_inspections/classical_models.py": "5e22c31ee284c057d359ebb3e053b370f558d8a86a2c72f04f8502ff1b98926e",
+    "src/hw4_inspections/classical_analysis.py": "254a483c559bb875876d26580119b413891564d5d9bf4f95452946af20cee557",
+    "src/hw4_inspections/residual_preprocessing.py": "7dee1b50dffa57b1619012fc55fa2b5564a2a3c41462ee8a8202f5c738c8fb11",
+    "src/hw4_inspections/residual_models.py": "934aaf51b34647826ec380a2e2ee9bed720ee5100114f88c864f51f7bb38d8dd",
+    "src/hw4_inspections/residual_training.py": "10590914eb6ccae93afa00c7f7e4c4ff44b71a5028561d2ad462ec67b6a49728"
+  },
+  "reference_integration": {
+    "synthetic_qa_only": true,
+    "baseline_fits": 0,
+    "new_tiny_neural_jobs": 4,
+    "validation_rows": 32,
+    "original_models": 6,
+    "models_with_blends": 16,
+    "archive_members": 8,
+    "changed_reference_rejected_before_output_write": true,
+    "not_quality_evidence": true
+  },
+  "date": "2026-11-19",
+  "lockbox_scored": false,
+  "test_refits": 0,
+  "kaggle_uploads": 0
+}

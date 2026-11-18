@@ -63,10 +63,29 @@ python scripts/run_hw4_neural.py --smoke --max-epochs 2 \
 preprocessing, маскирование и предобучение. Для smoke нужны официальные CSV;
 для тестов они не нужны.
 
-## Новый классический экран (18 ноября)
+## Новый GPU-экран: residual MLP и embeddings (19 ноября)
 
-Следующий опыт — CatBoost/LightGBM/ExtraTrees, компактные признаки,
-ID/давность и фиксированные ансамбли. Полного результата пока нет.
+Четыре варианта: matched MLP/ResNet, ResNet с числовыми PLE-эмбеддингами,
+тот же ResNet с кодовыми/type/result-эмбеддингами и Transformer истории.
+Все используют96 табличных признаков. Полного результата пока нет.
+
+```bash
+python -m pip install -r configs/hw4-residual-requirements.txt
+bash scripts/run_hw4_residual_v100.sh \
+  analysis/hw4-residual-v100-01 data analysis/hw4-classical-01
+```
+
+Использует V100; читает готовые OOF классического экрана без его переобучения.
+Данные должны быть непосредственно в `data/`. После завершения вернуть
+`analysis/hw4-residual-v100-01/return_results.tar.gz`.
+[Архитектуры, проверки и фоновый запуск](docs/hw4-residual-embeddings.md).
+
+## Классический экран (18 ноября)
+
+Завершён по логу пользователя: лучший CB+compact rank50 AP0.273134,
+reference0.268611,95%CI дельты[-0.000916,+0.009894]. Архив для независимой
+проверки ещё не получен. CatBoost/LightGBM/ExtraTrees, компактные признаки,
+ID/давность и фиксированные ансамбли.
 На сервере он использует CPU; свободная V100 в этом запуске ожидаема.
 
 ```bash

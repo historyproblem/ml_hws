@@ -1,0 +1,2 @@
+# Reuse the already installed torch==2.5.1+cu121; no CUDA wheel replacement.
+-r hw4-neural-requirements.txt

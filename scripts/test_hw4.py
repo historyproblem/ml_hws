@@ -13,7 +13,9 @@ def main():
     count = 0
     for name in ["test_hw4_features", "test_hw4_extensions", "test_hw4_neural", "test_hw4_masked",
                  "test_hw4_classical_features", "test_hw4_classical_models",
-                 "test_hw4_classical_analysis", "test_hw4_classical_runner"]:
+                 "test_hw4_classical_analysis", "test_hw4_classical_runner",
+                 "test_hw4_residual_preprocessing", "test_hw4_residual_models",
+                 "test_hw4_residual_training", "test_hw4_residual_runner"]:
         module = importlib.import_module(name)
         for key, value in vars(module).items():
             if key.startswith("test_") and callable(value):
