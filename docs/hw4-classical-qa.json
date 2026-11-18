@@ -1,0 +1,29 @@
+{
+  "source_sha256": {
+    "scripts/run_hw4_classical.py": "8a148c2e7b5b7301b2dcf042ecff2b855fc676c6695364a4c92581d795f19cf2",
+    "src/hw4_inspections/features.py": "320317b89be4510e21c83d18c7f0b0ad51bcd9ac677a8bc1297338fee1c1ec38",
+    "src/hw4_inspections/extensions.py": "43ee5a47e6b4e6e2dd271173b60f0bcbd8b31188dbbd0c21f8944ff5691d0a7c",
+    "src/hw4_inspections/classical_features.py": "97cd2b9c641d5ea8b8654b52d61f1224a26477d31d825526405ff629bfa4a2f5",
+    "src/hw4_inspections/classical_models.py": "5e22c31ee284c057d359ebb3e053b370f558d8a86a2c72f04f8502ff1b98926e",
+    "src/hw4_inspections/classical_analysis.py": "254a483c559bb875876d26580119b413891564d5d9bf4f95452946af20cee557"
+  },
+  "checks": {
+    "final_tests": "PASS",
+    "final_smoke": "PASS",
+    "final_resume": "PASS"
+  },
+  "completed_jobs": 27,
+  "reused_jobs": 27,
+  "new_fits_on_resume": 0,
+  "all_loaded_forward_exact": true,
+  "stale_tmp_recovery": true,
+  "changed_config_rejected": true,
+  "archive_matches": true,
+  "unit_checks": 33,
+  "date": "2026-11-18",
+  "full_new_cv_completed": false,
+  "quality_claim_from_smoke": false,
+  "kaggle_uploads": 0,
+  "test_refits": 0,
+  "lockbox_scored": false
+}

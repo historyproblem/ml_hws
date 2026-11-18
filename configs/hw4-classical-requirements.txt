@@ -1,0 +1,4 @@
+-r hw4-initial-requirements.txt
+lightgbm==4.6.0
+joblib>=1.4,<2
+threadpoolctl>=3.5,<4
