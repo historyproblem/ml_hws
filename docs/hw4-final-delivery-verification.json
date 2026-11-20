@@ -1,0 +1,81 @@
+{
+  "real_complete": true,
+  "training_sources_match_frozen_recipe": true,
+  "new_fit_jobs": 20,
+  "verified_reused_public_model_jobs": 1,
+  "all_saved_model_forwards_exact": true,
+  "full_train_rows": 21017,
+  "test_rows": 2246,
+  "primary": "cb_visit_rank3",
+  "CSV": {
+    "cb_rank50": {
+      "sha256": "2f12e69693267a6aafc39979700057d614ca03a29f4634c13ca6151527cb88a1",
+      "rows": 2246,
+      "primary": false,
+      "independent_formula_exact": true,
+      "max_formula_error": 0.0,
+      "unique_predictions": 1883,
+      "spearman_to_current_public": 0.9858030388433007,
+      "differs_from_current_public": true
+    },
+    "cb_visit_rank3": {
+      "sha256": "91f610df8f6e86ef72124e4eae7533aa2e1d73058828b1cd5ea7fc9d60977099",
+      "rows": 2246,
+      "primary": true,
+      "independent_formula_exact": true,
+      "max_formula_error": 0.0,
+      "unique_predictions": 2009,
+      "spearman_to_current_public": 0.9846477589359653,
+      "differs_from_current_public": true
+    },
+    "compact_cb": {
+      "sha256": "7c0e69cf058cd31f9ff065b40324a427356e77a56d8bafadc4aa0b768c7b9c0b",
+      "rows": 2246,
+      "primary": false,
+      "independent_formula_exact": true,
+      "max_formula_error": 0.0,
+      "unique_predictions": 2213,
+      "spearman_to_current_public": 0.9657434382791982,
+      "differs_from_current_public": true
+    },
+    "context_cb": {
+      "sha256": "636f8cbe87367b6df0bae6d9a1d79a57de863bc78a21bc2296f5c2ff85970634",
+      "rows": 2246,
+      "primary": false,
+      "independent_formula_exact": true,
+      "max_formula_error": 0.0,
+      "unique_predictions": 2246,
+      "spearman_to_current_public": 0.991711288256397,
+      "differs_from_current_public": true
+    }
+  },
+  "kaggle_uploads": 0,
+  "reserved_quarters_now_consumed": true,
+  "independent_rank_calculation": "SciPy rankdata explicitlyfloat64 to match frozenpercentileprecision",
+  "unit_checks": 60,
+  "synthetic_jobs": 21,
+  "independent_holdout_audit_passed": true,
+  "reserved_scores": {
+    "quarter_scores": {
+      "2024-04-01": {
+        "cb_rank50": 0.28202066670817894,
+        "cb_visit_rank3": 0.29275609797715185
+      },
+      "2024-07-01": {
+        "cb_rank50": 0.35006905955927314,
+        "cb_visit_rank3": 0.3507902040996699
+      }
+    },
+    "primary": "cb_visit_rank3",
+    "bootstrap": 2000,
+    "seed": 20261120,
+    "unit": "site_id",
+    "comparison": "B minus A",
+    "ci95": [
+      0.0006868248964922933,
+      0.011740108946879253
+    ],
+    "recipes_changed_after_scoring": false,
+    "reserved_quarters_now_consumed": true
+  }
+}

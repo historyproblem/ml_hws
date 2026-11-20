@@ -63,6 +63,24 @@ python scripts/run_hw4_neural.py --smoke --max-epochs 2 \
 preprocessing, маскирование и предобучение. Для smoke нужны официальные CSV;
 для тестов они не нужны.
 
+## Готовые отправки (20 ноября)
+
+Финальные рецепты прошли одноразовую проверку2024Q2/Q3 и полный refit.
+Первый кандидат — два bagged CatBoost+legacy VisitTransformer,rank⅓:
+validation meanAP0.321773 против0.316045 у двухCB. Это не Public score.
+Локальные4CSV готовы в outputs/hw4/final-20261120/;первым использовать
+submission_02_cb_visit_rank3.csv. Файлы вне Git.
+[Результат,порядок отправок и план3дней×5](docs/hw4-final-delivery-20261120.md).
+
+Воспроизведение с четырьмя CSV вdata/:
+
+```bash
+bash scripts/export_hw4_final.sh outputs/hw4/final-20261120 data cpu
+```
+
+--resume проверяет код/данные/версии и артефакты.60 tests и21 synthetic jobPASS.
+Q2/Q3 теперь использованы;нового нетронутого holdout на них нет.
+
 ## Новый GPU-экран: residual MLP и embeddings (19 ноября)
 
 Четыре варианта: matched MLP/ResNet, ResNet с числовыми PLE-эмбеддингами,
