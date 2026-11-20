@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-21",
+  "best_public": 0.34646,
+  "previous_best_public": 0.33982,
+  "gap_to_last_observed_baseline": 0.00566,
+  "new_successful_user_submissions": 5,
+  "selected": [
+    "submission_04_context_cb.csv",
+    "submission_02_cb_visit_rank3.csv"
+  ],
+  "user_reported_remaining_days": 2,
+  "max_remaining_attempts": 10,
+  "unit_checks": 84,
+  "tabm_QA": {
+    "unit_checks_so_far": 84,
+    "small_cv_jobs": 6,
+    "small_full_job": 1,
+    "default_architecture_cv_jobs": 3,
+    "default_full_job": 1,
+    "all_reload_exact": true,
+    "resume_fit_count": 0,
+    "resume_output_SHA_exact": true,
+    "changed_config_rejected": true,
+    "synthetic_only": true,
+    "real_GPU_run": false
+  },
+  "baseline9checkpoints_replayed_exact": true,
+  "new_real_CV_fits": 30,
+  "new_real_full_refits": 0,
+  "new_Q2_Q3_metrics": 0,
+  "new_ready_CSV_SHA": "029dfd6e24f44db48b7aba5d98c7fdf92dd19ad91facead98d21eca2f13bd20c",
+  "new_CSV_public_ap": null,
+  "map_eligible": false,
+  "site_state_eligible": false,
+  "probability50_eligible": true,
+  "agent_kaggle_uploads": 0
+}

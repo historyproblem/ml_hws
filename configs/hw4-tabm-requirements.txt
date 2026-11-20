@@ -1,0 +1,5 @@
+# Install these official wheels with --no-deps to preserve the existing
+# Torch/CUDA, numpy, pandas, scikit-learn and joblib environment.
+# Both support the server's installed torch 2.6.0+cu126; no external weights.
+tabm==0.0.3
+rtdl-num-embeddings==0.0.12
