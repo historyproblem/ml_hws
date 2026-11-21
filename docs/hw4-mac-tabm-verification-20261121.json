@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-21",
+  "hardware": {
+    "chip": "Apple M3",
+    "memory_bytes": 25769803776,
+    "memory_GiB": 24,
+    "CPU_cores": 8
+  },
+  "torch": "2.5.1",
+  "CPU_epoch_seconds": 7.498659749981016,
+  "MPS_epoch_seconds": 7.717274625028949,
+  "CPU_peak_RSS_GiB": 1.7162322998046875,
+  "MPS_forward_backward_passed": true,
+  "MPS_available_outside_sandbox": true,
+  "MPS_full_run": false,
+  "selected_device": "cpu",
+  "full_elapsed_seconds": 898.437,
+  "full_train_rows": 21017,
+  "test_rows": 2246,
+  "final_tabm32_epochs": 8,
+  "outer_and_full_checkpoints_verified": 7,
+  "all_saved_prediction_reloads_exact": true,
+  "summary": [
+    {
+      "model": "context_3seed",
+      "mean_ap": 0.26750641484452525,
+      "delta_vs_reference": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "nonnegative_quarters": 3,
+      "latest_q1_delta": 0.0,
+      "worst_quarter_delta": 0.0,
+      "eligible": false
+    },
+    {
+      "model": "context_tabm_75_25",
+      "mean_ap": 0.26667843838703575,
+      "delta_vs_reference": -0.0008279764574894988,
+      "ci95_low": -0.00391117866776871,
+      "ci95_high": 0.0020889393707384293,
+      "nonnegative_quarters": 0,
+      "latest_q1_delta": -0.0007053125844434516,
+      "worst_quarter_delta": -0.0015536626738060222,
+      "eligible": false
+    },
+    {
+      "model": "tabm1",
+      "mean_ap": 0.2653348517287473,
+      "delta_vs_reference": -0.0021715631157779303,
+      "ci95_low": -0.012249092576543079,
+      "ci95_high": 0.00838676770154916,
+      "nonnegative_quarters": 1,
+      "latest_q1_delta": -0.005681614778736133,
+      "worst_quarter_delta": -0.005681614778736133,
+      "eligible": false
+    },
+    {
+      "model": "tabm32",
+      "mean_ap": 0.26292440579656945,
+      "delta_vs_reference": -0.004582009047955804,
+      "ci95_low": -0.013183016803814257,
+      "ci95_high": 0.0037722006966053674,
+      "nonnegative_quarters": 0,
+      "latest_q1_delta": -0.004911310968166688,
+      "worst_quarter_delta": -0.006025400389233437,
+      "eligible": false
+    }
+  ],
+  "eligible_new_TabM_submissions": false,
+  "actual_GPU_full_run": false,
+  "training_source_changed": false,
+  "new_closed_quarter_metrics": false,
+  "Kaggle_uploads": 0,
+  "old_ready_CSV06_unaffected": true
+}
