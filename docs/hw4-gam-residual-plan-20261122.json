@@ -1,0 +1,95 @@
+{
+  "compute": {
+    "CPU_max_threads": 2,
+    "deadline_utc": "2026-11-22T18:52:00Z",
+    "expected_minutes": [
+      5,
+      20
+    ]
+  },
+  "controls": {
+    "manifest_sha256": "0df92c0cc65cfa0f362bff00eeb9c19dab038f18951a430bf0464ae7f2c371f8",
+    "matched_teacher": "The same fixed E.C.01 teacher trained strictlybefore eachouterquarter",
+    "oof_sha256": "877d7585a0d1860af271484be90845bf782fb61039e0ebbbe78e45a9a2fa58bd",
+    "previous_algorithm_directory": "/Users/khlystov/Documents/ChatGPT/ML ДЗ/analysis/hw4-six-hour-20261122/additive/metadata-canonical-v1"
+  },
+  "format": 1,
+  "frozen_at_utc": "2026-11-22T13:46:11.090804+00:00",
+  "gates": {
+    "context": "meanAPdelta>0,>=2nonnegativequarters,worst>=-.005",
+    "full": "Onlyifanyvariantqualifies andmedianN>0:3fixed-seedmetafits on allOOFavailabletrainingrows;teacherfullreuse; exportqualifying predefinedvariants",
+    "matched_teacher": "meanAPdelta>0 and>=2nonnegative oldquarters",
+    "previous_algorithm": "meanAPdelta>0 againstprevioussequentialalgorithm.276997",
+    "uncertainty": "Pairedcommon-site2000bootstrap,nominalreusedolddev, no CIhardgate"
+  },
+  "mixture_rationale": "Matchedteacher50 has identical fold/full construction. Previoussequentialalgorithm has changingteacher recipes in Q3/Q4, so is a comparisoncontrol, not a mixturecomponent.",
+  "new_q2_q3_metrics": false,
+  "official_source": "https://catboost.ai/docs/en/concepts/python-usages-examples#using-pre-training-results-baseline",
+  "public_uploads": 0,
+  "residual": {
+    "engine": "CatBoostClassifier Logloss on ORIGINALbinaryy with Pool baseline=teacherOOFraw logits",
+    "fake_residual_targets": false,
+    "features": "Unchanged base346,categorical10,nativeNaN",
+    "inference": "expit(teacher_raw + CB.predictRaw(X with NO Poolbaseline)); explicitcount0 returnszeros withoutcallingntree_end0",
+    "init_model": null,
+    "max_iterations": 400,
+    "native_baseline_precision": "CatBoost Pool baseline internallyfloat32 in installed1.2.10; rawinput/inference remainfloat64; numericQA confirms baseline+residualRaw semantics, never sumprobabilities",
+    "params": {
+      "allow_writing_files": false,
+      "boost_from_average": false,
+      "bootstrap_type": "Bernoulli",
+      "depth": 3,
+      "l2_leaf_reg": 20,
+      "learning_rate": 0.03,
+      "loss_function": "Logloss",
+      "rsm": 0.8,
+      "subsample": 0.8,
+      "task_type": "CPU",
+      "thread_count": 2,
+      "verbose": false
+    }
+  },
+  "risk": "OOFteachertraining-size/early-feature-coverage distribution differs from fullteacher; zero andmatchedteacher50 explicitly test need for residual correction, not a guarantee.",
+  "selection": {
+    "count0": "Exactly teacher, no nativeCBfit; finalmedian0 is duplicateTeacher andnotanewsubmission",
+    "final_count": "Median3selectedcounts, no2024Q2/Q3scoring",
+    "final_probability": "Mean across3 expit(teacherFullraw+seedCBraw) probabilities; one reusedfullteacher",
+    "final_seeds": [
+      42,
+      17,
+      2026
+    ],
+    "grid": [
+      0,
+      50,
+      100,
+      200,
+      400
+    ],
+    "inner": [
+      "2023-04-01",
+      "2023-07-01",
+      "2023-10-01"
+    ],
+    "outer": [
+      "2023-07-01",
+      "2023-10-01",
+      "2024-01-01"
+    ],
+    "rule": "Fitone400-treeinner model(seed42) with caUSALOOFbaselines on pastmeta rows; scoreprefixes onlyonpreviousinnerquarterAP,earliesttie0; freshoutermeta fit selectedN"
+  },
+  "teacher": {
+    "OOF": "Every official training quarter from2022Q2 through2024Q3: preprocessing+weights fitted on strictly earlier official quarters only; earliest2022Q1 absent from metaCB",
+    "fixed_before_residual_results": true,
+    "no_AP_on_2024Q2Q3": true,
+    "raw": "Logistic decision_function directly, no probability→clippedlogit reconstruction",
+    "recipe": "core_interactions_C0.01",
+    "recipe_selection_caveat": "Recipe was selected during prior reused-old-dev research; strictpast applies to fit/preprocessing, not an untouched claim about research hyperparameter discovery",
+    "reuse": "Verified existing same-recipe checkpoints for2023Q2/Q3/Q4/2024Q1 and full21017; fit only missing earlier/later teacher folds",
+    "source": "Canonical first-stage fixed final recipe, unweighted compactGAM with risk×area/risk×quarter; no recipe search in this branch"
+  },
+  "variants": [
+    "residual_raw",
+    "fixed50%matchedfixedGAMteacher+50%residual probabilities"
+  ]
+}

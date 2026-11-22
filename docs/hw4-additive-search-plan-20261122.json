@@ -1,0 +1,235 @@
+{
+  "C_values": [
+    0.01,
+    0.1,
+    1.0,
+    10.0
+  ],
+  "baseline": {
+    "context04_test_sha256": "636f8cbe87367b6df0bae6d9a1d79a57de863bc78a21bc2296f5c2ff85970634",
+    "context_oof_sha256": "0096456a838264be615680be4eead0ed8b449a4182d9f20acd519937e7cc1f7c",
+    "fixed_core": "Replay core/C=.1 against saved additive predictions; mark reused vsnew correctly"
+  },
+  "format": 1,
+  "frozen_at_utc": "2026-11-22T12:58:25.374342+00:00",
+  "full_cv_new_recipe_results_before_freeze": false,
+  "gate": {
+    "CI": "paired common-site bootstrap2000, nominal old reused development; CI not hard gate",
+    "against_context": "mean delta>0, at least2nonnegative old quarters, worst delta>=-.005",
+    "against_matched_fixed_core": "mean delta>0 and at least2nonnegative old quarters for the corresponding raw/blend variant",
+    "final_fit": "Only if any algorithm variant passes both gates; one selected-majority recipe full fit or verified exact duplicate reuse; emit qualifying predefined variants only",
+    "variants": [
+      "raw",
+      "fixed75%context04+25%algorithm probabilities"
+    ]
+  },
+  "new_q2_q3_metrics": false,
+  "optimizer": {
+    "fit_intercept": true,
+    "max_iter": 5000,
+    "penalty": "l2",
+    "solver": "lbfgs",
+    "threads": 2,
+    "tol": 1e-07
+  },
+  "recipe_count": 24,
+  "recipes": [
+    {
+      "C": 0.01,
+      "complexity_order": 0,
+      "id": "core_C0.01",
+      "view": "core"
+    },
+    {
+      "C": 0.1,
+      "complexity_order": 0,
+      "id": "core_C0.1",
+      "view": "core"
+    },
+    {
+      "C": 1.0,
+      "complexity_order": 0,
+      "id": "core_C1",
+      "view": "core"
+    },
+    {
+      "C": 10.0,
+      "complexity_order": 0,
+      "id": "core_C10",
+      "view": "core"
+    },
+    {
+      "C": 0.01,
+      "complexity_order": 5,
+      "id": "compact_all_splines_C0.01",
+      "view": "compact_all_splines"
+    },
+    {
+      "C": 0.1,
+      "complexity_order": 5,
+      "id": "compact_all_splines_C0.1",
+      "view": "compact_all_splines"
+    },
+    {
+      "C": 1.0,
+      "complexity_order": 5,
+      "id": "compact_all_splines_C1",
+      "view": "compact_all_splines"
+    },
+    {
+      "C": 10.0,
+      "complexity_order": 5,
+      "id": "compact_all_splines_C10",
+      "view": "compact_all_splines"
+    },
+    {
+      "C": 0.01,
+      "complexity_order": 3,
+      "id": "own_history_C0.01",
+      "view": "own_history"
+    },
+    {
+      "C": 0.1,
+      "complexity_order": 3,
+      "id": "own_history_C0.1",
+      "view": "own_history"
+    },
+    {
+      "C": 1.0,
+      "complexity_order": 3,
+      "id": "own_history_C1",
+      "view": "own_history"
+    },
+    {
+      "C": 10.0,
+      "complexity_order": 3,
+      "id": "own_history_C10",
+      "view": "own_history"
+    },
+    {
+      "C": 0.01,
+      "complexity_order": 4,
+      "id": "full_context_C0.01",
+      "view": "full_context"
+    },
+    {
+      "C": 0.1,
+      "complexity_order": 4,
+      "id": "full_context_C0.1",
+      "view": "full_context"
+    },
+    {
+      "C": 1.0,
+      "complexity_order": 4,
+      "id": "full_context_C1",
+      "view": "full_context"
+    },
+    {
+      "C": 10.0,
+      "complexity_order": 4,
+      "id": "full_context_C10",
+      "view": "full_context"
+    },
+    {
+      "C": 0.01,
+      "complexity_order": 2,
+      "id": "core_interactions_C0.01",
+      "view": "core_interactions"
+    },
+    {
+      "C": 0.1,
+      "complexity_order": 2,
+      "id": "core_interactions_C0.1",
+      "view": "core_interactions"
+    },
+    {
+      "C": 1.0,
+      "complexity_order": 2,
+      "id": "core_interactions_C1",
+      "view": "core_interactions"
+    },
+    {
+      "C": 10.0,
+      "complexity_order": 2,
+      "id": "core_interactions_C10",
+      "view": "core_interactions"
+    },
+    {
+      "C": 0.01,
+      "complexity_order": 1,
+      "id": "core_recency4_C0.01",
+      "view": "core_recency4"
+    },
+    {
+      "C": 0.1,
+      "complexity_order": 1,
+      "id": "core_recency4_C0.1",
+      "view": "core_recency4"
+    },
+    {
+      "C": 1.0,
+      "complexity_order": 1,
+      "id": "core_recency4_C1",
+      "view": "core_recency4"
+    },
+    {
+      "C": 10.0,
+      "complexity_order": 1,
+      "id": "core_recency4_C10",
+      "view": "core_recency4"
+    }
+  ],
+  "representation_definitions": {
+    "compact_all_splines": "Same compact90numeric; degree2 fit-quantile splines for all90 fields after fixed count log transform, constants zero",
+    "core": "Original AdditiveLogitTransform compact96-minus-year/cutoff,90 numeric4OHE,4degree2spline fields; exact original behavior",
+    "core_interactions": "Original core plus two fixed OHE tuples risk×area and risk×quarter",
+    "core_recency4": "Original core; logistic sample weights 2**(-quarter_age/4), normalized mean1; dates only in weights",
+    "full_context": "All base346 columns, same exclusions/categories/core4splines and fixed count/age logs",
+    "own_history": "All original non-ctx274 columns, omit absolute year/cutoff, quarter plus original categoricals OHE, core4splines, fixed count/age log linear remainder"
+  },
+  "runtime": {
+    "CPU_max_threads": 2,
+    "cache_reuse": "Job key is validation quarter+recipe; Q3/Q4 outer jobs may coincide with later inner jobs, without affecting earlier recipe choice",
+    "conservative_ceiling_minutes": 60,
+    "deadline_utc": "2026-11-22T18:52:00Z",
+    "expected_minutes": [
+      5,
+      30
+    ]
+  },
+  "scope": "New six-hour additive/GAM branch; old frozen modules unchanged",
+  "selection": {
+    "final_recipe": "Majority of3inner winners; tie equal-quarter mean inner AP across all3 numerical-valid inner jobs, then smaller C/complexity/ID; no later-quarter tuning",
+    "inner_quarters": [
+      "2023-04-01",
+      "2023-07-01",
+      "2023-10-01"
+    ],
+    "numerical_invalid": "ConvergenceWarning/numerical failure checkpoint explicit invalid for that recipe/inner; never drop an outer quarter; all invalid -> stop",
+    "outer_predictions": "ONLY sequentially selected algorithm and fixed original core/C=.1 control; never score all24 recipes as outer candidate panel",
+    "outer_quarters": [
+      "2023-07-01",
+      "2023-10-01",
+      "2024-01-01"
+    ],
+    "rule": "For each outer, train24recipes only on periods<previous-inner-quarter; select highest inner AP, tie smaller C then fixed complexity order then ID; fit/reuse selected recipe strictly before outer"
+  },
+  "transform_rules": {
+    "class_weights": null,
+    "degree": 2,
+    "feature_learning": "Fit-only imputation/scaling/category vocab/knots",
+    "generalized_log_rule": "Non-core-view count/total/n/n_visits/_days fields nonnegative: log1p; core4burden splines kept raw outside all-spline view; signed violation_change_last_vs_mean never log",
+    "knots_insufficient": "<3 unique knots -> linear, constant/allmissing -> zero",
+    "knots_quantiles": [
+      0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "raw_missing_flags": "Every numeric field, binary unscaled",
+    "scaling": "StandardScaler on continuous/spline columns, binary flags/OHE unchanged",
+    "tails": "constant and clip observed fit minima/maxima"
+  },
+  "uploads": 0
+}

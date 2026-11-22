@@ -1,0 +1,133 @@
+{
+  "compute": {
+    "conditional_fullfits_at_most": 1,
+    "deadline_utc": "2026-11-22T18:52:00Z",
+    "expected_minutes": [
+      2,
+      10
+    ],
+    "extra_outer_jobs_at_most": 1,
+    "inner_jobs": 36,
+    "threads": 2
+  },
+  "control": {
+    "path": "/Users/khlystov/Documents/ChatGPT/ML ДЗ/analysis/hw4-six-hour-20261122/additive/metadata-canonical-v1",
+    "previous_algorithm_blend75_mean_ap": 0.2711468094127368,
+    "previous_algorithm_manifest_sha256": "0df92c0cc65cfa0f362bff00eeb9c19dab038f18951a430bf0464ae7f2c371f8",
+    "previous_algorithm_mean_ap": 0.2769974120991072,
+    "previous_algorithm_oof_sha256": "877d7585a0d1860af271484be90845bf782fb61039e0ebbbe78e45a9a2fa58bd"
+  },
+  "format": 1,
+  "frozen_at_utc": "2026-11-22T13:30:20.666180+00:00",
+  "gate": {
+    "context": "Mean AP delta>0, >=2nonnegative oldquarters,worst>=-.005",
+    "final": "Onlyifanyvariantpassesbothgates:ONEfixedmajorityrecipe fullfit; export only qualifying predefinedvariants",
+    "previous_algorithm": "Compare matching raw/blend to PREVIOUSSEQUENTIALalgorithm,mean delta>0 and>=2nonnegative quarters",
+    "uncertainty": "Pairedcommon-site2000bootstrap,nominalreusedolddev;no CIhardgate",
+    "variants": [
+      "raw",
+      "fixed75%context04+25%new probabilities"
+    ]
+  },
+  "new_hybrid_metrics_before_freeze": false,
+  "new_q2_q3_metrics": false,
+  "optimizer": {
+    "class_weight": null,
+    "fit_intercept": true,
+    "max_iter": 5000,
+    "penalty": "l2",
+    "solver": "lbfgs",
+    "threads": 2,
+    "tol": 1e-07
+  },
+  "recipe_count": 12,
+  "recipes": [
+    {
+      "C": 0.003,
+      "half_life_quarters": 2,
+      "id": "hybrid_H2_C0.003"
+    },
+    {
+      "C": 0.01,
+      "half_life_quarters": 2,
+      "id": "hybrid_H2_C0.01"
+    },
+    {
+      "C": 0.03,
+      "half_life_quarters": 2,
+      "id": "hybrid_H2_C0.03"
+    },
+    {
+      "C": 0.1,
+      "half_life_quarters": 2,
+      "id": "hybrid_H2_C0.1"
+    },
+    {
+      "C": 0.003,
+      "half_life_quarters": 4,
+      "id": "hybrid_H4_C0.003"
+    },
+    {
+      "C": 0.01,
+      "half_life_quarters": 4,
+      "id": "hybrid_H4_C0.01"
+    },
+    {
+      "C": 0.03,
+      "half_life_quarters": 4,
+      "id": "hybrid_H4_C0.03"
+    },
+    {
+      "C": 0.1,
+      "half_life_quarters": 4,
+      "id": "hybrid_H4_C0.1"
+    },
+    {
+      "C": 0.003,
+      "half_life_quarters": 8,
+      "id": "hybrid_H8_C0.003"
+    },
+    {
+      "C": 0.01,
+      "half_life_quarters": 8,
+      "id": "hybrid_H8_C0.01"
+    },
+    {
+      "C": 0.03,
+      "half_life_quarters": 8,
+      "id": "hybrid_H8_C0.03"
+    },
+    {
+      "C": 0.1,
+      "half_life_quarters": 8,
+      "id": "hybrid_H8_C0.1"
+    }
+  ],
+  "representation": "Original compact GAM plus exactly risk×area and risk×quarter OHE (core_interactions), unchanged from prior frozen24 search",
+  "sample_weights": {
+    "formula": "2**(-calendar_quarter_age/H), normalized to arithmetic mean1 over fit rows",
+    "half_lives": [
+      2,
+      4,
+      8
+    ],
+    "regularization": "sum(weights)=N, hence sklearn lbfgs l2_reg_strength=1/(C*sumw)=1/(C*N); changing H changes relative weighting/ESS, not global loss scale or silently C",
+    "stats": "Save mean,sum,min,max,ESS,and actual1/(C*sumw) on every fit"
+  },
+  "selection": {
+    "final_rule": "Majority of3inner winners among recipes converged all3inner; tie equal-quarter mean inner AP, then smallerC,longerH,ID",
+    "inner_quarters": [
+      "2023-04-01",
+      "2023-07-01",
+      "2023-10-01"
+    ],
+    "inner_rule": "Maximum previous-inner-quarter AP; ties smallerC then longerH thenID; trainstrictpast; no12recipeouterselection",
+    "numeric_invalid": "Explicit invalidcheckpoint; allinvalidinner or selectedouterinvalid stops; never omitquarter",
+    "outer_quarters": [
+      "2023-07-01",
+      "2023-10-01",
+      "2024-01-01"
+    ]
+  },
+  "uploads": 0
+}

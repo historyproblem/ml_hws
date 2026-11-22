@@ -1,0 +1,99 @@
+{
+  "base_reuse": {
+    "early_inventory": "Scoped savedHW4 artifact filename inventory found no exact cb_reference/plus_context model on requested earlyquarters; unrelatedeventheads/TD/otherfeatureviews not reused",
+    "full_CB_test": "Exactcontext04CSV SHA636f8cbe87367b6df0bae6d9a1d79a57de863bc78a21bc2296f5c2ff85970634, nofullbasefit",
+    "full_GAM": "Reused verified canonical fixedE21017 checkpoint",
+    "old3CB_OOF_sha256": "0096456a838264be615680be4eead0ed8b449a4182d9f20acd519937e7cc1f7c",
+    "recent_artifacts": "holdout_<q>/cb_reference_s<seed>/prediction.npy+model.joblib verified against frozen_recipe source/raw/seed/recipe/signatures; no recentAPread/computed",
+    "recent_delivery_signature": "38eaf418ff4a66e573285bdbf6a51d6caded2416b183be995fcda5e733499b40",
+    "recent_quarters": [
+      "2024-04-01",
+      "2024-07-01"
+    ]
+  },
+  "compute": {
+    "deadline_utc": "2026-11-22T18:52:00Z",
+    "expected_minutes": [
+      3,
+      15
+    ],
+    "threads": 2
+  },
+  "format": 1,
+  "frozen_at_utc": "2026-11-22T14:12:45.015506+00:00",
+  "inputs": {
+    "CB": "Original reference500d5/lr.04/L210/PlainMVS.8,seeds42/17/2026,probabilitymeanTHENlogitclip",
+    "CB_clip_epsilon": 1e-06,
+    "GAM": "Fixed unweighted core_interactions_C0.01 directdecisionlogit; existing strictpast teacherOOF all10quarters",
+    "no_logit_standardization": true,
+    "no_raw_features_or_IDs": true
+  },
+  "limitations": [
+    "Early-vs-full base-training-size/preprocessing coverage covshift",
+    "Erecipe chosen in prior adaptive reuseddev research, not unbiasedvalidation",
+    "Loglossoptimum need not optimizeAP; nonnegative coefficient boundary may select onebase"
+  ],
+  "meta": {
+    "analytic_gradient": true,
+    "bounds": "w_cb>=0,w_gam>=0,interceptunpenalized/unbounded",
+    "features": [
+      "logit(clip(mean3CBprob,1e-6,1-1e-6))",
+      "fixedGAMdecisionraw"
+    ],
+    "ftol": 1e-15,
+    "gtol": 1e-09,
+    "init": "w=(.5,.5),bias=logit(pastfitlabelmean)",
+    "lambda_": 0.001,
+    "max_iter": 2000,
+    "objective": "mean(logaddexp(0,z)-y*z)+.001/2*(w_cb**2+w_gam**2), z=b+w_cb*x_cb+w_gam*x_gam",
+    "one_input_boundary": "If oneweight0, scoremonotonic of oneinput; no fabricatedAPgain",
+    "optimizer": "scipyL-BFGS-B",
+    "positive_weights_not_required_sum1": true,
+    "rows": "Strictpast prequentialOOF rows from2022Q2 before eachmeta predictionquarter; earliest2022Q1 dropped"
+  },
+  "method": "ONE fixed prequential nonnegative2logit ridge-stacker; no hyperparameter/weight grid",
+  "new_base_fits": {
+    "count": 15,
+    "fixed_iterations": 500,
+    "max_CPU_threads": 2,
+    "no_prefix_or_different_recipe_reuse": true,
+    "quarters": [
+      "2022-04-01",
+      "2022-07-01",
+      "2022-10-01",
+      "2023-01-01",
+      "2023-04-01"
+    ],
+    "seeds": [
+      42,
+      17,
+      2026
+    ],
+    "strict_train_period_before_prediction_quarter": true
+  },
+  "new_q2_q3_metrics": false,
+  "new_stacking_metrics_before_freeze": false,
+  "provenance": {
+    "GAM_teacher_manifest_sha256": "c6999ae63655cf80fc4e1d337079efde6af798e4a286ca7d58a33fca7c43ab46",
+    "previous_algorithm_oof_sha256": "877d7585a0d1860af271484be90845bf782fb61039e0ebbbe78e45a9a2fa58bd"
+  },
+  "public_uploads": 0,
+  "validation": {
+    "controls": [
+      "matchedfixedEteacher",
+      "previoussequentialGAMalgorithm.276997",
+      "context04"
+    ],
+    "final": "Onlygated:one fullmeta fit on allOOFpast2022Q2..2024Q3 labels asordinaryTRAINING, no basefullfit. Predict test from exact04mean andfixedGAMfullraw.",
+    "gate": "mean>matchedEteacher and>=2nonnegativequarters andworstmatched>=-.005; mean>previousalgorithm; mean>context,>=2nonnegative,worstcontext>=-.005",
+    "no_inner_or_other_selection": true,
+    "old_outer": [
+      "2023-07-01",
+      "2023-10-01",
+      "2024-01-01"
+    ],
+    "recent": "Fit/predict2024Q2/Q3 with the samefixedestimator strictlypastOOFmeta, savenonscoredpredictions forrootone-shot framework; noAPorfeatureselection",
+    "sole_variant": "standalonecalibratedstacker probability",
+    "uncertainty": "Pairedcommon-site2000bootstrap,nominaladaptiveolddev; noCIhardgate"
+  }
+}

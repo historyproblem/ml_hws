@@ -7,7 +7,6 @@ from io import BytesIO, StringIO
 import json
 from pathlib import Path
 import sys
-import tarfile
 
 import numpy as np
 import pandas as pd
@@ -18,6 +17,7 @@ sys.path[:0] = [str(ROOT / "src"), str(ROOT / "scripts")]
 import run_hw4_tabm_preprocessing_v100 as producer
 from hw4_inspections.delivery import validate_submission
 from hw4_inspections.next_round import evaluate_candidates
+from safe_archives import read_known_tar
 
 REFERENCE = "previous07"
 ANCHORS = {
@@ -34,13 +34,8 @@ def read_csv(path_or_bytes):
 
 
 def archive_members(path):
-    with tarfile.open(path, "r:gz") as archive:
-        members = archive.getmembers()
-        if (len(members) != len(producer.RETURN_FILES) or {m.name for m in members} != set(producer.RETURN_FILES)
-                or any(not m.isfile() or m.size > 8_000_000 for m in members)
-                or sum(m.size for m in members) > 20_000_000):
-            raise ValueError("Unexpected, duplicate, linked or oversized archive members")
-        return {m.name: archive.extractfile(m).read() for m in members}
+    return read_known_tar(path, producer.RETURN_FILES, max_decompressed_bytes=32_000_000,
+                          max_member_bytes=8_000_000, max_total_payload_bytes=20_000_000)
 
 
 def scores(values, n, fp32=False):
@@ -122,12 +117,22 @@ def verify(args):
     required_keys = {(c, s, q) for c in producer.CASES for s in producer.SEEDS for q in producer.QUARTERS}
     if len(metrics) != 27 or keys != required_keys or set(selections) != set(producer.CASES):
         raise ValueError("Incomplete neural folds")
+    for item in selections.values():
+        counts = item["inner_selected_epochs"]
+        if (not isinstance(counts, list) or len(counts) != len(producer.QUARTERS)
+                or any(type(value) is not int or not 1 <= value <= protocol["max_epochs"] for value in counts)
+                or type(item["full_epochs"]) is not int
+                or not 1 <= item["full_epochs"] <= protocol["max_epochs"]
+                or item["full_epochs"] != int(np.median(counts))):
+            raise ValueError("Expected exactly three bounded inner epoch choices and their full median")
     for record in metrics.to_dict("records"):
         mask = metadata.forecast_period.eq(record["forecast_period"])
         y = metadata.loc[mask, "target"]
         p = old.loc[mask, f"{record['case']}__s{record['seed']}"]
-        if (record["n"] != len(y) or record["positive"] != int(y.sum())
-                or abs(float(average_precision_score(y, p)) - record["ap"]) > 1e-12):
+        reported_ap = float(record["ap"])
+        if (not np.isfinite(reported_ap) or not 0 <= reported_ap <= 1
+                or record["n"] != len(y) or record["positive"] != int(y.sum())
+                or abs(float(average_precision_score(y, p)) - reported_ap) > 1e-12):
             raise ValueError("Reported old-fold AP/counts differ")
         count = selections[record["case"]]["inner_selected_epochs"][producer.QUARTERS.index(record["forecast_period"])]
         if count != record["epochs"] or not 1 <= count <= protocol["max_epochs"]:

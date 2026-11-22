@@ -1,0 +1,138 @@
+{
+  "candidate": {
+    "blend75_csv": "/Users/khlystov/Documents/ChatGPT/ML ДЗ/analysis/hw4-six-hour-20261122/additive/metadata-canonical-v1/submission_additive_search_blend75.csv",
+    "blend75_sha256": "a5009420bc6368fdd36186570806d3aa66d5e720453d90b3f51262c31c4e2d38",
+    "context_old3_mean_ap": 0.26750641484452525,
+    "fixed_old3_mean_ap": 0.27845059758507046,
+    "fixed_recipe": "core_interactions_C0.01",
+    "public_score": null,
+    "raw_csv": "/Users/khlystov/Documents/ChatGPT/ML ДЗ/analysis/hw4-six-hour-20261122/additive/metadata-canonical-v1/submission_additive_search_raw.csv",
+    "raw_sha256": "58d41da9004178840ff9ee164e5b414d22cfb4eff86d561923c1564498b9c810",
+    "sequential_selection_old3_mean_ap": 0.2769974120991072
+  },
+  "interpretation": "All method selection remains adaptive reused old development; previousalgorithm score is not fixedfinalrecipe score; new fixedEscore measured as predeclared matchedteachercontrol in residual branch, not bestof24outer.",
+  "new_q2_q3_metrics": false,
+  "numerical_invalid_attempts": 2,
+  "public_uploads": 0,
+  "real_training_attempts_total": 167,
+  "recent_nonscored_predictions": {
+    "GAM_teacher_template": "/Users/khlystov/Documents/ChatGPT/ML ДЗ/analysis/hw4-six-hour-20261122/additive/gam-baseline-residual/teacher/<2024-04-01|2024-07-01>/raw.npy",
+    "stacker_template": "/Users/khlystov/Documents/ChatGPT/ML ДЗ/analysis/hw4-six-hour-20261122/additive/prequential-stacking/meta/<2024-04-01|2024-07-01>/prediction.npy"
+  },
+  "stages": {
+    "hybrid12": {
+      "audit": "/Users/khlystov/Documents/ChatGPT/ML ДЗ/analysis/hw4-six-hour-20261122/additive/hybrid-recency-interactions/audit/verification.json",
+      "csvs": 0,
+      "fullfits": 0,
+      "gates": {
+        "blend75": {
+          "delta_context": 0.002635747883627193,
+          "delta_previous_algorithm": -0.0010046466845843316,
+          "eligible": false,
+          "mean_ap": 0.27014216272815245,
+          "nonnegative_context": 2,
+          "nonnegative_previous_algorithm": 0,
+          "worst_context": -0.00034175708880185285
+        },
+        "raw": {
+          "delta_context": 0.004360723137202593,
+          "delta_previous_algorithm": -0.005130274117379374,
+          "eligible": false,
+          "mean_ap": 0.27186713798172785,
+          "nonnegative_context": 2,
+          "nonnegative_previous_algorithm": 1,
+          "worst_context": -0.010217692575636539
+        }
+      }
+    },
+    "residual": {
+      "audit": "/Users/khlystov/Documents/ChatGPT/ML ДЗ/analysis/hw4-six-hour-20261122/additive/gam-baseline-residual/audit/verification.json",
+      "csvs": 0,
+      "fullfits": 0,
+      "gates": {
+        "residual_raw": {
+          "delta_context": 0.006595977393969832,
+          "delta_matched_teacher": -0.004348205346575373,
+          "delta_previous_algorithm": -0.002895019860612136,
+          "eligible": false,
+          "mean_ap": 0.2741023922384951,
+          "nonnegative_matched_teacher": 2
+        },
+        "teacher50_residual50": {
+          "delta_context": 0.008821684853381306,
+          "delta_matched_teacher": -0.002122497887163899,
+          "delta_previous_algorithm": -0.0006693124012006613,
+          "eligible": false,
+          "mean_ap": 0.27632809969790656,
+          "nonnegative_matched_teacher": 2
+        }
+      },
+      "median": 0,
+      "native_CB_fits": 4,
+      "selected_counts": [
+        0,
+        200,
+        0
+      ],
+      "teacher_checkpoint_reuses": 4,
+      "teacher_new_fits": 6,
+      "zero_sentinels": 2
+    },
+    "search24": {
+      "converged": 73,
+      "metadata_only_patch_zero_fits": true,
+      "numerical_invalid": 2,
+      "source_chain": "/Users/khlystov/Documents/ChatGPT/ML ДЗ/analysis/hw4-six-hour-20261122/additive/metadata-canonical-v1/audit/metadata-compatibility-verification.json",
+      "unique_attempts": 75
+    },
+    "stacker": {
+      "GAM_OOF_quarters_reused": 10,
+      "audit": "/Users/khlystov/Documents/ChatGPT/ML ДЗ/analysis/hw4-six-hour-20261122/additive/prequential-stacking/audit/verification.json",
+      "csvs": 0,
+      "early_CB_new_fits": 15,
+      "full_base_fits": 0,
+      "full_meta_fits": 0,
+      "gate": {
+        "delta_context": 0.010366105823012672,
+        "delta_matched_teacher": -0.0005780769175325329,
+        "delta_previous_algorithm": 0.0008751085684307047,
+        "eligible": false,
+        "mean_ap": 0.2778725206675379,
+        "nonnegative_teacher": 0,
+        "worst_teacher": -0.0008151186063554694
+      },
+      "meta_fits": 5,
+      "old_CB_mean3_OOF_quarters_reused": 3,
+      "recent_CB_components_reused": 6
+    },
+    "state8": {
+      "audit": "/Users/khlystov/Documents/ChatGPT/ML ДЗ/analysis/hw4-six-hour-20261122/additive/compact-state/audit/verification.json",
+      "checkpoints": 25,
+      "csvs": 0,
+      "fullfits": 0,
+      "gates": {
+        "blend75": {
+          "delta_context": 0.003153798177412348,
+          "delta_matched_E": -0.0006784150989657678,
+          "delta_previous_algorithm": -0.0004865963907991766,
+          "eligible": false,
+          "mean_ap": 0.2706602130219376,
+          "nonnegative_matched_E": 0,
+          "worst_matched_E": -0.0015445063274407977
+        },
+        "raw": {
+          "delta_context": 0.010025133133124142,
+          "delta_matched_E": -0.000919049607421063,
+          "delta_previous_algorithm": 0.0005341358785421746,
+          "eligible": false,
+          "mean_ap": 0.2775315479776494,
+          "nonnegative_matched_E": 1,
+          "worst_matched_E": -0.0019706038069964293
+        }
+      }
+    }
+  },
+  "status": "ADDITIVE_ZONE_COMPLETE_AUDITED",
+  "successful_fits": 165,
+  "zero_sentinel_checkpoints": 2
+}

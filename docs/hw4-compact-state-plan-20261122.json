@@ -1,0 +1,142 @@
+{
+  "added_categorical": [
+    "lag1_result",
+    "last_routine_result",
+    "lag1_inspection_type"
+  ],
+  "added_numeric": [
+    "history_fail_rate",
+    "recent365_fail_rate",
+    "history_n_visits",
+    "last_routine_age_days"
+  ],
+  "added_numeric_transform": {
+    "bounds": "observedfitminmaxclip",
+    "imputation": "finitefitmedian/allmissingzero",
+    "log1p_only": [
+      "history_n_visits",
+      "last_routine_age_days"
+    ],
+    "missing": "rawmissingflagforeach4field,binaryunscaled",
+    "scale": "fitStandardScaler"
+  },
+  "base_E_transform": "Exact frozen SearchTransform(core_interactions): compact94+existingrisk×area/risk×quarter, fit-only4burdensplines/clip/scale/OHE/90missing; oldsource unchanged. Coefficients jointly refitted; globalC is the only regularizationgrid.",
+  "categories": "Fit-onlyOHE unknownignore,missingliteral<none>; no targetencoding",
+  "compute": {
+    "conditional_fullfits_at_most": 1,
+    "deadline_utc": "2026-11-22T18:52:00Z",
+    "expected_minutes": [
+      2,
+      10
+    ],
+    "extra_outer_jobs_at_most": 1,
+    "inner_jobs": 24,
+    "threads": 2
+  },
+  "controls": {
+    "directory": "/Users/khlystov/Documents/ChatGPT/ML ДЗ/analysis/hw4-six-hour-20261122/additive/gam-baseline-residual",
+    "manifest_sha256": "c6999ae63655cf80fc4e1d337079efde6af798e4a286ca7d58a33fca7c43ab46",
+    "matched_teacher_raw_mean_ap": 0.27845059758507046,
+    "mixture_comparisons": "Compare raw toraw and75blend tocorrespondingfixed75blend,notrawteacher",
+    "oof_sha256": "e55e6c6f7e77ffd8b82262640ae808bcd7a59f7f5550ff3a0282cddbe193a366",
+    "previous_algorithm_raw_mean_ap": 0.2769974120991072
+  },
+  "format": 1,
+  "frozen_at_utc": "2026-11-22T14:34:09.307541+00:00",
+  "gates": {
+    "context": "Mean delta>0,>=2nonnegativequarters,worst>=-.005",
+    "final": "Onlyifanyvariantpasses:ONEmajorityrecipe fullfitall21017,exportqualifyingpredefinedvariants",
+    "matched_E": "Correspondingraw/blendmean delta>0,>=2nonnegativequarters,worst>=-.005",
+    "previous_algorithm": "Correspondingraw/blendmean delta>0",
+    "uncertainty": "Pairedcommon-site2000bootstrap,nominaladaptiveolddev,noCIhardgate"
+  },
+  "hypothesis": "Small conditional past-outcome/cadence memory without176sparsecodefields; no claim that codefields caused earlier fullviewfailure",
+  "limitations": [
+    "Sameolddevelopmentdatareuse and adaptivehypothesis design",
+    "No sanitary semantics foropaquecodes",
+    "Outcomes/cadence are historicalpredictors,not causalhealth effects"
+  ],
+  "new_q2_q3_metrics": false,
+  "new_state_metrics_before_freeze": false,
+  "optimizer": {
+    "class_weight": null,
+    "fit_intercept": true,
+    "max_iter": 5000,
+    "penalty": "l2",
+    "solver": "lbfgs",
+    "threads": 2,
+    "tol": 1e-07
+  },
+  "public_uploads": 0,
+  "recipe_count": 8,
+  "recipes": [
+    {
+      "C": 0.003,
+      "complexity_order": 0,
+      "id": "state_C0.003",
+      "view": "state"
+    },
+    {
+      "C": 0.01,
+      "complexity_order": 0,
+      "id": "state_C0.01",
+      "view": "state"
+    },
+    {
+      "C": 0.03,
+      "complexity_order": 0,
+      "id": "state_C0.03",
+      "view": "state"
+    },
+    {
+      "C": 0.1,
+      "complexity_order": 0,
+      "id": "state_C0.1",
+      "view": "state"
+    },
+    {
+      "C": 0.003,
+      "complexity_order": 1,
+      "id": "state_load_outcome_C0.003",
+      "view": "state_load_outcome"
+    },
+    {
+      "C": 0.01,
+      "complexity_order": 1,
+      "id": "state_load_outcome_C0.01",
+      "view": "state_load_outcome"
+    },
+    {
+      "C": 0.03,
+      "complexity_order": 1,
+      "id": "state_load_outcome_C0.03",
+      "view": "state_load_outcome"
+    },
+    {
+      "C": 0.1,
+      "complexity_order": 1,
+      "id": "state_load_outcome_C0.1",
+      "view": "state_load_outcome"
+    }
+  ],
+  "selection": {
+    "final": "Majority3inner winners amongall3converged recipes;tieequal-quarter meaninnerAP,smallerC,simpler,ID",
+    "inner": [
+      "2023-04-01",
+      "2023-07-01",
+      "2023-10-01"
+    ],
+    "numerical_failure": "Explicitinvalid;allinvalidinner/selectedouterinvalidstop,noquarterdrop",
+    "outer": [
+      "2023-07-01",
+      "2023-10-01",
+      "2024-01-01"
+    ],
+    "rule": "Maxprevious-inner APonly;tie smallerC,simplerrepresentation,ID; no8recipeouterselection"
+  },
+  "variant2": "Multiply already fitted existing last_routine_violation_count spline basis columns (or declaredlinear fallback) by fitOHElast_routine_result; standardize newproductcolumns onFIT; retainexistingmainburdenandoutcome effects; no otherautomaticinteractions",
+  "variants": [
+    "raw",
+    "fixed75%context04+25%new probabilities"
+  ]
+}
