@@ -10,12 +10,13 @@ context CatBoost04:0.34646; baseline0.35212 пока не побит. После
 многократно просмотренные OLD3:2023Q3,2023Q4,2024Q1. Новых метрик2024Q2/Q3
 нет. Старые87 frozen source/evidence, рецепты и CSV не изменены.
 
-Снимок завершённых вычислений:123 обучения для failure/auxiliary задач и32
-domain-membership обучения, всего155 завершённых моделей. Отдельно один
+Итог завершённых вычислений:151 обучение для failure/auxiliary задач и32
+domain-membership обучения, всего183 завершённые модели. В151 входят четыре
+реальных двухэпоховых измерения скорости neural-моделей без AP. Отдельно один
 CatBoostMAP fit прерван по первоначальному30-секундному ограничению до
 первой модели или AP; неизменные параметры затем получили заранее объявленный
-бюджет90сек/fit,15мин всего. Синтетические QA и foundation-контексты в155
-не входят. Новая retrieval-MLP ветка в этом снимке ещё не учтена.
+бюджет90сек/fit,15мин всего. Синтетические QA и foundation-контексты в183
+не входят. Всего184 реальные optimizer-попытки:183 завершённых и одна прерванная.
 
 | Проверка | OLD mean AP | Вывод |
 |---|---:|---|
@@ -35,6 +36,10 @@ CatBoostMAP fit прерван по первоначальному30-секун�
 | Context rank-normalized compact94 blend75 | .269289 | Слабый формальный резерв; Q4 delta−.003194 |
 | Same-season weighted CatBoost | .262608 | Ниже опоры во всех3 кварталах |
 | Own first-routine-per-quarter features + CB | .262026 | Ниже опоры во всех3 кварталах |
+| Own22 matched MLP | .263684 | Ниже context |
+| Own22 retrieval-MLP | .265173 | Лучше matched MLP, но ниже context |
+| Compact94 matched MLP | .255426 | Ниже context |
+| Compact94 retrieval-MLP | .245904 | Ниже matched MLP и context |
 
 В каждой строке зафиксированы собственные seed/алгоритм выбора; это не
 одинаково независимые оценки. Полные параметры, matched controls и split
@@ -86,6 +91,14 @@ provenance (старые seed/logloss/blend descriptions). Явные новые
 Источники методов: [XGBoost ranking](https://xgboost.readthedocs.io/en/stable/tutorials/learning_to_rank.html),
 [CatBoost ranking objectives](https://catboost.ai/docs/en/concepts/loss-functions-ranking),
 [TabR, официальный код](https://github.com/yandex-research/tabular-dl-tabr).
-Подробные отчёты: `hw4-post-public-shift-and-controls-20261122.md` и
-`hw4-catboost-map-results-20261122.md`. Параметры и исследовательские данные
+Neural-сравнение использовало один64-wide backbone, k16, AdamW.001/.0003,
+seed42 и эпохи, выбранные на предыдущем inner-квартале. Соседи исключали
+то же физическое site и все кварталы не раньше query. Это упрощённая
+retrieval-MLP по идее TabR. Ни один raw или fixed50ICL вариант не прошёл gate.
+Все28 сохранённых neural-forward повторились EXACT; девять целевых проверок
+включали пустой контекст, маски, инвариантность к запрещённым меткам и градиенты.
+
+Подробные отчёты: `hw4-post-public-shift-and-controls-20261122.md`,
+`hw4-catboost-map-results-20261122.md` и
+`hw4-post-public-retrieval-mlp-20261122.md`. Параметры и исследовательские данные
 сохраняются локально; построчные данные и веса в Git не публикуются.
