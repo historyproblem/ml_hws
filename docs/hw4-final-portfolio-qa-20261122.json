@@ -1,0 +1,170 @@
+{
+  "portfolio": {
+    "cached_result_artifacts": {
+      "comparison.json": "f38294b0d2d0cb9bb4b33a828767434f1a47d9fe79f88a1602f3b043511f6c84",
+      "quarter-metrics.csv": "ee01f8032529381a67f6d3cf907461c1b73ba53735aa0a77c0a7efd56bb9bbc5",
+      "summary.csv": "ea50bbed86d948ff6285a185ce55aee314763eb004e0ca56f0fe4f89b2664b11"
+    },
+    "cached_table_arithmetic_all_ten_models_exact": true,
+    "context_mean_ap_cached": 0.3179676995062895,
+    "diagnostic_complete_sha256": "26cd50d44c11cdacce1e7bccd5827150ba914085825c43e18990c156d46fb55d",
+    "diagnostic_scoring_invocations_recorded": 1,
+    "export_source_sha256": "b86a115005826ac40273650869e7155f44efad4af7f9cfd6ec14846e4ada88db",
+    "files": [
+      {
+        "both_quarters_positive": true,
+        "cached_ci_contains_zero": true,
+        "delta_cached": 0.00956491061745357,
+        "file": "submission_11_tabicl94.csv",
+        "float64_finite_range": true,
+        "frozen_matrix_values_exact": true,
+        "manual_parent_formula_exact": true,
+        "mean_ap_cached": 0.3275326101237431,
+        "model": "tabicl94",
+        "rows": 2246,
+        "sample_order_exact": true,
+        "schema_exact": true,
+        "sha256": "7c8fe950aa0470e4833b6ffefdccdf5918a9f0cd9595417373d030c6059059fe"
+      },
+      {
+        "both_quarters_positive": true,
+        "cached_ci_contains_zero": true,
+        "delta_cached": 0.005231782552667985,
+        "file": "submission_12_gam75_tabicl94_odds.csv",
+        "float64_finite_range": true,
+        "frozen_matrix_values_exact": true,
+        "manual_parent_formula_exact": true,
+        "mean_ap_cached": 0.3231994820589575,
+        "model": "gam75_tabicl94_odds",
+        "rows": 2246,
+        "sample_order_exact": true,
+        "schema_exact": true,
+        "sha256": "0e48441ca09be3c6775487ec179373e497fc8c8784cbb7372d308cf754db2727"
+      },
+      {
+        "both_quarters_positive": true,
+        "cached_ci_contains_zero": true,
+        "delta_cached": 0.0043150573727449015,
+        "file": "submission_13_gam75_tabicl22_odds.csv",
+        "float64_finite_range": true,
+        "frozen_matrix_values_exact": true,
+        "manual_parent_formula_exact": true,
+        "mean_ap_cached": 0.3222827568790344,
+        "model": "gam75_tabicl22_odds",
+        "rows": 2246,
+        "sample_order_exact": true,
+        "schema_exact": true,
+        "sha256": "a098a8bdfe990e3c18d31f1f8a10f012e5c6fcf3a1496e186a9121554c519130"
+      },
+      {
+        "both_quarters_positive": true,
+        "cached_ci_contains_zero": true,
+        "delta_cached": 0.004064152594425663,
+        "file": "submission_14_context50_gam50.csv",
+        "float64_finite_range": true,
+        "frozen_matrix_values_exact": true,
+        "manual_parent_formula_exact": true,
+        "mean_ap_cached": 0.32203185210071517,
+        "model": "context50_gam50",
+        "rows": 2246,
+        "sample_order_exact": true,
+        "schema_exact": true,
+        "sha256": "95075fa2cbdff0792aba57e0e8516c675a5832907a6e2337be06868c900961f1"
+      }
+    ],
+    "freeze_sha256": "5e791eba3e3129dd8d9348e0d7984a2e6d9cb9f0fc347ef695c345fc437fdd47",
+    "frozen_unique_files_rehashed": 88,
+    "generic_exporter_hardening_note": {
+      "current_artifacts_affected": false,
+      "file": "scripts/export_hw4_final_portfolio.py",
+      "finding": "The generic CLI validates the supplied source-proof and matrix against each other, but does not itself require their hashes/paths to be frozen sources. An alternate internally consistent pair could pass. This actual invocation uses the exact pre-score original matrix and proof, both independently rehashed in all frozen source lists.",
+      "line": 27,
+      "recommended_change": "For future reuse, require supplied proof and test-matrix hashes to occur in the frozen finalist source maps before export. No source changes were made during this read-only audit.",
+      "severity": "P2"
+    },
+    "kaggle_uploads": 0,
+    "manifest_sha256": "347ac313ed0044cc122b312adc7a7772d611657c4c783a60fd7169105f78178e",
+    "new_AP_calls": 0,
+    "new_bootstrap_calls": 0,
+    "new_fits": 0,
+    "new_formulas": 0,
+    "new_predictor_calls": 0,
+    "pre_score_test_matrix_sha256": "fb33ed1155e3f7692e4a7050eac10457a9244c8522ba397049f677560e4b137d",
+    "recipes_sha256": "881edbc58402c4a9dc0e693aa76b2513388753ae15c5db3c08c2c2a8904dccd3",
+    "scope": "Read-only final CSV/provenance/cached-statistic arithmetic audit; no scoring API imported or invoked",
+    "selected_four_match_cached_ranking": true,
+    "signature": "c2e506c81c9f23f092abf277ccd27b0ac3e65214ffc4c368282330b5277ffce7",
+    "source_files_changed": 0,
+    "source_proof_sha256": "703249b25203485651360b7db1df59a0280a82ffae362b2934413be1da012af1",
+    "statistical_note": "The four models were selected from the ten pre-frozen columns after one descriptive diagnostic on previously consumed quarters. All four nominal confidence intervals include zero; no Public/Private score is known. Export copies full-test probabilities, without refitting or recalculating metrics.",
+    "status": "PASS"
+  },
+  "export_hardening": {
+    "change": "Require both supplied input paths and hashes to be present in the frozen finalist source/evidence maps before any export or cached-score verification.",
+    "compatibility": "Original publication manifest remains tied to archived b86a source; hardened replay has the patched source hash. All four CSV bytes are identical.",
+    "completed_resume_verification_calls": 1,
+    "diagnostic_and_cached_statistics_unchanged": true,
+    "forged_consistent_unsigned_pair_rejected": true,
+    "forged_rejection": "Portfolio inputs must be exact pre-diagnostic frozen sources",
+    "frozen_parents_and_scorer_unchanged": true,
+    "frozen_signature": "c2e506c81c9f23f092abf277ccd27b0ac3e65214ffc4c368282330b5277ffce7",
+    "kaggle_uploads": 0,
+    "new_AP_calls": 0,
+    "new_bootstrap_calls": 0,
+    "new_fits": 0,
+    "new_metrics_computed": 0,
+    "original_published_manifest_sha256": "347ac313ed0044cc122b312adc7a7772d611657c4c783a60fd7169105f78178e",
+    "original_source": "/Users/khlystov/Documents/ChatGPT/ML ДЗ/analysis/hw4-six-hour-20261122/audit/exporter-original.py",
+    "original_source_sha256": "b86a115005826ac40273650869e7155f44efad4af7f9cfd6ec14846e4ada88db",
+    "patched_source": "/private/tmp/ml-hw4-final-four-20261122/scripts/export_hw4_final_portfolio.py",
+    "patched_source_sha256": "c6a245432e06bce0fa83305883bb89e1ad4dfbf646c436a6c52354be2bf43c76",
+    "published_outputs_and_manifest_unchanged": true,
+    "rejection_before_output_writes": true,
+    "rejection_before_resume_call": true,
+    "replay_files": [
+      {
+        "bytes_exact": true,
+        "file": "submission_11_tabicl94.csv",
+        "sha256": "7c8fe950aa0470e4833b6ffefdccdf5918a9f0cd9595417373d030c6059059fe"
+      },
+      {
+        "bytes_exact": true,
+        "file": "submission_12_gam75_tabicl94_odds.csv",
+        "sha256": "0e48441ca09be3c6775487ec179373e497fc8c8784cbb7372d308cf754db2727"
+      },
+      {
+        "bytes_exact": true,
+        "file": "submission_13_gam75_tabicl22_odds.csv",
+        "sha256": "a098a8bdfe990e3c18d31f1f8a10f012e5c6fcf3a1496e186a9121554c519130"
+      },
+      {
+        "bytes_exact": true,
+        "file": "submission_14_context50_gam50.csv",
+        "sha256": "95075fa2cbdff0792aba57e0e8516c675a5832907a6e2337be06868c900961f1"
+      }
+    ],
+    "replay_manifest_sha256": "a2d5b9584716fe40c8c21fcf57adf02c983706cbc38d9f320e440a98d1e4e349",
+    "replay_output": "/Users/khlystov/Documents/ChatGPT/ML ДЗ/analysis/hw4-six-hour-20261122/audit/export-hardening-replay",
+    "status": "PASS"
+  },
+  "suite": {
+    "status": "PASS",
+    "test_modules": 63,
+    "completed_unique_checks": 240,
+    "expected_checks": 240,
+    "missing": [],
+    "unexpected": [],
+    "real_recent_AP_computed": 0,
+    "kaggle_uploads": 0,
+    "model_fits_from_QA": "synthetic only; excluded from actual HW4 fit counts",
+    "driver_repair": "Snapshot list(vars(module).items()) to permit lazy warning-registry insertion. Continued at next module, then ran the one last RBF check that the interrupted dictionary enumeration had not reached. Every declared check ran exactly once.",
+    "initial_driver_run_interrupted": true,
+    "continuation_exit_code": 0,
+    "logs": {
+      "extended-checks.log": "973ca8ed5ca4341e4a64ad629046e49cea607749ab786a2d63e438ea04928b00",
+      "extended-checks-continuation.log": "42e542f8fa01a17fc0e7e454252dab357eaeddacf0eecb6156e2922938fa702d",
+      "extended-checks-single-missing.log": "885d060bf17cb79e61c9887d17d9c66f9fb5e172ef1089dc9a78de6c9972fee5"
+    },
+    "driver_sha256": "8c9516fbfa3d3fe2d039192e6fa3e45d645f94b8cbf3fe330b6626ca55e3f24a"
+  }
+}

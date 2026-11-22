@@ -1,0 +1,101 @@
+{
+  "date": "2026-11-22",
+  "research": "complete",
+  "baseline_public_last_verified": 0.35212,
+  "best_public_last_verified": 0.34646,
+  "new_public_scores": null,
+  "optimizer_attempts": 723,
+  "optimizer_completed": 720,
+  "numerical_invalid": 3,
+  "pretrained_real_contexts": 30,
+  "portable_checks": 240,
+  "real_recent_diagnostic": {
+    "artifacts": {
+      "comparison.json": "f38294b0d2d0cb9bb4b33a828767434f1a47d9fe79f88a1602f3b043511f6c84",
+      "quarter-metrics.csv": "ee01f8032529381a67f6d3cf907461c1b73ba53735aa0a77c0a7efd56bb9bbc5",
+      "summary.csv": "ea50bbed86d948ff6285a185ce55aee314763eb004e0ca56f0fe4f89b2664b11"
+    },
+    "freeze_sha256": "5e791eba3e3129dd8d9348e0d7984a2e6d9cb9f0fc347ef695c345fc437fdd47",
+    "fresh_holdout": false,
+    "kaggle_uploads": 0,
+    "model_selection_performed": false,
+    "new_fits": 0,
+    "recent_quarters_scored": [
+      "2024-04-01",
+      "2024-07-01"
+    ],
+    "scoring_invocations": 1,
+    "signature": "c2e506c81c9f23f092abf277ccd27b0ac3e65214ffc4c368282330b5277ffce7",
+    "status": "COMPLETE",
+    "weight_search": false
+  },
+  "portfolio_manifest_sha256": "347ac313ed0044cc122b312adc7a7772d611657c4c783a60fd7169105f78178e",
+  "portfolio": [
+    {
+      "file": "submission_11_tabicl94.csv",
+      "model": "tabicl94",
+      "priority": 1,
+      "private_ap": null,
+      "public_ap": null,
+      "recent_delta_vs_context": 0.00956491061745357,
+      "recent_mean_ap": 0.3275326101237431,
+      "recent_nominal_ci95": [
+        -0.0012926962578355696,
+        0.021653416884335867
+      ],
+      "rows": 2246,
+      "sha256": "7c8fe950aa0470e4833b6ffefdccdf5918a9f0cd9595417373d030c6059059fe",
+      "status": "READY_NOT_SUBMITTED"
+    },
+    {
+      "file": "submission_12_gam75_tabicl94_odds.csv",
+      "model": "gam75_tabicl94_odds",
+      "priority": 2,
+      "private_ap": null,
+      "public_ap": null,
+      "recent_delta_vs_context": 0.005231782552667985,
+      "recent_mean_ap": 0.3231994820589575,
+      "recent_nominal_ci95": [
+        -0.005995757003082263,
+        0.017174861442331647
+      ],
+      "rows": 2246,
+      "sha256": "0e48441ca09be3c6775487ec179373e497fc8c8784cbb7372d308cf754db2727",
+      "status": "READY_NOT_SUBMITTED"
+    },
+    {
+      "file": "submission_13_gam75_tabicl22_odds.csv",
+      "model": "gam75_tabicl22_odds",
+      "priority": 3,
+      "private_ap": null,
+      "public_ap": null,
+      "recent_delta_vs_context": 0.0043150573727449015,
+      "recent_mean_ap": 0.3222827568790344,
+      "recent_nominal_ci95": [
+        -0.007000845211497621,
+        0.016362938449972587
+      ],
+      "rows": 2246,
+      "sha256": "a098a8bdfe990e3c18d31f1f8a10f012e5c6fcf3a1496e186a9121554c519130",
+      "status": "READY_NOT_SUBMITTED"
+    },
+    {
+      "file": "submission_14_context50_gam50.csv",
+      "model": "context50_gam50",
+      "priority": 4,
+      "private_ap": null,
+      "public_ap": null,
+      "recent_delta_vs_context": 0.004064152594425663,
+      "recent_mean_ap": 0.32203185210071517,
+      "recent_nominal_ci95": [
+        -0.002246924961125585,
+        0.010745900883824943
+      ],
+      "rows": 2246,
+      "sha256": "95075fa2cbdff0792aba57e0e8516c675a5832907a6e2337be06868c900961f1",
+      "status": "READY_NOT_SUBMITTED"
+    }
+  ],
+  "agent_uploads": 0,
+  "no_post_recent_parameter_changes": true
+}
