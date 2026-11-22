@@ -1,0 +1,13 @@
+# Dedicated TabICL venv. Install sklearn here and preserve the original host packages.
+scikit-learn==1.7.2
+einops==0.8.2
+huggingface-hub==0.36.2
+tqdm==4.70.1
+requests==2.34.2
+PyYAML==6.0.4
+certifi==2026.11.20
+charset-normalizer==3.5.2
+urllib3==2.8.0
+idna==3.20
+hf-xet==1.8.0
+psutil==7.2.2

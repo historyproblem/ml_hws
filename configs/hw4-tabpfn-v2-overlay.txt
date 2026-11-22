@@ -1,0 +1,30 @@
+# Only this separate environment receives these versions. Host torch/CUDA,
+# numpy, pandas, scipy, joblib and threadpoolctl remain in the original environment.
+scikit-learn==1.6.1
+tabpfn-common-utils==0.1.9
+typing-extensions==4.16.0
+einops==0.8.2
+huggingface-hub==0.36.2
+pydantic==2.14.4
+pydantic-settings==2.16.3
+eval-type-backport==0.4.0
+filelock==4.2.9
+platformdirs==4.14.5
+posthog==6.9.3
+requests==2.34.2
+fsspec==2026.9.0
+hf-xet==1.8.0
+packaging==26.3
+PyYAML==6.0.4
+tqdm==4.70.1
+annotated-types==0.8.0
+pydantic-core==2.50.5
+typing-inspection==0.4.5
+python-dotenv==1.2.4
+six==1.17.0
+backoff==2.2.1
+distro==1.9.0
+charset-normalizer==3.5.2
+idna==3.20
+urllib3==2.8.0
+certifi==2026.11.20
