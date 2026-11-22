@@ -1,0 +1,4 @@
+# Add only this dependency with --no-deps to the existing HW4 environment.
+# Official PyPI stable release, macOS ARM wheel; requires Python >=3.12.
+# Keep installed CatBoost/Torch/numpy/scipy/pandas/scikit-learn unchanged.
+xgboost==3.4.1

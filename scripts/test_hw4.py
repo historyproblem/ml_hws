@@ -18,7 +18,11 @@ def main():
                  "test_hw4_residual_training", "test_hw4_residual_runner",
                  "test_hw4_delivery", "test_hw4_delivery_neural",
                  "test_hw4_map_ranking", "test_hw4_next_round", "test_hw4_tabm_models",
-                 "test_hw4_site_state", "test_hw4_tabm_training"]:
+                 "test_hw4_site_state", "test_hw4_tabm_training",
+                 "test_hw4_deep_boosting", "test_hw4_transition_features",
+                 "test_hw4_seasonal_context", "test_hw4_final_research",
+                 "test_hw4_additive_logit", "test_hw4_additive_runner",
+                 "test_hw4_context_bag10", "test_hw4_inner_ap_followup"]:
         module = importlib.import_module(name)
         for key, value in vars(module).items():
             if key.startswith("test_") and callable(value):

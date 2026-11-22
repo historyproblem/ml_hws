@@ -1,0 +1,751 @@
+{
+  "qa": {
+    "date": "2026-11-22",
+    "isolated_hw4_checks": 126,
+    "passed": true,
+    "new_real_fits": 108,
+    "fit_counts": {
+      "primary_outer_and_full": 45,
+      "primary_inner": 24,
+      "d6_ap_outer_and_full": 11,
+      "xgb_reg_ap_outer": 3,
+      "additive_old_and_full": 4,
+      "bag10_old": 21
+    },
+    "new_q2_q3_metrics": false,
+    "kaggle_uploads": 0,
+    "feature_cache_independent_rebuild": "ALL base346, transition353, seasonal358 values/categories/columns for 23263 rows EXACT with target removed",
+    "final_export_source_sha256": "45a57471e7d6001550d9995eea0a71b3c954e54a37e93c9b0ce082a5757df099",
+    "test_log_sha256": "f704bb35bac9abd5e1efe76e847868ef42c4f84d423f689f0a7d107eee162d2d",
+    "statistical_caveat": "Reused development quarters and adaptive hypothesis selection; intervals nominal, no independent holdout evidence for new candidates."
+  },
+  "delivery": {
+    "date": "2026-11-22",
+    "incumbent_public_ap": 0.34646,
+    "target_public_baseline_last_observed": 0.35212,
+    "remaining_attempts_user_reported": 4,
+    "agent_uploads": 0,
+    "new_fits": 0,
+    "new_q2_q3_metrics": false,
+    "supplemental_delivery_decision": "The frozen additive runner selected raw only. After reviewing its already reported raw and fixed75/25 old-dev results, this separate export also delivers the fixed75/25 blend. Both passed the original gate; no new weights or fits. This supplemental output is not original one-CSV-policy compliance or independent confirmation.",
+    "interpretation": "Reused old development quarters; all intervals nominal and unadjusted for model selection. Boosting improvements are tiny, reserves are not four equally strong recommendations. Send07 first and review Public before spending the other attempts.",
+    "parents": {
+      "context04": "636f8cbe87367b6df0bae6d9a1d79a57de863bc78a21bc2296f5c2ff85970634",
+      "additive_raw": "2f31b48d45e18adc85c981ce419d3c59a183b929e7e7db7c9c465b83bbaa75e2",
+      "additive_manifest": "48f0b0bb25b0d558122b3c999e3b9b7a853130242b362b774357e650d316203e",
+      "additive_signature": "d6d65e1386ec5dfa6422581be5c10d54b2a34e6cf6289aabdec12466bf6934cf",
+      "cb_d6_blend": "21dee16866b44016b7d5ae3ec740378d626c2884c082128272e5c00d2e862350",
+      "xgb_d4_blend": "4bbf41684775f3536bf892578bc282e43d34b6a73dcf68a7606d4b9c0bf53124"
+    },
+    "official_sha256": {
+      "inspection_history.csv": "9637ec0279d9cf521795268a0f44099d7d51a795b5155a0d78405a770966afc7",
+      "sample_submission.csv": "2d9b5084b510302cd027d46e0c5f9b8e986d48f417d9a582a8b5ec2b3c953b42",
+      "test_student.csv": "1014585cdbdb45e6b1ce7bcb5723700aa025826975a6c5c6910ed5ce39f6f643",
+      "train.csv": "30b6acd8c9f2eec4259a775b098017934ba5497cb37689eb00b639433472f0d9"
+    },
+    "files": [
+      {
+        "file": "submission_07_context_additive_probability75.csv",
+        "priority": "first",
+        "sha256": "ef638b33e25e391f943c8a3758a0ff27618b23467b01ae0a5d227aa5d9b4d0f0",
+        "rows": 2246,
+        "model": "additive_logit__blend75",
+        "formula": ".75*context04+.25*additive08",
+        "historical_cv": {
+          "mean_ap": 0.2708403454908619,
+          "delta_vs_reference": 0.003333930646336636,
+          "ci95_low": -6.870709184538108e-05,
+          "ci95_high": 0.006385046744128974,
+          "nonnegative_quarters": 3,
+          "worst_quarter_delta": 0.0019745726857094414,
+          "eligible": true
+        },
+        "public_ap": null,
+        "private_ap": null,
+        "status": "READY_NOT_SUBMITTED"
+      },
+      {
+        "file": "submission_08_additive_logit.csv",
+        "priority": "second_after_public_review",
+        "sha256": "2f31b48d45e18adc85c981ce419d3c59a183b929e7e7db7c9c465b83bbaa75e2",
+        "rows": 2246,
+        "model": "additive_logit__raw",
+        "formula": "additive08",
+        "historical_cv": {
+          "mean_ap": 0.27120760729750876,
+          "delta_vs_reference": 0.003701192452983504,
+          "ci95_low": -0.007848296477684683,
+          "ci95_high": 0.014939697869443904,
+          "nonnegative_quarters": 2,
+          "worst_quarter_delta": -0.004212021339498828,
+          "eligible": true
+        },
+        "public_ap": null,
+        "private_ap": null,
+        "status": "READY_NOT_SUBMITTED"
+      },
+      {
+        "file": "reserve/submission_09_context_cb_d6_probability75.csv",
+        "priority": "weak_reserve",
+        "sha256": "21dee16866b44016b7d5ae3ec740378d626c2884c082128272e5c00d2e862350",
+        "rows": 2246,
+        "model": "cb_plain_d6_inner_ap__blend75",
+        "formula": ".75*context04+.25*mean3_CB_d6",
+        "historical_cv": {
+          "mean_ap": 0.2679403599122445,
+          "delta_vs_reference": 0.0004339450677192658,
+          "ci95_low": -0.0016112750812633026,
+          "ci95_high": 0.0023335880659091893,
+          "nonnegative_quarters": 2,
+          "worst_quarter_delta": -0.0008608369675879857,
+          "eligible": true
+        },
+        "public_ap": null,
+        "private_ap": null,
+        "status": "READY_NOT_SUBMITTED"
+      },
+      {
+        "file": "reserve/submission_10_context_xgb_probability75.csv",
+        "priority": "very_weak_reserve",
+        "sha256": "4bbf41684775f3536bf892578bc282e43d34b6a73dcf68a7606d4b9c0bf53124",
+        "rows": 2246,
+        "model": "xgb_d4__blend75",
+        "formula": ".75*context04+.25*mean3_XGB_d4",
+        "historical_cv": {
+          "mean_ap": 0.26757709465082635,
+          "delta_vs_reference": 7.067980630109938e-05,
+          "ci95_low": -0.002043467736886537,
+          "ci95_high": 0.002078236371385646,
+          "nonnegative_quarters": 2,
+          "worst_quarter_delta": -0.00033966319183487137,
+          "eligible": true
+        },
+        "public_ap": null,
+        "private_ap": null,
+        "status": "READY_NOT_SUBMITTED"
+      }
+    ]
+  },
+  "independent_candidate_audit": {
+    "status": "PASS",
+    "scope": "Independent completed-candidate audit only; no new fits, model forwards, new Q2/Q3 metrics, altered sources or uploads.",
+    "official_old_validation_rows": 5815,
+    "old_positives": 944,
+    "official_test_rows": 2246,
+    "original_data_sha256": {
+      "train.csv": "30b6acd8c9f2eec4259a775b098017934ba5497cb37689eb00b639433472f0d9",
+      "test_student.csv": "1014585cdbdb45e6b1ce7bcb5723700aa025826975a6c5c6910ed5ce39f6f643",
+      "inspection_history.csv": "9637ec0279d9cf521795268a0f44099d7d51a795b5155a0d78405a770966afc7",
+      "sample_submission.csv": "2d9b5084b510302cd027d46e0c5f9b8e986d48f417d9a582a8b5ec2b3c953b42"
+    },
+    "baseline_sha256": "0096456a838264be615680be4eead0ed8b449a4182d9f20acd519937e7cc1f7c",
+    "context04_sha256": "636f8cbe87367b6df0bae6d9a1d79a57de863bc78a21bc2296f5c2ff85970634",
+    "case_reports": {
+      "search": {
+        "signature_exact": true,
+        "manifest_output_hashes_checked": 10,
+        "current_source_hashes_exact": {
+          "classical_analysis.py": true,
+          "deep_boosting.py": true,
+          "delivery.py": true,
+          "extensions.py": true,
+          "features.py": true,
+          "next_round.py": true,
+          "run_hw4_final_research.py": true,
+          "seasonal_context.py": true,
+          "transition_features.py": true
+        },
+        "job_count": 45,
+        "old_jobs": 42,
+        "full_jobs": 3,
+        "all_job_artifact_hashes_exact": true,
+        "stages": [
+          {
+            "stage": "screen",
+            "official_rows": 5815,
+            "official_metadata_exact": true,
+            "anchor_exact": true,
+            "all_probability_blends_exact": true,
+            "all_AP_and_summary_and_CI_reproduced": true,
+            "gates_reproduced_including_worst_floor": true,
+            "models": [
+              "context_3seed",
+              "cb_ordered_d5__raw",
+              "cb_ordered_d5__blend75",
+              "cb_plain_d3__raw",
+              "cb_plain_d3__blend75",
+              "cb_plain_d6__raw",
+              "cb_plain_d6__blend75",
+              "cb_plain_d5_low_l2__raw",
+              "cb_plain_d5_low_l2__blend75",
+              "xgb_d2__raw",
+              "xgb_d2__blend75",
+              "xgb_d4__raw",
+              "xgb_d4__blend75",
+              "xgb_d6__raw",
+              "xgb_d6__blend75",
+              "xgb_d3_reg__raw",
+              "xgb_d3_reg__blend75",
+              "transition__raw",
+              "transition__blend75",
+              "seasonal__raw",
+              "seasonal__blend75"
+            ]
+          },
+          {
+            "stage": "confirmed",
+            "official_rows": 5815,
+            "official_metadata_exact": true,
+            "anchor_exact": true,
+            "all_probability_blends_exact": true,
+            "all_AP_and_summary_and_CI_reproduced": true,
+            "gates_reproduced_including_worst_floor": true,
+            "models": [
+              "context_3seed",
+              "cb_plain_d3__raw",
+              "cb_plain_d3__blend75",
+              "xgb_d4__raw",
+              "xgb_d4__blend75"
+            ]
+          }
+        ],
+        "export_files": [
+          {
+            "case": "xgb_d4",
+            "csv": "submission_01_xgb_d4_blend75.csv",
+            "delta_vs_reference": 7.067980630109938e-05,
+            "family": "xgboost",
+            "full_trees": 50,
+            "mean_ap": 0.26757709465082635,
+            "model": "xgb_d4__blend75",
+            "rows": 2246,
+            "sha256": "4bbf41684775f3536bf892578bc282e43d34b6a73dcf68a7606d4b9c0bf53124",
+            "variant": "blend75"
+          }
+        ]
+      },
+      "additive": {
+        "signature_exact": true,
+        "manifest_output_hashes_checked": 6,
+        "current_source_hashes_exact": {
+          "additive_logit.py": true,
+          "classical_analysis.py": true,
+          "classical_features.py": true,
+          "deep_boosting.py": true,
+          "delivery.py": true,
+          "extensions.py": true,
+          "features.py": true,
+          "next_round.py": true,
+          "run_hw4_additive.py": true,
+          "run_hw4_final_research.py": true,
+          "seasonal_context.py": true,
+          "transition_features.py": true
+        },
+        "job_count": 4,
+        "old_jobs": 3,
+        "full_jobs": 1,
+        "all_job_artifact_hashes_exact": true,
+        "stages": [
+          {
+            "stage": "screen",
+            "official_rows": 5815,
+            "official_metadata_exact": true,
+            "anchor_exact": true,
+            "all_probability_blends_exact": true,
+            "all_AP_and_summary_and_CI_reproduced": true,
+            "gates_reproduced_including_worst_floor": true,
+            "models": [
+              "context_3seed",
+              "additive_logit__raw",
+              "additive_logit__blend75"
+            ]
+          }
+        ],
+        "export_files": [
+          {
+            "case": "additive_logit",
+            "csv": "submission_additive_raw.csv",
+            "delta_vs_reference": 0.003701192452983504,
+            "family": "additive_logit",
+            "mean_ap": 0.27120760729750876,
+            "model": "additive_logit__raw",
+            "rows": 2246,
+            "sha256": "2f31b48d45e18adc85c981ce419d3c59a183b929e7e7db7c9c465b83bbaa75e2",
+            "variant": "raw"
+          }
+        ]
+      },
+      "d6-ap": {
+        "signature_exact": true,
+        "manifest_output_hashes_checked": 11,
+        "current_source_hashes_exact": {
+          "classical_analysis.py": true,
+          "deep_boosting.py": true,
+          "delivery.py": true,
+          "extensions.py": true,
+          "features.py": true,
+          "next_round.py": true,
+          "run_hw4_final_research.py": true,
+          "seasonal_context.py": true,
+          "transition_features.py": true
+        },
+        "job_count": 11,
+        "old_jobs": 8,
+        "full_jobs": 3,
+        "all_job_artifact_hashes_exact": true,
+        "stages": [
+          {
+            "stage": "screen",
+            "official_rows": 5815,
+            "official_metadata_exact": true,
+            "anchor_exact": true,
+            "all_probability_blends_exact": true,
+            "all_AP_and_summary_and_CI_reproduced": true,
+            "gates_reproduced_including_worst_floor": true,
+            "models": [
+              "context_3seed",
+              "cb_plain_d6_inner_ap__raw",
+              "cb_plain_d6_inner_ap__blend75"
+            ]
+          },
+          {
+            "stage": "confirmed",
+            "official_rows": 5815,
+            "official_metadata_exact": true,
+            "anchor_exact": true,
+            "all_probability_blends_exact": true,
+            "all_AP_and_summary_and_CI_reproduced": true,
+            "gates_reproduced_including_worst_floor": true,
+            "models": [
+              "context_3seed",
+              "cb_plain_d6_inner_ap__raw",
+              "cb_plain_d6_inner_ap__blend75"
+            ]
+          }
+        ],
+        "export_files": [
+          {
+            "case": "cb_plain_d6_inner_ap",
+            "csv": "submission_cb_plain_d6_inner_ap_blend75.csv",
+            "delta_vs_reference": 0.0004339450677192658,
+            "family": "catboost",
+            "full_trees": 200,
+            "mean_ap": 0.2679403599122445,
+            "model": "cb_plain_d6_inner_ap__blend75",
+            "rows": 2246,
+            "sha256": "21dee16866b44016b7d5ae3ec740378d626c2884c082128272e5c00d2e862350",
+            "variant": "blend75"
+          }
+        ]
+      },
+      "xgb-reg-ap": {
+        "signature_exact": true,
+        "manifest_output_hashes_checked": 9,
+        "current_source_hashes_exact": {
+          "classical_analysis.py": true,
+          "deep_boosting.py": true,
+          "delivery.py": true,
+          "extensions.py": true,
+          "features.py": true,
+          "next_round.py": true,
+          "run_hw4_final_research.py": true,
+          "seasonal_context.py": true,
+          "transition_features.py": true
+        },
+        "job_count": 3,
+        "old_jobs": 3,
+        "full_jobs": 0,
+        "all_job_artifact_hashes_exact": true,
+        "stages": [
+          {
+            "stage": "screen",
+            "official_rows": 5815,
+            "official_metadata_exact": true,
+            "anchor_exact": true,
+            "all_probability_blends_exact": true,
+            "all_AP_and_summary_and_CI_reproduced": true,
+            "gates_reproduced_including_worst_floor": true,
+            "models": [
+              "context_3seed",
+              "xgb_d3_reg_inner_ap__raw",
+              "xgb_d3_reg_inner_ap__blend75"
+            ]
+          },
+          {
+            "stage": "confirmed",
+            "official_rows": 5815,
+            "official_metadata_exact": true,
+            "anchor_exact": true,
+            "all_probability_blends_exact": true,
+            "all_AP_and_summary_and_CI_reproduced": true,
+            "gates_reproduced_including_worst_floor": true,
+            "models": [
+              "context_3seed"
+            ]
+          }
+        ],
+        "export_files": []
+      },
+      "context-bag10": {
+        "signature_exact": true,
+        "manifest_output_hashes_checked": 4,
+        "current_source_hashes_exact": {
+          "classical_analysis.py": true,
+          "deep_boosting.py": true,
+          "delivery.py": true,
+          "extensions.py": true,
+          "features.py": true,
+          "next_round.py": true,
+          "run_hw4_final_research.py": true,
+          "seasonal_context.py": true,
+          "transition_features.py": true
+        },
+        "job_count": 21,
+        "old_jobs": 21,
+        "full_jobs": 0,
+        "all_job_artifact_hashes_exact": true,
+        "stages": [
+          {
+            "stage": "old",
+            "official_rows": 5815,
+            "official_metadata_exact": true,
+            "anchor_exact": true,
+            "all_probability_blends_exact": true,
+            "all_AP_and_summary_and_CI_reproduced": true,
+            "gates_reproduced_including_worst_floor": true,
+            "models": [
+              "context_3seed",
+              "context_bag10"
+            ]
+          }
+        ],
+        "export_files": []
+      }
+    },
+    "checks": {
+      "manifest_file_hash_checks": 40,
+      "job_artifact_hash_checks": 252,
+      "job_markers": 84,
+      "sklearn_quarter_AP_checks": 123,
+      "summary_field_checks_including_paired_CI": 287,
+      "full_test_deliverables": 4
+    },
+    "raw_oof_saved_prediction_reconstructions": [
+      {
+        "run": "search",
+        "stage": "screen",
+        "model": "cb_ordered_d5__raw",
+        "seed_mean_and_saved_predictions_exact": true
+      },
+      {
+        "run": "search",
+        "stage": "screen",
+        "model": "cb_plain_d3__raw",
+        "seed_mean_and_saved_predictions_exact": true
+      },
+      {
+        "run": "search",
+        "stage": "screen",
+        "model": "cb_plain_d6__raw",
+        "seed_mean_and_saved_predictions_exact": true
+      },
+      {
+        "run": "search",
+        "stage": "screen",
+        "model": "cb_plain_d5_low_l2__raw",
+        "seed_mean_and_saved_predictions_exact": true
+      },
+      {
+        "run": "search",
+        "stage": "screen",
+        "model": "xgb_d2__raw",
+        "seed_mean_and_saved_predictions_exact": true
+      },
+      {
+        "run": "search",
+        "stage": "screen",
+        "model": "xgb_d4__raw",
+        "seed_mean_and_saved_predictions_exact": true
+      },
+      {
+        "run": "search",
+        "stage": "screen",
+        "model": "xgb_d6__raw",
+        "seed_mean_and_saved_predictions_exact": true
+      },
+      {
+        "run": "search",
+        "stage": "screen",
+        "model": "xgb_d3_reg__raw",
+        "seed_mean_and_saved_predictions_exact": true
+      },
+      {
+        "run": "search",
+        "stage": "screen",
+        "model": "transition__raw",
+        "seed_mean_and_saved_predictions_exact": true
+      },
+      {
+        "run": "search",
+        "stage": "screen",
+        "model": "seasonal__raw",
+        "seed_mean_and_saved_predictions_exact": true
+      },
+      {
+        "run": "search",
+        "stage": "confirmed",
+        "model": "cb_plain_d3__raw",
+        "seed_mean_and_saved_predictions_exact": true
+      },
+      {
+        "run": "search",
+        "stage": "confirmed",
+        "model": "xgb_d4__raw",
+        "seed_mean_and_saved_predictions_exact": true
+      },
+      {
+        "run": "d6-ap",
+        "stage": "screen",
+        "model": "cb_plain_d6_inner_ap__raw",
+        "seed_mean_and_saved_predictions_exact": true
+      },
+      {
+        "run": "d6-ap",
+        "stage": "confirmed",
+        "model": "cb_plain_d6_inner_ap__raw",
+        "seed_mean_and_saved_predictions_exact": true
+      },
+      {
+        "run": "xgb-reg-ap",
+        "stage": "screen",
+        "model": "xgb_d3_reg_inner_ap__raw",
+        "seed_mean_and_saved_predictions_exact": true
+      }
+    ],
+    "deliverables": [
+      {
+        "file": "/Users/khlystov/Documents/ChatGPT/ML ДЗ/outputs/hw4/final-four-20261122/submission_07_context_additive_probability75.csv",
+        "sha256": "ef638b33e25e391f943c8a3758a0ff27618b23467b01ae0a5d227aa5d9b4d0f0",
+        "official_sample_order_exact": true,
+        "probabilities_valid": true,
+        "full_array_formula_exact": true,
+        "old_cv_fields_exact": true,
+        "public_ap": null,
+        "private_ap": null,
+        "priority": "first"
+      },
+      {
+        "file": "/Users/khlystov/Documents/ChatGPT/ML ДЗ/outputs/hw4/final-four-20261122/submission_08_additive_logit.csv",
+        "sha256": "2f31b48d45e18adc85c981ce419d3c59a183b929e7e7db7c9c465b83bbaa75e2",
+        "official_sample_order_exact": true,
+        "probabilities_valid": true,
+        "full_array_formula_exact": true,
+        "old_cv_fields_exact": true,
+        "public_ap": null,
+        "private_ap": null,
+        "priority": "second_after_public_review"
+      },
+      {
+        "file": "/Users/khlystov/Documents/ChatGPT/ML ДЗ/outputs/hw4/final-four-20261122/reserve/submission_09_context_cb_d6_probability75.csv",
+        "sha256": "21dee16866b44016b7d5ae3ec740378d626c2884c082128272e5c00d2e862350",
+        "official_sample_order_exact": true,
+        "probabilities_valid": true,
+        "full_array_formula_exact": true,
+        "old_cv_fields_exact": true,
+        "public_ap": null,
+        "private_ap": null,
+        "priority": "weak_reserve"
+      },
+      {
+        "file": "/Users/khlystov/Documents/ChatGPT/ML ДЗ/outputs/hw4/final-four-20261122/reserve/submission_10_context_xgb_probability75.csv",
+        "sha256": "4bbf41684775f3536bf892578bc282e43d34b6a73dcf68a7606d4b9c0bf53124",
+        "official_sample_order_exact": true,
+        "probabilities_valid": true,
+        "full_array_formula_exact": true,
+        "old_cv_fields_exact": true,
+        "public_ap": null,
+        "private_ap": null,
+        "priority": "very_weak_reserve"
+      }
+    ],
+    "unlabelled_test_diversity": [
+      {
+        "model_a": "context04",
+        "model_b": "xgb_d4__blend75",
+        "spearman": 0.9968303232827488,
+        "probability_MAE": 0.00671799621733873,
+        "top10pct_overlap_fraction": 0.96
+      },
+      {
+        "model_a": "additive_logit__blend75",
+        "model_b": "context04",
+        "spearman": 0.9915778507827272,
+        "probability_MAE": 0.008097605812107311,
+        "top10pct_overlap_fraction": 0.9377777777777778
+      },
+      {
+        "model_a": "additive_logit__blend75",
+        "model_b": "additive_logit__raw",
+        "spearman": 0.9435884078959655,
+        "probability_MAE": 0.024292817436321935,
+        "top10pct_overlap_fraction": 0.8222222222222222
+      },
+      {
+        "model_a": "additive_logit__blend75",
+        "model_b": "cb_plain_d6_inner_ap__blend75",
+        "spearman": 0.9914458314932926,
+        "probability_MAE": 0.008145464729652567,
+        "top10pct_overlap_fraction": 0.9377777777777778
+      },
+      {
+        "model_a": "additive_logit__blend75",
+        "model_b": "xgb_d4__blend75",
+        "spearman": 0.991383627327259,
+        "probability_MAE": 0.009562899118566332,
+        "top10pct_overlap_fraction": 0.9466666666666667
+      },
+      {
+        "model_a": "additive_logit__raw",
+        "model_b": "context04",
+        "spearman": 0.8948758587086075,
+        "probability_MAE": 0.03239042324842924,
+        "top10pct_overlap_fraction": 0.7644444444444445
+      },
+      {
+        "model_a": "additive_logit__raw",
+        "model_b": "cb_plain_d6_inner_ap__blend75",
+        "spearman": 0.8970728659980148,
+        "probability_MAE": 0.031916047866419446,
+        "top10pct_overlap_fraction": 0.7733333333333333
+      },
+      {
+        "model_a": "additive_logit__raw",
+        "model_b": "xgb_d4__blend75",
+        "spearman": 0.9016898654243638,
+        "probability_MAE": 0.032029012802648776,
+        "top10pct_overlap_fraction": 0.7733333333333333
+      },
+      {
+        "model_a": "cb_plain_d6_inner_ap__blend75",
+        "model_b": "context04",
+        "spearman": 0.9988058518041482,
+        "probability_MAE": 0.003250226663485138,
+        "top10pct_overlap_fraction": 0.9644444444444444
+      },
+      {
+        "model_a": "cb_plain_d6_inner_ap__blend75",
+        "model_b": "xgb_d4__blend75",
+        "spearman": 0.9980091214083084,
+        "probability_MAE": 0.005381716858915171,
+        "top10pct_overlap_fraction": 0.9688888888888889
+      }
+    ],
+    "supplemental_additive_export": {
+      "original_policy": "One best eligible variant and at most one CSV; raw chosen by frozen mean-AP rule.",
+      "actual_original_selection": "additive_logit__raw",
+      "secondary_already_predeclared": "additive_logit__blend75 = 0.75 context probability + 0.25 additive probability",
+      "secondary_already_passed_gate": true,
+      "secondary_has_three_positive_quarter_deltas": true,
+      "both_outputs_are_correlated_same_fit": true,
+      "new_weight_search": false,
+      "new_fit_for_secondary": false,
+      "is_original_one_CSV_policy_compliance": false,
+      "is_transparent_supplemental_delivery_exception": true,
+      "original_freeze_and_manifest_hashes_preserved": true,
+      "delivery_manifest_discloses_exception": true
+    },
+    "recommendation": {
+      "first": "07 fixed additive probability blend",
+      "second": "08 raw additive, only after Public review and not as independent confirmation",
+      "third": "09 D6 AP blend, weak reserve",
+      "fourth": "10 XGB d4 blend, very weak reserve",
+      "automatic_four_submissions": false,
+      "bag10_and_xgb_reg_ap": "Rejected by original gates; no test files or full fits",
+      "baseline_win_guaranteed": false,
+      "keep_context04_incumbent": true
+    },
+    "uncertainty": "All CIs are nominal, conditional on reused old dev quarters, unadjusted for extensive/adaptive screening. No remaining candidate has a positive lower95% bound vs context04; no Private performance is known.",
+    "new_fits": 0,
+    "new_model_forwards": 0,
+    "new_closed_quarter_metrics": 0,
+    "kaggle_uploads": 0
+  },
+  "feature_cache_cli_audit": {
+    "status": "PASS",
+    "builder_cli": "/private/tmp/ml-hw4-final-four-20261122/scripts/build_hw4_final_feature_cache.py",
+    "builder_cli_sha256": "02403ec760083d71cacfb041bf529a89d46fd891626b59c93d3a0e8b735e8adf",
+    "raw": "/Users/khlystov/Documents/ChatGPT/ML ДЗ/data/hw4/raw",
+    "reference_cache": "/Users/khlystov/Documents/ChatGPT/ML ДЗ/analysis/hw4-deep-research-20261122/features.joblib",
+    "reference_cache_sha256": "0de82a91eccf5759f3caa3960a2b576653a3317f92e764ae5bfacab22a4d8d5e",
+    "rebuilt_cache": "/Users/khlystov/Documents/ChatGPT/ML ДЗ/analysis/hw4-deep-research-20261122/qa/cache-rebuild/features.joblib",
+    "rebuilt_cache_sha256": "52b2c3a4567e1b6f742fa3bd0340fec735919554dcea79fc156c07240b1b6942",
+    "serialized_bytes_identical": false,
+    "payload_values_exact": true,
+    "frames": [
+      {
+        "frame": "train",
+        "rows": 21017,
+        "columns": 8,
+        "exact_values_dtypes_index_columns": true
+      },
+      {
+        "frame": "test",
+        "rows": 2246,
+        "columns": 7,
+        "exact_values_dtypes_index_columns": true
+      },
+      {
+        "frame": "sample",
+        "rows": 2246,
+        "columns": 2,
+        "exact_values_dtypes_index_columns": true
+      },
+      {
+        "frame": "views/base",
+        "rows": 23263,
+        "columns": 346,
+        "exact_values_dtypes_index_columns": true
+      },
+      {
+        "frame": "views/transition",
+        "rows": 23263,
+        "columns": 353,
+        "exact_values_dtypes_index_columns": true
+      },
+      {
+        "frame": "views/seasonal",
+        "rows": 23263,
+        "columns": 358,
+        "exact_values_dtypes_index_columns": true
+      }
+    ],
+    "categorical_names_exact": true,
+    "categories": [
+      "facility_type",
+      "risk_level",
+      "area_id",
+      "lag1_result",
+      "lag1_inspection_type",
+      "lag2_result",
+      "lag2_inspection_type",
+      "lag3_result",
+      "lag3_inspection_type",
+      "last_routine_result"
+    ],
+    "feature_build_seconds": 5.726934082980733,
+    "rebuilt_cache_bytes": 22485058,
+    "resume_rebuilt_features": 0,
+    "changed_fingerprints_refused": [
+      "raw_sha256",
+      "builder_sha256",
+      "builder_cli_sha256"
+    ],
+    "known_cache_overwrite_refused": true,
+    "reference_cache_unchanged": true,
+    "model_fits": 0,
+    "new_model_metrics": 0,
+    "new_closed_quarter_metrics": 0,
+    "official_current_row_targets_used_in_features": false,
+    "historical_outcomes_used_with_strict_snapshot_and_cutoff": true
+  }
+}

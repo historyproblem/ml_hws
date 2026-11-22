@@ -1,0 +1,664 @@
+{
+  "date": "2026-11-22",
+  "unique_exact_source_urls": 46,
+  "note": "Source catalogs include task context and attempted inaccessible pages; source count is not a count of fully fetched winning notebooks. Original reports mark access limitations.",
+  "catalogs": {
+    "sources.json": [
+      {
+        "id": "hw4",
+        "title": "HW4 Kaggle (ранее проверено в локальном протоколе)",
+        "url": "https://www.kaggle.com/competitions/hw-4-ml-mipt-autumn-2026/overview",
+        "relevance": "Официальная постановка. В этой сессии внешний web viewer не отдал страницу. Использованы сохранённый протокол и сообщённые последние scores."
+      },
+      {
+        "id": "boston_results",
+        "title": "DrivenData, объявление итогов Keeping It Fresh",
+        "url": "https://blog.drivendata.org/blog/keeping-it-fresh-results",
+        "relevance": "Имена призёров и шестинедельная проспективная проверка."
+      },
+      {
+        "id": "boston1",
+        "title": "Liliana Medina, 1st place solution",
+        "url": "https://github.com/drivendataorg/keeping-it-fresh/tree/main/1st-place",
+        "relevance": "Последние 2–3 инспекции, счётчики, отношения, численные цели 3 видов, RF и GBM."
+      },
+      {
+        "id": "boston2",
+        "title": "Qingchen Wang, 2nd place solution",
+        "url": "https://github.com/drivendataorg/keeping-it-fresh/tree/main/2nd-place",
+        "relevance": "Малое подмножество повторов за 1–4 недели в Boston, сильная зависимость от горизонта."
+      },
+      {
+        "id": "boston3",
+        "title": "Shane Teehan, 3rd place solution",
+        "url": "https://github.com/drivendataorg/keeping-it-fresh/tree/main/3rd-place",
+        "relevance": "Недавние и исторические нарушения, семь недель искусственного зазора, четыре семейства моделей."
+      },
+      {
+        "id": "chicago",
+        "title": "City of Chicago, forecasting restaurants with critical violations",
+        "url": "https://github.com/Chicago/food-inspections-evaluation/blob/master/REPORTS/forecasting-restaurants-with-critical-violations-in-Chicago.Rmd",
+        "relevance": "Роль истории инспекций, давности и инспектора. Другая цель."
+      },
+      {
+        "id": "fair",
+        "title": "Fair Decision-Making for Food Inspections",
+        "url": "https://arxiv.org/abs/2108.05523",
+        "relevance": "Оригинальное исследование того, как sanitarian и география связаны с наблюдаемыми результатами."
+      },
+      {
+        "id": "amex_writeup",
+        "title": "Correlation, 1st place AMEX write-up",
+        "url": "https://www.kaggle.com/competitions/amex-default-prediction/writeups/lucky-shake-1st-solution-update-github-code",
+        "relevance": "Атрибуция победителя и происхождение опубликованного репозитория."
+      },
+      {
+        "id": "amex_s2",
+        "title": "AMEX 1st, original manual feature code",
+        "url": "https://github.com/jxzly/Kaggle-American-Express-Default-Prediction-1st-solution/blob/master/S2_manual_feature.py#L52-L71",
+        "relevance": "Последовательные разности и несколько временных окон."
+      },
+      {
+        "id": "amex_s3",
+        "title": "AMEX 1st, original row-level LGBM",
+        "url": "https://github.com/jxzly/Kaggle-American-Express-Default-Prediction-1st-solution/blob/master/S3_series_feature.py#L30-L63",
+        "relevance": "Склейка train с официальным target и grouped fit row-level scores."
+      },
+      {
+        "id": "amex_s4",
+        "title": "AMEX 1st, original OOF packing",
+        "url": "https://github.com/jxzly/Kaggle-American-Express-Default-Prediction-1st-solution/blob/master/S4_feature_combined.py#L10-L34",
+        "relevance": "Из OOF и test score формируют до 13 отдельных столбцов по клиенту."
+      },
+      {
+        "id": "amex_s5",
+        "title": "AMEX 1st, original second-level LGBM",
+        "url": "https://github.com/jxzly/Kaggle-American-Express-Default-Prediction-1st-solution/blob/master/S5_LGB_main.py#L54-L86",
+        "relevance": "Второй LGBM учится на агрегациях без и с event-scores. Параметры DART относятся к их большой задаче."
+      },
+      {
+        "id": "credit5",
+        "title": "Paweł Godula and team, Home Credit Default Risk 5th place",
+        "url": "https://github.com/pawelgodula/kagglehomecredit/",
+        "relevance": "OOF-события, агрегация, одна неуспешная вложенная таблица, сходство финальных моделей."
+      },
+      {
+        "id": "credit2",
+        "title": "Kazuki Onodera, Home Credit Default Risk 2nd place",
+        "url": "https://github.com/KazukiOnodera/Home-Credit-Default-Risk",
+        "relevance": "Отдельные семейства истории, окна давности, первый/последний документ."
+      },
+      {
+        "id": "cbtd_paper",
+        "title": "Holzmüller, Grinsztajn, Steinwart, Better by Default",
+        "url": "https://arxiv.org/abs/2407.04491",
+        "relevance": "Авторы исследовали сильные preset-параметры на многих табличных задачах; оценка на HW4 отсутствует."
+      },
+      {
+        "id": "cbtd_code",
+        "title": "pytabkit, original CB_TD_CLASS",
+        "url": "https://github.com/dholzmueller/pytabkit/blob/main/pytabkit/models/sklearn/default_params.py#L87-L92",
+        "relevance": "Проверены конкретные параметры classification; ранняя остановка 300 в исходном пресете."
+      },
+      {
+        "id": "cbtune",
+        "title": "CatBoost, Parameter tuning",
+        "url": "https://catboost.ai/docs/en/concepts/parameter-tuning",
+        "relevance": "Ручки глубины, числа деревьев, learning rate, L2."
+      },
+      {
+        "id": "cbboot",
+        "title": "CatBoost, Bootstrap options",
+        "url": "https://catboost.ai/docs/en/concepts/algorithm-main-stages_bootstrap-options",
+        "relevance": "Bernoulli и параметры subsampling."
+      },
+      {
+        "id": "xgb",
+        "title": "XGBoost, Notes on Parameter Tuning",
+        "url": "https://xgboost.readthedocs.io/en/stable/tutorials/param_tuning.html",
+        "relevance": "Контроль ёмкости и случайности, предлагаемые в отчёте численные значения — локальные гипотезы."
+      },
+      {
+        "id": "ap",
+        "title": "scikit-learn, average_precision_score",
+        "url": "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.average_precision_score.html",
+        "relevance": "Определение AP, поддержка sample_weight и отсутствие линейной интерполяции."
+      },
+      {
+        "id": "model_selection",
+        "title": "Cawley & Talbot, On Over-fitting in Model Selection and Subsequent Selection Bias in Performance Evaluation",
+        "url": "https://jmlr.csail.mit.edu/papers/v11/cawley10a.html",
+        "relevance": "Смещение от выбора по шумному критерию."
+      }
+    ],
+    "classical-sources.json": [
+      {
+        "id": "amex1_writeup",
+        "title": "AMEX2022 first-place author writeup",
+        "url": "https://www.kaggle.com/competitions/amex-default-prediction/writeups/lucky-shake-1st-solution-update-github-code",
+        "primary": true,
+        "authors": [
+          "Correlation / jxzly"
+        ],
+        "competition_rank": 1,
+        "access": "Primary author text obtained from web search index; direct Kaggle HTML not reliably readable",
+        "observations": [
+          "Author links his own released implementation and describes LGB plus NN."
+        ],
+        "limits": [
+          "Released code may not exactly reproduce the maximum private score; author notes random fluctuations."
+        ]
+      },
+      {
+        "id": "amex1_lgb_code",
+        "title": "AMEX winner S5_LGB_main.py",
+        "url": "https://github.com/jxzly/Kaggle-American-Express-Default-Prediction-1st-solution/blob/master/S5_LGB_main.py",
+        "raw_url": "https://raw.githubusercontent.com/jxzly/Kaggle-American-Express-Default-Prediction-1st-solution/master/S5_LGB_main.py",
+        "primary": true,
+        "access": "Opened complete raw author code",
+        "line_ranges": [
+          "25-53",
+          "54-86"
+        ],
+        "exact_parameters": {
+          "objective": "binary",
+          "metric": "binary_logloss",
+          "boosting": "dart",
+          "num_leaves": 64,
+          "learning_rate": 0.035,
+          "bagging_freq": 5,
+          "bagging_fraction": 0.75,
+          "feature_fraction": 0.05,
+          "min_data_in_leaf": 256,
+          "max_bin": 63,
+          "min_data_in_bin": 256,
+          "lambda_l1": 0.1,
+          "lambda_l2": 30,
+          "rounds": 4500,
+          "folds": 5
+        },
+        "limits": [
+          "Thousands of engineered columns and much larger training data than HW4; not a directly transferable preset."
+        ]
+      },
+      {
+        "id": "amex1_fe_code",
+        "title": "AMEX winner manual feature code",
+        "url": "https://github.com/jxzly/Kaggle-American-Express-Default-Prediction-1st-solution/blob/master/S2_manual_feature.py",
+        "primary": true,
+        "access": "Opened complete raw author code",
+        "line_ranges": [
+          "19-65",
+          "69-121"
+        ],
+        "observations": [
+          "Full/last3/last6 aggregation; first differences; within-customer percentile ranks; calendar-month percentile ranks."
+        ],
+        "limits": [
+          "Original source combines train/test features. HW4 adaptation must preserve exact snapshot and cutoff, fit-only learned transformations."
+        ]
+      },
+      {
+        "id": "amex1_training",
+        "title": "AMEX winner training helper",
+        "url": "https://github.com/jxzly/Kaggle-American-Express-Default-Prediction-1st-solution/blob/master/utils.py",
+        "primary": true,
+        "access": "Opened complete raw author code",
+        "line_ranges": [
+          "84-182"
+        ],
+        "observations": [
+          "Default LGB path uses shuffled StratifiedKFold; probability predictions are averaged over saved fold models."
+        ],
+        "limits": [
+          "Its CV strategy is not our causal forward validation. Merely specifying early_stopping_rounds in old DART code does not establish stopping support in the installed modern version."
+        ]
+      },
+      {
+        "id": "amex1_blend",
+        "title": "AMEX winner S7_ensemble.py",
+        "url": "https://github.com/jxzly/Kaggle-American-Express-Default-Prediction-1st-solution/blob/master/S7_ensemble.py",
+        "primary": true,
+        "access": "Opened complete raw author code",
+        "line_ranges": [
+          "10-16"
+        ],
+        "exact_parameters": {
+          "weights_in_file": [
+            0.3,
+            0.35,
+            0.15,
+            0.1
+          ],
+          "weight_sum": 0.9
+        },
+        "limits": [
+          "These are literal released code coefficients, not a universal weighting recipe."
+        ]
+      },
+      {
+        "id": "amex2_writeup",
+        "title": "AMEX2022 second-place JuneHomes writeup",
+        "url": "https://www.kaggle.com/competitions/amex-default-prediction/discussion/347637",
+        "canonical_redirect": "https://www.kaggle.com/competitions/amex-default-prediction/writeups/bydefault-junehomes-2nd-place-solution-team-juneho",
+        "primary": true,
+        "authors": [
+          "JuneHomes team / bydefault"
+        ],
+        "competition_rank": 2,
+        "access": "Full indexed original author writeup inspected through search; direct HTML has no readable lines",
+        "exact_parameters": {
+          "num_leaves": 64,
+          "min_data_in_leaf": 2048,
+          "learning_rate": 0.01,
+          "feature_fraction": 0.2,
+          "feature_fraction_bynode": 0.3,
+          "subsample": 0.8,
+          "subsample_freq": 1,
+          "gbdt_estimators_cap": 5000,
+          "dart_estimators_cap": 17001
+        },
+        "observations": [
+          "Independent20%holdout; early6 versus later6-month feature stress checks; specialized small-history model; some holdout-winning model blends did not transfer to leaderboard."
+        ],
+        "limits": [
+          "Large-data settings and random customer-fold design cannot be copied to HW4."
+        ]
+      },
+      {
+        "id": "ieee1_deotte_article",
+        "title": "IEEE-CIS winner Chris Deotte coauthored technical article",
+        "url": "https://developer.nvidia.com/blog/leveraging-machine-learning-to-detect-fraud-tips-to-developing-a-winning-kaggle-solution/",
+        "primary": true,
+        "authors": [
+          "Carol McDonald",
+          "Chris Deotte"
+        ],
+        "competition_rank": 1,
+        "access": "Opened full author article; AI-generated introductory summary ignored",
+        "line_ranges": [
+          "193-238",
+          "245-271"
+        ],
+        "exact_parameters": {
+          "n_estimators": 5000,
+          "max_depth": 12,
+          "learning_rate": 0.02,
+          "subsample": 0.8,
+          "colsample_bytree": 0.4,
+          "missing": -1,
+          "eval_metric": "auc",
+          "tree_method": "gpu_hist",
+          "early_stopping_rounds": 100
+        },
+        "observations": [
+          "UID used for group aggregates rather than a direct input; first-place ensemble included XGB, CatBoost and LGBM."
+        ],
+        "limits": [
+          "Depth12 and missing=-1 are not recommended HW4 defaults. Ordinary GroupKFold does not itself enforce chronology despite the article wording. UID-average future postprocessing is inapplicable to quarter-specific site targets."
+        ]
+      },
+      {
+        "id": "ieee1_kyakovlev_params",
+        "title": "IEEE winner Konstantin Yakovlev direct CatBoost parameter reply",
+        "url": "https://www.kaggle.com/c/ieee-fraud-detection/discussion/111257",
+        "primary": true,
+        "authors": [
+          "Konstantin Yakovlev"
+        ],
+        "competition_rank": 1,
+        "access": "Original author comment and parameters inspected via indexed primary page text; direct HTML empty",
+        "exact_parameters": {
+          "n_estimators": 25000,
+          "learning_rate": 0.07,
+          "eval_metric": "AUC",
+          "loss_function": "Logloss",
+          "metric_period": 500,
+          "od_wait": 500,
+          "task_type": "GPU",
+          "depth": 8
+        },
+        "limits": [
+          "A particular large-fraud-data model, not a CPU21k-row recommendation."
+        ]
+      },
+      {
+        "id": "ieee_deotte_fe",
+        "title": "Chris Deotte original Feature Engineering Techniques",
+        "url": "https://www.kaggle.com/competitions/ieee-fraud-detection/discussion/108575",
+        "primary": true,
+        "authors": [
+          "Chris Deotte"
+        ],
+        "competition_rank": 1,
+        "access": "Original author text inspected via web search index",
+        "observations": [
+          "Discusses frequency/group statistics, categorical interactions, and native-NaN versus sentinel ablation."
+        ],
+        "limits": [
+          "Transductive combined train/test recipes must be rewritten for HW4 availability. Such ideas are hypotheses, not guaranteed gains."
+        ]
+      },
+      {
+        "id": "homecredit2_readme",
+        "title": "HomeCredit2018 second-place author repository",
+        "url": "https://github.com/KazukiOnodera/Home-Credit-Default-Risk",
+        "primary": true,
+        "authors": [
+          "Kazuki Onodera"
+        ],
+        "competition_rank": 2,
+        "access": "Opened full repository README",
+        "observations": [
+          "Author identifies own feature-engineering contribution: interval aggregates, first/last historical events, deltas and ratios."
+        ],
+        "limits": [
+          "Different financial data and AUC metric."
+        ]
+      },
+      {
+        "id": "homecredit2_code",
+        "title": "HomeCredit2018 published second-place LGB component",
+        "url": "https://github.com/KazukiOnodera/Home-Credit-Default-Risk/blob/master/py/935_predict_908-2.py",
+        "primary": true,
+        "access": "Opened complete raw author code",
+        "line_ranges": [
+          "24-53",
+          "103-138"
+        ],
+        "exact_parameters": {
+          "selected_features": 700,
+          "loops": 5,
+          "folds": 7,
+          "objective": "binary",
+          "metric": "auc",
+          "learning_rate": 0.01,
+          "max_depth": 6,
+          "num_leaves": 63,
+          "max_bin": 255,
+          "min_child_weight": 10,
+          "min_data_in_leaf": 150,
+          "reg_lambda": 0.5,
+          "reg_alpha": 0.5,
+          "colsample_bytree": 0.7,
+          "subsample": 0.9,
+          "bagging_freq": 1,
+          "iterations_cap": 9999,
+          "early_stopping_rounds": 100
+        },
+        "observations": [
+          "Repeated-fold rank averaging in this component."
+        ],
+        "limits": [
+          "One released component, not the complete team model; random lgb.cv cannot replace temporal folds."
+        ]
+      },
+      {
+        "id": "talkingdata1_readme",
+        "title": "TalkingData2018 winner flowlight author repository",
+        "url": "https://github.com/flowlight0/talkingdata-adtracking-fraud-detection",
+        "primary": true,
+        "authors": [
+          "Takanori Hayashi / flowlight0"
+        ],
+        "competition_rank": 1,
+        "access": "Opened complete author README including example configuration",
+        "line_ranges": [
+          "184-189",
+          "212-286"
+        ],
+        "exact_parameters": {
+          "config_status": "README example, not asserted final winning preset",
+          "num_leaves": 255,
+          "max_depth": 8,
+          "learning_rate": 0.01,
+          "min_child_samples": 200,
+          "colsample_bytree": 0.5,
+          "subsample": 0.9,
+          "subsample_freq": 1,
+          "min_child_weight": 0,
+          "reg_lambda": 0,
+          "num_boost_round": 5000,
+          "negative_downsample_bags": 5
+        },
+        "limits": [
+          "Extreme class imbalance and huge volume; downsampling is not required for HW4."
+        ]
+      },
+      {
+        "id": "talkingdata1_time_code",
+        "title": "TalkingData winning repository time-feature generators",
+        "url": "https://github.com/flowlight0/talkingdata-adtracking-fraud-detection/blob/master/features/time_series_click.py",
+        "primary": true,
+        "access": "Opened complete raw author code",
+        "line_ranges": [
+          "30-121"
+        ],
+        "observations": [
+          "Both past and future click-count generators and next/previous click-time deltas exist."
+        ],
+        "limits": [
+          "Future-event generators are incompatible with HW4 strict prediction cutoffs."
+        ]
+      },
+      {
+        "id": "amazon1_writeup",
+        "title": "Amazon Employee Access2013 winners original methodology",
+        "url": "https://www.kaggle.com/c/amazon-employee-access-challenge/forums/t/5283/winning-solution-code-and-methodology",
+        "canonical_redirect": "https://www.kaggle.com/competitions/amazon-employee-access-challenge/writeups/paul-duan-bs-man-winning-solution-code-and-methodo",
+        "primary": true,
+        "authors": [
+          "Paul Duan",
+          "Benjamin Solecki"
+        ],
+        "competition_rank": 1,
+        "access": "Original author text and author comments inspected via web search index",
+        "observations": [
+          "Category cross-counts/frequencies, robust repeated validation and a mixture of logistic/tree models."
+        ],
+        "limits": [
+          "Historical categorical non-temporal task, not a transferable split strategy."
+        ]
+      },
+      {
+        "id": "amazon1_repo",
+        "title": "Amazon Employee Access winning authors code",
+        "url": "https://github.com/pyduan/amazonaccess",
+        "primary": true,
+        "authors": [
+          "Paul Duan",
+          "Benjamin Solecki"
+        ],
+        "competition_rank": 1,
+        "access": "Opened author repository README",
+        "observations": [
+          "Separate author components combined after standardization and weighted averaging."
+        ],
+        "limits": [
+          "Source is from2013; not a ready current-library HW4 implementation."
+        ]
+      },
+      {
+        "id": "amazon2_encoding",
+        "title": "Owen Zhang second-place original shrinkage target-encoding helper",
+        "url": "https://github.com/owenzhang/Kaggle-AmazonChallenge2013/blob/master/__final_utils.R",
+        "primary": true,
+        "authors": [
+          "Owen Zhang"
+        ],
+        "competition_rank": 2,
+        "access": "Opened complete raw author code",
+        "line_ranges": [
+          "0-34",
+          "50-87"
+        ],
+        "observations": [
+          "Two-/three-way counts and named shrinkage randomized leave-one-out target means; prior strengths20/40."
+        ],
+        "limits": [
+          "This is not a causal temporal implementation. For HW4 write and test quarter-prefix statistics, including a past-only global prior; do not copy the old function blindly."
+        ]
+      },
+      {
+        "id": "cibmtr1_writeup",
+        "title": "CIBMTR2025 first-place original two-target solution",
+        "url": "https://www.kaggle.com/competitions/equity-post-HCT-survival-predictions/writeups/minerppdy-1st-place-solution-2-targets-and-ensembl",
+        "primary": true,
+        "authors": [
+          "pppdy"
+        ],
+        "competition_rank": 1,
+        "access": "Original author writeup text inspected via web search index",
+        "observations": [
+          "Author reports best LGB/XGB depth2 versus CatBoost depth6, and adding one-hot/category copies of some inputs."
+        ],
+        "limits": [
+          "Survival ranking and a different validation design; not evidence of HW4 AP gain."
+        ]
+      },
+      {
+        "id": "chicago_primary_site",
+        "title": "City of Chicago Food Inspection Forecasting official project",
+        "url": "https://chicago.github.io/food-inspections-evaluation/",
+        "primary": true,
+        "authors": [
+          "City of Chicago"
+        ],
+        "competition_rank": null,
+        "access": "Opened full official project page",
+        "observations": [
+          "Inputs include prior violations, time since inspection, business age, inspector, weather and nearby complaint signals."
+        ],
+        "limits": [
+          "Different outcome and richer covariates; not a Kaggle winner on our dataset. No confirmed mapping of our opaque codes follows from this project."
+        ]
+      },
+      {
+        "id": "chicago_production_code",
+        "title": "Chicago official binomial ridge model code",
+        "url": "https://github.com/Chicago/food-inspections-evaluation/blob/master/CODE/30a_glmnet_model.R",
+        "primary": true,
+        "access": "Opened complete raw city code",
+        "line_ranges": [
+          "58-103"
+        ],
+        "exact_parameters": {
+          "family": "binomial",
+          "alpha": 0,
+          "evaluation_last_days": 90,
+          "penalized_coefficients": "inspector only"
+        },
+        "limits": [
+          "Cannot reproduce unavailable inspector/weather effects in HW4."
+        ]
+      },
+      {
+        "id": "chicago_causal_fe",
+        "title": "Chicago official historical inspection feature code",
+        "url": "https://github.com/Chicago/food-inspections-evaluation/blob/master/CODE/23_food_insp_features.R",
+        "primary": true,
+        "access": "Opened complete raw city code",
+        "line_ranges": [
+          "40-60"
+        ],
+        "observations": [
+          "Orders by License and Inspection_Date, shifts past outcomes and violation counts, includes missing-history indicator."
+        ],
+        "limits": [
+          "Code severity categories do not establish meanings of HW4 code tokens."
+        ]
+      },
+      {
+        "id": "chicago_experimental_xgb",
+        "title": "Chicago separate historical XGB experiment code",
+        "url": "https://github.com/Chicago/food-inspections-evaluation/blob/master/CODE/30_xgboost_model.R",
+        "primary": true,
+        "access": "Opened complete raw city code",
+        "observations": [
+          "Its inner-validation rows are also present in its dtrain construction."
+        ],
+        "limits": [
+          "Do not copy this evaluation logic: inner early-stopping validation would leak."
+        ]
+      },
+      {
+        "id": "catboost_paper",
+        "title": "CatBoost original NeurIPS2018 author paper",
+        "url": "https://papers.neurips.cc/paper_files/paper/2018/file/14491b756b3a51daac41c24863285549-Paper.pdf",
+        "primary": true,
+        "access": "Primary paper text inspected via indexed PDF",
+        "observations": [
+          "Authors compare Plain and Ordered and report particular Ordered benefits on smaller datasets."
+        ],
+        "limits": [
+          "No HW4 result is implied."
+        ]
+      },
+      {
+        "id": "catboost_common",
+        "title": "CatBoost official common parameters",
+        "url": "https://catboost.ai/docs/en/references/training-parameters/common",
+        "primary": true,
+        "access": "Opened official documentation",
+        "observations": [
+          "CPU default is Plain; Ordered is a distinct mode. min_data_in_leaf is only for Depthwise/Lossguide."
+        ],
+        "limits": [
+          "Inspect effective parameters in the installed version rather than assuming defaults."
+        ]
+      },
+      {
+        "id": "catboost_ctr",
+        "title": "CatBoost official categorical-transform algorithm",
+        "url": "https://catboost.ai/docs/en/concepts/algorithm-main-stages_cat-to-numberic",
+        "primary": true,
+        "access": "Opened official documentation",
+        "observations": [
+          "Ordered categorical statistics use preceding permuted objects; Counter can be label-free."
+        ],
+        "limits": [
+          "Does not make an externally target-encoded feature temporally causal."
+        ]
+      },
+      {
+        "id": "xgb_parameters",
+        "title": "XGBoost official parameters and PR metric definition",
+        "url": "https://xgboost.readthedocs.io/en/stable/parameter.html",
+        "primary": true,
+        "access": "Opened official documentation",
+        "observations": [
+          "aucpr is an interpolated PR area, so use an explicitly verified sklearn AP metric for our prefix selection."
+        ],
+        "limits": [
+          "Current documented version can differ from the installed runtime; pin runtime and API."
+        ]
+      },
+      {
+        "id": "lgb_parameters",
+        "title": "LightGBM official parameter reference",
+        "url": "https://lightgbm.readthedocs.io/en/stable/Parameters.html",
+        "primary": true,
+        "access": "Opened official documentation",
+        "observations": [
+          "Rebuild Dataset or disable feature_pre_filter when tuning min_data_in_leaf; bagging_fraction requires nonzero bagging_freq."
+        ],
+        "limits": [
+          "No parameter range is a guaranteed optimum."
+        ]
+      },
+      {
+        "id": "lgb_dart_stopping",
+        "title": "LightGBM official early-stopping callback",
+        "url": "https://lightgbm.readthedocs.io/en/stable/pythonapi/lightgbm.early_stopping.html",
+        "primary": true,
+        "access": "Opened official documentation",
+        "observations": [
+          "Standard early_stopping callback has no effect for DART."
+        ],
+        "limits": [
+          "A DART experiment needs separately planned fixed-budget/checkpoint handling."
+        ]
+      }
+    ]
+  }
+}
